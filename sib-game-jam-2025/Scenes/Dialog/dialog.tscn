@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw6khy35vqoje"]
+
+[ext_resource type="Script" uid="uid://dwjdwct1y54tv" path="res://Scripts/Dialog/Dialog.gd" id="1_agsmp"]
+[ext_resource type="PackedScene" uid="uid://6gul4yn6koen" path="res://Scenes/Dialog/replicas_box.tscn" id="1_o85vb"]
+
+[node name="Dialog" type="CanvasLayer"]
+script = ExtResource("1_agsmp")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 1, 1, 1)
+
+[node name="ReplicasBox" parent="." instance=ExtResource("1_o85vb")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -140.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SpeakerNameLabel" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100

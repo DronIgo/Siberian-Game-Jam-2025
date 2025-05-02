@@ -1,0 +1,34 @@
+{
+	"data": [
+		{
+			"text": "Salam daddy",
+			"speaker_location": "RIGHT",
+			"speaker_name": "BOORATEENO",
+			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+		},
+		{
+			"text": "Salam son",
+			"speaker_location": "LEFT",
+			"speaker_name": "PAPA",
+			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+		},
+		{
+			"text": "Can we have some KEEMCHEE for dinner?",
+			"speaker_location": "RIGHT",
+			"speaker_name": "BOORATEENO",
+			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+		},
+		{
+			"text": "Oh no! Cuz we got no money, kiddo",
+			"speaker_location": "LEFT",
+			"speaker_name": "PAPA",
+			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+		},
+		{
+			"text": "(I gotta go and get some from this BAZEELEEO...)",
+			"speaker_location": "RIGHT",
+			"speaker_name": "BOORATEENO",
+			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+		}
+	]
+}

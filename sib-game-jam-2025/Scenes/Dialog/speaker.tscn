@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6dygmnny2usk"]
+
+[ext_resource type="Texture2D" uid="uid://c7lqe77727cjo" path="res://Sprites/Dialog/papa.png" id="1_22kw0"]
+[ext_resource type="Script" uid="uid://dxsw5vi1p4ml8" path="res://Scripts/Dialog/Speaker.gd" id="1_q4sq7"]
+
+[node name="Speaker" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_q4sq7")
+
+[node name="NameFrame" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+offset_right = 384.0
+offset_bottom = -40.0
+grow_vertical = 0
+color = Color(1, 0, 0.501961, 1)
+
+[node name="NameLabel" type="Label" parent="NameFrame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+
+[node name="Avatar" type="Sprite2D" parent="."]
+position = Vector2(192, -192)
+texture = ExtResource("1_22kw0")
