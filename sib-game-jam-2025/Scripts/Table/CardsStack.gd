@@ -13,8 +13,12 @@ func add_card():
 	card.rotation = Vector3(90, 0, 0)
 	add_child(card)
 	_current_cards.append(card)
+	print("[CARDS STACK] CARD ADDED")
 
 func remove_card():
+	if _current_cards.is_empty():
+		return
 	var card = _current_cards[_current_cards.size() - 1]
 	card.queue_free()
-	_current_cards.erase(_current_cards.size() - 1)
+	_current_cards.erase(card)
+	print("[CARDS STACK] CARD REMOVED")

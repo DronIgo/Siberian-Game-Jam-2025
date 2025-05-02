@@ -16,8 +16,12 @@ func add_card(type: Card3D.Type):
 	card.disable_physics()
 	add_child(card)
 	_current_cards.append(card)
+	print("[CARDS HAND] CARD ADDED")
 
 func remove_card(index: int):
+	if _current_cards.is_empty():
+		return
 	var card = _current_cards[index]
 	card.queue_free()
 	_current_cards.erase(card)
+	print("[CARDS HAND] CARD REMOVED")

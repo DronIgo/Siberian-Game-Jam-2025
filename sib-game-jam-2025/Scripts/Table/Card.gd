@@ -14,10 +14,7 @@ func init(type: Type):
 	_front.texture = load(texture_path)
 
 func move(delta_x: float):
-	print(delta_x)
-	print(position.x)
 	position += Vector3(delta_x, 0, 0)
-	print(position.x)
 
 func disable_physics():
 	freeze = true
