@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv3ksaqbetw7n"]
+
+[ext_resource type="Texture2D" uid="uid://d1nbbeiefm4px" path="res://Sprites/Table/mqufoghqzqooxcmtxhbbadthf1grx1bk.png" id="1_2orv5"]
+[ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
+[ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
+
+[node name="Table" type="Node3D"]
+script = ExtResource("1_4w2lj")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, -5)
+
+[node name="Enemy" type="Sprite3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.25, -5)
+texture = ExtResource("1_2orv5")
+
+[node name="EnemyHand" parent="." instance=ExtResource("2_65vo3")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -4)
+
+[node name="PlayerHand" parent="." instance=ExtResource("2_65vo3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1)

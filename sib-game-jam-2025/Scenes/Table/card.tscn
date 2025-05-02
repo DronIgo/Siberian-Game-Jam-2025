@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://lxyxtu86gwqx"]
+
+[ext_resource type="Script" uid="uid://gl3re7i7a8dr" path="res://Scripts/Table/Card.gd" id="1_b0j6s"]
+[ext_resource type="Texture2D" uid="uid://bwc1sg4revri8" path="res://Sprites/Table/card_red.png" id="1_hr2vp"]
+[ext_resource type="Texture2D" uid="uid://v14mq4v8dyxf" path="res://Sprites/Table/card_back.png" id="2_b0j6s"]
+
+[node name="Card" type="Node3D"]
+script = ExtResource("1_b0j6s")
+
+[node name="Front" type="Sprite3D" parent="."]
+texture = ExtResource("1_hr2vp")
+
+[node name="Back" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+texture = ExtResource("2_b0j6s")

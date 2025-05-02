@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2k40ei7w4s1c"]
+
+[ext_resource type="Script" uid="uid://nxjquuocgn2m" path="res://Scripts/Table/CardsHand.gd" id="1_dlc6h"]
+[ext_resource type="PackedScene" uid="uid://lxyxtu86gwqx" path="res://Scenes/Table/card.tscn" id="2_wgsao"]
+
+[node name="CardsHand" type="Node3D"]
+script = ExtResource("1_dlc6h")
+card_scene = ExtResource("2_wgsao")
