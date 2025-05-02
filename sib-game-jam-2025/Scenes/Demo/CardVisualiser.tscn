@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kmqdfyuw2yx"]
+
+[ext_resource type="Script" uid="uid://r82gke8hpkcw" path="res://Scripts/Demo/card_visualiser.gd" id="1_80v4j"]
+
+[node name="CardVisualiser" type="Node"]
+script = ExtResource("1_80v4j")

@@ -1,5 +1,5 @@
+class_name CardManager
 extends Node
-class_name Card_Manager
 
 @export_category("Deck settings")
 @export var cards_each_color_num : int = 7
@@ -18,13 +18,16 @@ var stack : Array
 #cards added on last turn
 var last_addition : Array
 
+func get_player_hand() -> Array:
+	return hand_player
+func get_last_addition() -> Array:
+	return stack
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("Ready")
+	EventBusGL.start_round.connect(fill_hands)
 	randomize()
 	create_starting_deck()
-	fill_hands()
-	debug_output()
 
 func add_card_to_player(player_won_last_round : bool) -> bool:
 	if deck.size() == 0:
@@ -56,6 +59,7 @@ func fill_hands() -> void:
 	added_card = add_card_to_player(true)
 	while added_card:
 		added_card = add_card_to_player(true)
+	debug_output()
 
 func create_starting_deck() -> void:
 	deck = []
@@ -65,7 +69,7 @@ func create_starting_deck() -> void:
 		for i in range(cards_each_color_num):
 			var new_card = Card.new()
 			new_card.color = c as Card.CARD_COLOR
-			new_card.value = i
+			new_card.value = i + 1
 			new_card.bonus_mod = 1
 			new_card.score_mod = 1
 			deck.append(new_card)

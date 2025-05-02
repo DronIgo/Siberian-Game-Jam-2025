@@ -5,11 +5,11 @@ extends Object
 class_name Card
 
 enum CARD_COLOR {
-	RED,
-	GREEN,
-	BLUE,
-	VIOLET,
-	GREY
+	RED = 0,
+	GREEN = 1,
+	BLUE = 2,
+	VIOLET = 3,
+	GREY = 4
 }
 
 var color: CARD_COLOR
