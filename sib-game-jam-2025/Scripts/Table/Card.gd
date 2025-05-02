@@ -1,4 +1,4 @@
-class_name Card
+class_name Card3D
 
 extends Node3D
 

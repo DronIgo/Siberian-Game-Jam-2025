@@ -8,7 +8,7 @@ extends Node3D
 
 var _current_cards: Array = []
 
-func add_card(type: Card.Type):
+func add_card(type: Card3D.Type):
 	for card in _current_cards:
 		card.move(-1 * card_width / 100 - cards_gap / 100)
 	var card = card_scene.instantiate()
