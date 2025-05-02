@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdcfnxst2dods"]
+
+[ext_resource type="Script" uid="uid://7urfnchet5yi" path="res://Scripts/Game Logic/card_manager.gd" id="1_p5x7k"]
+
+[node name="CardManager" type="Node"]
+script = ExtResource("1_p5x7k")

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvi0lsee7j2cv"]
+
+[ext_resource type="PackedScene" uid="uid://cdcfnxst2dods" path="res://Scenes/Game Logic/CardManager.tscn" id="1_opw4r"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CardManager" parent="." instance=ExtResource("1_opw4r")]
