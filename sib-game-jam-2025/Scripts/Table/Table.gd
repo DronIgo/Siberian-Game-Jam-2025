@@ -16,10 +16,14 @@ func _ready():
 	_hands = [_player_hand, _enemy_hand]
 	_token_spawners = [_player_token_spawner, _enemy_token_spawner]
 	EventBus.hand_add_card.connect(_add_card_to_hand)
+	EventBus.hand_remove_card.connect(_remove_card_from_hand)
 	EventBus.token_add.connect(_add_token)
+	EventBus.token_remove.connect(_remove_token)
 	EventBus.stack_add_card.connect(_add_card_to_stack)
+	EventBus.stack_remove_card.connect(_remove_card_from_stack)
 	EventBus.hand_add_card.emit(0, Card3D.Type.RED)
-	#EventBus.hand_add_card.emit(0, Card3D.Type.YELLOW)
+	EventBus.hand_add_card.emit(0, Card3D.Type.YELLOW)
+	EventBus.hand_remove_card.emit(0, 0)
 	#EventBus.hand_add_card.emit(0, Card3D.Type.GREEN)
 	#EventBus.hand_add_card.emit(0, Card3D.Type.GRAY)
 	#EventBus.hand_add_card.emit(1, Card3D.Type.BLUE)
@@ -27,13 +31,25 @@ func _ready():
 	EventBus.stack_add_card.emit(CardsStack.Type.NEW)
 	EventBus.stack_add_card.emit(CardsStack.Type.DROPPED)
 	EventBus.stack_add_card.emit(CardsStack.Type.DROPPED)
-	#_test_token_spawner()
+	EventBus.stack_add_card.emit(CardsStack.Type.DROPPED)
+	EventBus.stack_remove_card.emit(CardsStack.Type.DROPPED, 1)
+	EventBus.stack_remove_card.emit(CardsStack.Type.DROPPED, 1)
+	EventBus.token_add.emit(0)
+	EventBus.token_add.emit(0)
+	EventBus.token_add.emit(0)
+	EventBus.token_remove.emit(0)
 
 func _add_card_to_hand(player_id: int, card_type: Card3D.Type):
 	_hands[player_id].add_card(card_type)
 
+func _remove_card_from_hand(player_id: int, index: int):
+	_hands[player_id].remove_card(index)
+
 func _add_token(player_id: int):
 	_token_spawners[player_id].spawn_token()
+
+func _remove_token(player_id: int):
+	_token_spawners[player_id].remove_token()
 
 func _add_card_to_stack(stack_type: CardsStack.Type):
 	match stack_type:
@@ -41,6 +57,13 @@ func _add_card_to_stack(stack_type: CardsStack.Type):
 			_new_cards_stack.add_card()
 		CardsStack.Type.DROPPED:
 			_dropped_cards_stack.add_card()
+
+func _remove_card_from_stack(stack_type: CardsStack.Type):
+	match stack_type:
+		CardsStack.Type.NEW:
+			_new_cards_stack.remove_card()
+		CardsStack.Type.DROPPED:
+			_dropped_cards_stack.remove_card()
 
 func _test_token_spawner():
 	get_tree().create_timer(1).timeout.connect(func(): _do_test_token_spawner())
