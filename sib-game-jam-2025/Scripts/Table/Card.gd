@@ -1,6 +1,6 @@
 class_name Card3D
 
-extends Node3D
+extends RigidBody3D
 
 enum Type { RED, YELLOW, GREEN, BLUE, GRAY }
 
@@ -18,6 +18,10 @@ func move(delta_x: float):
 	print(position.x)
 	position += Vector3(delta_x, 0, 0)
 	print(position.x)
+
+func disable_physics():
+	freeze = true
+	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
 
 func _type_to_low_str(type: Type) -> String:
 	return str(Type.keys()[type]).to_lower()

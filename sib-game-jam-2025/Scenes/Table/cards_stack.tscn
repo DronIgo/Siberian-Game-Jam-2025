@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3oyeftvghnow"]
+
+[ext_resource type="Script" uid="uid://d201ky680jdan" path="res://Scripts/Table/CardsStack.gd" id="1_cg22x"]
+[ext_resource type="PackedScene" uid="uid://lxyxtu86gwqx" path="res://Scenes/Table/card.tscn" id="2_wmjnh"]
+
+[node name="CardsStack" type="Node3D"]
+script = ExtResource("1_cg22x")
+card_scene = ExtResource("2_wmjnh")

@@ -13,5 +13,6 @@ func add_card(type: Card3D.Type):
 		card.move(-1 * card_width / 100 - cards_gap / 100)
 	var card = card_scene.instantiate()
 	card.init(type)
+	card.disable_physics()
 	add_child(card)
 	_current_cards.append(card)
