@@ -9,7 +9,8 @@ var _next_replica_index = 0
 
 func _ready():
 	EventBus.dialog_start.connect(start)
-	start("res://Configs/Dialog/test.json")
+	var current_phase = PhaseManager.current()
+	start(current_phase.args[0])
 
 func _process(delta):
 	if Input.is_action_just_pressed("dialog_next"):
@@ -29,4 +30,6 @@ func next():
 	_next_replica_index += 1
 
 func finish():
-	_next_replica_index = 0
+	#_next_replica_index = 0
+	var next_phase = PhaseManager.next()
+	get_tree().change_scene_to_file(next_phase.scene_name)
