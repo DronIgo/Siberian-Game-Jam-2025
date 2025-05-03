@@ -42,13 +42,20 @@ func _ready():
 	EventBus.nose_increase.connect(_increase_nose)
 	EventBus.bend_over_table.connect(_bend_over)
 	EventBus.sit_back_at_table.connect(_sit_back)
+	EventBus.show_cards.connect(_show_cards)
+	EventBus.hide_cards.connect(_hide_cards)
+	
 
 # tests
-func _input(ev):
+func _process(delta):
 	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
+		EventBus.show_cards.emit()
+	
+	#if Input.is_key_pressed(KEY_1):
+		#EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
 	if Input.is_key_pressed(KEY_2):
-		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
+		EventBus.hide_cards.emit()
+		#EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
 		EventBus.hand_select_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_4):
@@ -67,6 +74,7 @@ func _input(ev):
 		EventBus.sit_back_at_table.emit()
 
 var sit : bool = true
+var card_choosing = false
 
 func _next_game_phase():
 	var next_phase: Phase = PhaseManager.next()
@@ -96,6 +104,26 @@ func _sit_back():
 		_anim_player.play(sit_back_anim_name)
 		sit = true
 
+func _show_cards():
+	print("_show_cards")
+	
+	if !card_choosing:
+		print("play cards_up")
+		_anim_player.play_backwards("cards_down")
+		card_choosing = true
+
+func _hide_cards():
+	print("_hide_cards")
+	if card_choosing:
+		print("play cards_down")
+		_anim_player.play("cards_down")
+		card_choosing = false
+
+#func _on_AnimationPlayer_animation_finished(anim_name):
+	#if anim_name == "_show_cards":
+	#if anim_name == "_hide_cards":
+		#card_choosing = false
+	#
 func _increase_nose():
 	_nose.increase()
 

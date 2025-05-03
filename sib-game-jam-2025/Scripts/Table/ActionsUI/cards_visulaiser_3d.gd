@@ -29,6 +29,7 @@ func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_stack)
 	EventBusGL.update_visualisation.connect(update_selected_color)
 	EventBusGL.start_round.connect(start_round)
+	EventBus.hide_cards.emit()
 
 func start_round() -> void:
 	for card3d in player_hand._cards:
@@ -141,8 +142,16 @@ func try_flip_card(card : Card3D):
 
 var mouse_pressed_last_frame = false
 func _physics_process(delta):
+#
+	if (ray_casting_manager.find_raycast_player_card() != null):
+		EventBus.show_cards.emit()
+	elif card_manager.selected_cards.size() <= 0:
+		EventBus.hide_cards.emit()
+		return
+
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if mouse_pressed_last_frame:
+			
 			return
 		mouse_pressed_last_frame = true
 		if player_cards_active:
