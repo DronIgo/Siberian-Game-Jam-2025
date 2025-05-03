@@ -2,7 +2,7 @@ class_name Table
 
 extends Node3D
 
-@onready var _player_hand = $PlayerHand
+@onready var _player_hand = $Camera3D/PlayerHand
 @onready var _enemy_hand = $EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
@@ -36,9 +36,9 @@ func _ready():
 # tests
 func _input(ev):
 	if Input.is_key_pressed(KEY_1):
-		EventBus.line_add_card.emit(Card3D.Type.GRAY)
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_2):
-		EventBus.line_remove_card.emit(0)
+		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
 		EventBus.line_flip_card.emit(0)
 	elif Input.is_key_pressed(KEY_4):

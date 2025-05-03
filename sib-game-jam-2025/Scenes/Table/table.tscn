@@ -33,7 +33,7 @@ shape = SubResource("BoxShape3D_6ax0b")
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
 [node name="PlayerHand" parent="Camera3D" instance=ExtResource("2_65vo3")]
-transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -0.2, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
 
 [node name="Nose" parent="Camera3D" instance=ExtResource("3_cv3oe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.2)
