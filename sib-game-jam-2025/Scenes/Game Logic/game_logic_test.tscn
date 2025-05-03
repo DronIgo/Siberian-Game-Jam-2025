@@ -137,6 +137,28 @@ offset_bottom = -962.0
 grow_vertical = 0
 text = "Enemy: 0"
 
+[node name="PlayerBonuses" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1360.0
+offset_top = -920.0
+offset_right = 1550.0
+offset_bottom = -858.0
+grow_vertical = 0
+text = "Player: 0"
+
+[node name="EnemyBonuses" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1360.0
+offset_top = -1024.0
+offset_right = 1550.0
+offset_bottom = -962.0
+grow_vertical = 0
+text = "Enemy: 0"
+
 [node name="DeclareTrustButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
@@ -197,6 +219,17 @@ offset_bottom = 602.0
 size_flags_horizontal = 4
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="ExtraCheckButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1320.0
+offset_top = -180.0
+offset_right = 1510.0
+offset_bottom = -118.0
+grow_vertical = 0
+text = "Купить проверку"
 
 [node name="CardVisualiser" parent="." instance=ExtResource("2_j5dxk")]
 

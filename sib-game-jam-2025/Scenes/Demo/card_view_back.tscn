@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://b3jqgw1j3an54"]
+[gd_scene load_steps=2 format=3 uid="uid://b3jqgw1j3an54"]
+
+[ext_resource type="Script" uid="uid://d4gsqv7rw0tmm" path="res://Scripts/Demo/card_view_back.gd" id="1_xs4jo"]
 
 [node name="CardView" type="Button"]
 custom_minimum_size = Vector2(30, 40)
@@ -13,15 +15,4 @@ offset_right = 15.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Selected" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -7.5
-offset_top = -20.0
-offset_right = 7.5
-offset_bottom = -5.0
-grow_horizontal = 2
+script = ExtResource("1_xs4jo")

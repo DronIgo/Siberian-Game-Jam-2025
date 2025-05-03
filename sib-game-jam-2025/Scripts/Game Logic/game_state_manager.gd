@@ -8,6 +8,7 @@ enum PLAYER {
 	MAN,
 	AI
 }
+const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
 
 var player_avialable_actions : Array
 var current_player : PLAYER = PLAYER.MAN
@@ -55,6 +56,10 @@ func get_round_result() -> EventBusGL.END_ROUND_RESULT:
 			return EventBusGL.END_ROUND_RESULT.ENEMY_TAKES_CARDS
 
 func end_round() -> void:
+	var timer_effect = EFFECT_TIMER.instantiate()
+	add_child(timer_effect)
+	timer_effect.start(2.0)
+	await EventBusAction.effect_end
 	var result = get_round_result()
 	print("ROUND ENDED")
 	EventBusGL.end_round.emit(result)
@@ -69,8 +74,8 @@ func start_round() -> void:
 	current_player = current_player_round
 	player_avialable_actions.clear()
 	player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
-	EventBusGL.update_visualisation.emit()
 	EventBusAction.progress_game.emit()
+	EventBusGL.update_visualisation.emit()
 
 func can_increase_card_check() -> bool:
 	var num_bonus : int
@@ -80,7 +85,7 @@ func can_increase_card_check() -> bool:
 		num_bonus = game_manager.enemy_bonus
 	if num_bonus < game_manager.extra_check_cost:
 		return false
-	if card_manager.get_last_addition().size() >= card_checks_left:
+	if card_manager.get_last_addition().size() <= card_checks_left:
 		return false
 	return true
 
@@ -147,6 +152,8 @@ func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 				should_end_round = true
 			if card_checks_left == 0:
 				should_end_round = true
+			if !should_end_round:
+				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
 	if should_end_round:
 		end_round()
 	else:
