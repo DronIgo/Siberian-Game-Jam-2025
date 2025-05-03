@@ -3,7 +3,7 @@ class_name Table
 extends Node3D
 
 @onready var _player_hand = $Camera3D/PlayerHand
-@onready var _enemy_hand = $EnemyHand
+@onready var _enemy_hand = $EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack
@@ -40,13 +40,13 @@ func _ready():
 # tests
 func _input(ev):
 	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.ENEMY_ID, Card3D.Type.values().pick_random())
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_2):
-		EventBus.hand_remove_card.emit(MagicNumbers.ENEMY_ID, 0)
+		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
-		EventBus.hand_select_card.emit(MagicNumbers.ENEMY_ID, 0)
+		EventBus.hand_select_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_4):
-		EventBus.hand_unselect_card.emit(MagicNumbers.ENEMY_ID, 0)
+		EventBus.hand_unselect_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_5):
 		EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_6):
