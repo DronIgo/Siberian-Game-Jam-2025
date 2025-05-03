@@ -10,6 +10,7 @@ extends Node3D
 @onready var _dropped_cards_stack = $DroppedCardsStack
 @onready var _non_checkable_cards_stack = $NonCheckableCardsStack
 @onready var _checkable_cards_line = $CheckableCardsLine
+@onready var _nose = $Camera3D/Nose
 
 var _cards_hands: Array = []
 var _token_spawners: Array = []
@@ -30,6 +31,7 @@ func _ready():
 	EventBus.line_add_card.connect(_add_card_to_checkable_line)
 	EventBus.line_remove_card.connect(_remove_card_from_checkable_line)
 	EventBus.line_flip_card.connect(_flip_card_in_checkable_line)
+	EventBus.nose_increase.connect(_increase_nose)
 
 # tests
 func _input(ev):
@@ -52,7 +54,10 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_9):
 		EventBus.token_add.emit(MagicNumbers.ENEMY_ID)
 	elif Input.is_key_pressed(KEY_0):
-		EventBus.token_remove.emit(MagicNumbers.ENEMY_ID)
+		EventBus.nose_increase.emit()
+
+func _increase_nose():
+	_nose.increase()
 
 func _add_card_to_hand(player_id: int, card_type: Card3D.Type):
 	_cards_hands[player_id].add_card(card_type)
