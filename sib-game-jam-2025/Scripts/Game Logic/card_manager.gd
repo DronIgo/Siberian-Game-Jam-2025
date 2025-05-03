@@ -11,6 +11,8 @@ extends Node
 
 #const Card = preload("res://Scripts/Game Logic/Card.gd")
 
+var deck_total_score = 40
+
 var deck : Array
 var hand_player : Array
 var hand_enemy : Array

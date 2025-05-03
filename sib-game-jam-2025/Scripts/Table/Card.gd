@@ -2,7 +2,18 @@ class_name Card3D
 
 extends Node3D
 
-enum Type { RED, VIOLET, GREEN, BLUE, GRAY }
+enum Type { KEY, COIN, PUPPET, ALPHABET, SKULL }
+
+enum Value {
+	AVIAN = 1,
+	BUG = 2,
+	DOG = 3,
+	FROG = 4,
+	LEECHE = 5,
+	TURTLE = 6,
+	TBD = 7,
+	SCULL = 9
+}
 
 @export var flip_anim_name = "card_flip"
 @export var selection_anim_name = "card_selection"
@@ -12,6 +23,7 @@ enum Type { RED, VIOLET, GREEN, BLUE, GRAY }
 @onready var _anim_player: AnimationPlayer = $AnimationPlayer
 
 var _type: Type
+var _value: Value
 var base_card : Card
 var selectable : bool = false
 var flipable : bool = false
@@ -23,17 +35,18 @@ func init(card : Card):
 	base_card = card
 	match card.color:
 		Card.CARD_COLOR.RED:
-			_type = Type.RED
+			_type = Type.KEY
 		Card.CARD_COLOR.BLUE:
-			_type = Type.BLUE
+			_type = Type.COIN
 		Card.CARD_COLOR.GREEN:
-			_type = Type.GREEN
+			_type = Type.PUPPET
 		Card.CARD_COLOR.VIOLET:
-			_type = Type.VIOLET
+			_type = Type.ALPHABET
 		Card.CARD_COLOR.GREY:
-			_type = Type.GRAY
-	var texture_path = str("res://Sprites/Table/card_", _type_to_low_str(_type),".png")
-	$Body/Front.texture = load(texture_path)
+			_type = Type.SKULL
+	_value = card.value
+	var texture_path = CardTexturesHolder.get_texture(_type, _value)
+	$Body/Front.texture = texture_path
 
 func move_x(delta_x: float):
 	position += Vector3(delta_x, 0, 0)

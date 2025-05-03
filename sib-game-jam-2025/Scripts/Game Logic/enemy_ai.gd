@@ -25,10 +25,18 @@ func _ready() -> void:
 	add_child(currentAI)
 	currentAI.init(card_manager, game_manager, game_state_manager, self as EnemyAI)
 	EventBusGL.start_round.connect(start_round)
+	EventBusAction.player_lied.connect(detect_lie)
+	EventBusAction.player_told_truth.connect(detect_truth)
 	
 func start_round() -> void:
 	checked_cards_idx.clear()
+	currentAI.generated_card_turns = false
 
+func detect_lie() -> void:
+	currentAI.player_lied_last_turn = true
+func detect_truth() -> void:
+	currentAI.player_lied_last_turn = false
+	
 func start_turn() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI &&\
 	game_state_manager.player_avialable_actions.size() > 0:
