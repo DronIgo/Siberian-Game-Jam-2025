@@ -29,7 +29,7 @@ func disable_all_UI() -> void:
 	enable_declare_trust(false)
 	enable_call_bluff(false)
 	enable_add_extra_check(false)
-	enable_pick_card_check(false)
+	enable_pick_card_check()
 
 func enable_color_select(enable : bool) -> void:
 	select_color.visible = enable
@@ -46,7 +46,9 @@ func enable_call_bluff(enable : bool) -> void:
 	call_bluff_button.visible = enable
 func enable_add_extra_check(enable : bool) -> void:
 	extra_check_button.visible = enable
-func enable_pick_card_check(enable : bool) -> void:
+func enable_pick_card_check() -> void:
+	var enable = game_state_manager.player_avialable_actions.has(\
+	EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
 	cards_visulaiser_3d.set_last_active(enable)
 	if enable:
 		EventBus.bend_over_table.emit()
@@ -70,7 +72,7 @@ func update_avialable_actions_UI() -> void:
 			EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK:
 				enable_add_extra_check(true)
 			EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK:
-				enable_pick_card_check(true)
+				enable_pick_card_check()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

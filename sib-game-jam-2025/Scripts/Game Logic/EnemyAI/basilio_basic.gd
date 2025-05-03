@@ -26,16 +26,24 @@ func take_turn() -> void:
 	var first_turn = !game_state_manager.color_selected
 	
 	var can_add_cards_to_check = \
-	actions.count(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK) > 0
+	actions.has(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
+	
+	var can_add_extra_checks = \
+	actions.has(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK)
+	
+	if can_add_extra_checks:
+		enemy_ai.add_extra_check()
+		enemy_ai.next_think_time = enemy_ai.think_time_quick
+		return
 	
 	if can_add_cards_to_check:
-		enemy_ai.pick_check_card()
+		enemy_ai.pick_random_check_card()
 		enemy_ai.next_think_time = enemy_ai.think_time
 		return
-	var can_add = actions.count(EventBusAction.PLAYER_ACTION.ADD_CARDS) > 0
-	var can_trust = actions.count(EventBusAction.PLAYER_ACTION.DECLARE_TRUST) > 0
-	var can_call_bluff = actions.count(EventBusAction.PLAYER_ACTION.CALL_BLUFF) > 0
-	var can_select_color = actions.count(EventBusAction.PLAYER_ACTION.SELECT_COLOR) > 0
+	var can_add = actions.has(EventBusAction.PLAYER_ACTION.ADD_CARDS)
+	var can_trust = actions.has(EventBusAction.PLAYER_ACTION.DECLARE_TRUST)
+	var can_call_bluff = actions.has(EventBusAction.PLAYER_ACTION.CALL_BLUFF)
+	var can_select_color = actions.has(EventBusAction.PLAYER_ACTION.SELECT_COLOR)
 	if can_select_color:
 		enemy_ai.send_color(selected_color)
 		enemy_ai.next_think_time = enemy_ai.think_time

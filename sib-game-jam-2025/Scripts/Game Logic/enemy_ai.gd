@@ -24,7 +24,11 @@ func _ready() -> void:
 	currentAI = BASILIO_BASIC_AI.instantiate()
 	add_child(currentAI)
 	currentAI.init(card_manager, game_manager, game_state_manager, self as EnemyAI)
+	EventBusGL.start_round.connect(start_round)
 	
+func start_round() -> void:
+	checked_cards_idx.clear()
+
 func start_turn() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI:
 		var timer = EFFECT_TIMER.instantiate()
@@ -47,14 +51,25 @@ func check_cards(trust : bool) -> void:
 	else:
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
 
-func pick_check_card() -> void:
+func add_extra_check() -> void:
+	game_manager.enemy_bonus -= game_manager.extra_check_cost
+	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
+
+var checked_cards_idx : Array
+
+func pick_random_check_card() -> void:
 	if !checkable_cards_line:
 		var truth = CardUtils.check_random(card_manager.get_last_addition(), \
 		game_state_manager.current_correct_color)
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+	
 	var rand_card : Card3D
 	var num_cards = checkable_cards_line._current_cards.size()
-	rand_card = checkable_cards_line._current_cards[randi_range(0, num_cards - 1)]
+	var rand_idx = randi_range(0, num_cards - 1)
+	while checked_cards_idx.count(rand_idx) > 0:
+		rand_idx = randi_range(0, num_cards - 1)
+	rand_card = checkable_cards_line._current_cards[rand_idx]
+	checked_cards_idx.append(rand_idx)
 	rand_card.flip()
 	var timer = EFFECT_TIMER.instantiate()
 	add_child(timer)
