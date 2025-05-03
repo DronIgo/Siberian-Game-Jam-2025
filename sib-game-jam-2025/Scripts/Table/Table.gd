@@ -66,11 +66,17 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_0):
 		EventBus.sit_back_at_table.emit()
 
+var sit : bool = true
+
 func _bend_over():
-	_anim_player.play(bend_over_anim_name)
+	if sit:
+		_anim_player.play(bend_over_anim_name)
+		sit = false
 
 func _sit_back():
-	_anim_player.play(sit_back_anim_name)
+	if !sit:
+		_anim_player.play(sit_back_anim_name)
+		sit = true
 
 func _increase_nose():
 	_nose.increase()

@@ -6,7 +6,7 @@ extends Node
 
 @onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
-@onready var player_hand: CardHand = $"../Camera3D/PlayerHand"
+@onready var player_hand: CardHand = $"../PlayerFakeCamera/PlayerHand"
 @onready var enemy_hand: CardHand = $"../EnemyFakeCamera/EnemyHand"
 @onready var checkable_cards_line: CardsLine = $"../CheckableCardsLine"
 @onready var non_checkable_cards_stack: CardsStack = $"../NonCheckableCardsStack"
@@ -28,6 +28,11 @@ func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_last_add)
 	EventBusGL.update_visualisation.connect(display_stack)
 	EventBusGL.update_visualisation.connect(update_selected_color)
+	EventBusGL.start_round.connect(start_round)
+
+func start_round() -> void:
+	for card3d in player_hand._cards:
+		deselect_card(card3d)
 
 #есть отличия от display_enemy_hand, потому что UI 
 func display_player_cards() -> void:
@@ -110,6 +115,12 @@ func update_selected_color() -> void:
 			Card.CARD_COLOR.VIOLET:
 				selected_color.theme = VIOLET_BUTTON_THEME
 
+func deselect_card(card : Card3D):
+	var base_card = card.base_card as Card
+	if card_manager.selected_cards.count(base_card) > 0:
+		card_manager.deselect_card(base_card)
+	card.unselect()
+
 func change_card_select(card : Card3D):
 	if !card.selectable:
 		return
@@ -134,11 +145,13 @@ func _physics_process(delta):
 		if mouse_pressed_last_frame:
 			return
 		mouse_pressed_last_frame = true
-		var card = ray_casting_manager.find_raycast_player_card() as Card3D
-		if card:
-			change_card_select(card)
-		var enemy_card = ray_casting_manager.find_raycast_line_card() as Card3D
-		if enemy_card:
-			try_flip_card(enemy_card)
+		if player_cards_active:
+			var card = ray_casting_manager.find_raycast_player_card() as Card3D
+			if card:
+				change_card_select(card)
+		if last_add_active:
+			var enemy_card = ray_casting_manager.find_raycast_line_card() as Card3D
+			if enemy_card:
+				try_flip_card(enemy_card)
 	else:
 		mouse_pressed_last_frame = false

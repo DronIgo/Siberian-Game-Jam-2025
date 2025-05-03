@@ -36,6 +36,8 @@ func enable_color_select(enable : bool) -> void:
 func enable_select_cards(enable : bool) -> void:
 	cards_visulaiser_3d.set_cards_active(enable)
 	place_cards_button.visible = enable
+	if enable:
+		EventBus.sit_back_at_table.emit()
 func enable_place_cards(enable : bool) -> void:
 	place_cards_button.visible = enable
 func enable_declare_trust(enable : bool) -> void:
@@ -46,7 +48,8 @@ func enable_add_extra_check(enable : bool) -> void:
 	extra_check_button.visible = enable
 func enable_pick_card_check(enable : bool) -> void:
 	cards_visulaiser_3d.set_last_active(enable)
-	
+	if enable:
+		EventBus.bend_over_table.emit()
 	
 func update_avialable_actions_UI() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI:

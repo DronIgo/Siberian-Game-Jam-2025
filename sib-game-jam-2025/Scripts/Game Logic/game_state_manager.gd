@@ -168,9 +168,8 @@ func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
 	if should_end_round:
 		end_round()
-	else:
-		EventBusGL.update_visualisation.emit()
-		EventBusAction.progress_game.emit()
+	EventBusGL.update_visualisation.emit()
+	EventBusAction.progress_game.emit()
 
 func _process(delta: float) -> void:
 	pass
