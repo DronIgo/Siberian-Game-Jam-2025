@@ -1,11 +1,19 @@
 class_name CardVisualiser
 
 extends Node
+@onready var game_state_manager: GameStateManager = $"../GameStateManager"
 
 @onready var player_hand: HBoxContainer = $"../CanvasLayer/Player_Hand"
 @onready var enemy_hand: HBoxContainer = $"../CanvasLayer/Enemy_Hand"
 @onready var last_add_disp: HBoxContainer = $"../CanvasLayer/LastAdd"
 @onready var stack_disp: VBoxContainer = $"../CanvasLayer/Stack"
+@onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
+
+const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
+const GREEN_BUTTON_THEME = preload("res://Resources/Demo/green_button_theme.tres")
+const RED_BUTTON_THEME = preload("res://Resources/Demo/red_button_theme.tres")
+const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tres")
+const GREY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
 
 @onready var card: Button = $"../CanvasLayer/Player_Hand/Card"
 @onready var card_manager: CardManager = $"../CardManager"
@@ -18,6 +26,7 @@ func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_enemy_cards)
 	EventBusGL.update_visualisation.connect(display_last_add)
 	EventBusGL.update_visualisation.connect(display_stack)
+	EventBusGL.update_visualisation.connect(update_selected_color)
 
 #есть отличия от display_enemy_hand, потому что UI 
 func display_player_cards() -> void:
@@ -52,6 +61,7 @@ func display_enemy_cards() -> void:
 		child.free()
 	for c in hand_enemy:
 		var card = card_view_back.instantiate()
+		card.visible = true
 		enemy_hand.add_child(card)
 
 func display_last_add() -> void:
@@ -60,6 +70,7 @@ func display_last_add() -> void:
 		child.free()
 	for c in last:
 		var card = card_view_back.instantiate()
+		card.visible = true
 		last_add_disp.add_child(card)
 
 func display_stack() -> void:
@@ -68,8 +79,24 @@ func display_stack() -> void:
 		child.free()
 	for c in stack:
 		var card = card_view_back.instantiate()
+		card.visible = true
 		stack_disp.add_child(card)
-		
+
+func update_selected_color() -> void:
+	selected_color.visible = game_state_manager.color_selected
+	if ! game_state_manager.color_selected:
+		return
+	else:
+		match game_state_manager.current_correct_color:
+			Card.CARD_COLOR.RED:
+				selected_color.theme = RED_BUTTON_THEME
+			Card.CARD_COLOR.BLUE:
+				selected_color.theme = BLUE_BUTTON_THEME
+			Card.CARD_COLOR.GREEN:
+				selected_color.theme = GREEN_BUTTON_THEME
+			Card.CARD_COLOR.VIOLET:
+				selected_color.theme = VIOLET_BUTTON_THEME
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

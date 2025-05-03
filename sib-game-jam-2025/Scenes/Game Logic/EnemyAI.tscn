@@ -4,3 +4,5 @@
 
 [node name="EnemyAi" type="Node"]
 script = ExtResource("1_f5t7d")
+
+[node name="Timer" type="Timer" parent="."]

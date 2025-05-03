@@ -38,8 +38,12 @@ func deselect_card(card : Card) -> void:
 		print("trying to deselect_card a card thats not on the selected_cards!")
 		return
 	selected_cards.erase(card)
-func is_stack_correct() -> bool:
+func is_selected_correct() -> bool:
 	return selected_cards.size() > 0
+
+func pre_finish_round() -> void:
+	stack.append_array(last_add)
+	last_add.clear()
 
 func place_cards(player_turn : bool) -> void:
 	stack.append_array(last_add)
@@ -91,7 +95,7 @@ func fill_hands() -> void:
 	added_card = add_card_to_players(true)
 	while added_card:
 		added_card = add_card_to_players(true)
-	debug_output()
+	#debug_output()
 
 func create_starting_deck() -> void:
 	deck = []

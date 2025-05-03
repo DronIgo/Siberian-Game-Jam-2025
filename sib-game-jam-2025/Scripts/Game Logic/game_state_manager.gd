@@ -56,6 +56,7 @@ func get_round_result() -> EventBusGL.END_ROUND_RESULT:
 
 func end_round() -> void:
 	var result = get_round_result()
+	print("ROUND ENDED")
 	EventBusGL.end_round.emit(result)
 	EventBusGL.update_visualisation.emit()
 	switch_player_round()
@@ -69,11 +70,14 @@ func start_round() -> void:
 	player_avialable_actions.clear()
 	player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
 	EventBusGL.update_visualisation.emit()
+	EventBusAction.progress_game.emit()
 
 func can_increase_card_check() -> bool:
-	var num_bonus
+	var num_bonus : int
 	if current_player == PLAYER.MAN:
-		num_bonus = game_manager
+		num_bonus = game_manager.player_bonus
+	else:
+		num_bonus = game_manager.enemy_bonus
 	if num_bonus < game_manager.extra_check_cost:
 		return false
 	if card_manager.get_last_addition().size() >= card_checks_left:
@@ -94,7 +98,14 @@ func update_check_success(check_truth : bool) -> void:
 
 func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 	player_avialable_actions.clear()
-	EventBusGL.update_visualisation.emit()
+	var should_end_round = false
+	#lmao
+	print(PLAYER.keys()[current_player],\
+	" does ",\
+	EventBusAction.PLAYER_ACTION.keys()[action])
+	EventBusAction.print_action.emit(PLAYER.keys()[current_player] + \
+	" does " + \
+	EventBusAction.PLAYER_ACTION.keys()[action])
 	match action:
 		EventBusAction.PLAYER_ACTION.ADD_CARDS:
 			if color_selected:
@@ -133,10 +144,14 @@ func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 			var truth = data as bool
 			update_check_success(truth)
 			if check_succesed:
-				end_round()
+				should_end_round = true
 			if card_checks_left == 0:
-				end_round()
-	EventBusAction.progress_game.emit()
+				should_end_round = true
+	if should_end_round:
+		end_round()
+	else:
+		EventBusGL.update_visualisation.emit()
+		EventBusAction.progress_game.emit()
 
 func _process(delta: float) -> void:
 	pass

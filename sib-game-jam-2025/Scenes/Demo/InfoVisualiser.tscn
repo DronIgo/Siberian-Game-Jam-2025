@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqsnixrd8nhfe"]
+
+[ext_resource type="Script" uid="uid://b6nd3cepnktd8" path="res://Scripts/Demo/info_visualiser.gd" id="1_yuydu"]
+
+[node name="InfoVisualiser" type="Node"]
+script = ExtResource("1_yuydu")

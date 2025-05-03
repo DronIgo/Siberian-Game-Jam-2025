@@ -19,7 +19,7 @@ var enemy_bonus : int = 0
 var inited : bool = false
 
 func _ready() -> void:
-	EventBusGL.update_visualisation.connect(update_score_disp)
+	EventBusGL.end_round.connect(process_end_round)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -29,7 +29,22 @@ func _process(delta: float) -> void:
 		EventBusAction.progress_game.emit()
 		inited = true
 
+func process_end_round(result : EventBusGL.END_ROUND_RESULT) -> void:
+	card_manager.pre_finish_round()
+	match result:
+		EventBusGL.END_ROUND_RESULT.PLAYER_TAKES_CARDS:
+			player_takes_cards()
+			return
+		EventBusGL.END_ROUND_RESULT.ENEMY_TAKES_CARDS:
+			enemy_takes_cards()
+			return
+		EventBusGL.END_ROUND_RESULT.CARDS_ARE_DISCARED:
+			cards_are_removed()
+			return
+
 func player_takes_cards() -> void:
+	print("Player takes cards!")
+	EventBusAction.print_action.emit("Player takes cards!")
 	for c in card_manager.stack:
 		var card = c as Card
 		player_score += card.score_mod
@@ -37,13 +52,17 @@ func player_takes_cards() -> void:
 	card_manager.stack.clear()
 
 func enemy_takes_cards() -> void:
+	print("Enemy takes cards!")
+	EventBusAction.print_action.emit("Enemy takes cards!")
 	for c in card_manager.stack:
 		var card = c as Card
-		player_score += card.score_mod
-		player_bonus += card.bonus_mod
+		enemy_score += card.score_mod
+		enemy_bonus += card.bonus_mod
 	card_manager.stack.clear()
 
 func cards_are_removed() -> void:
+	print("Cards are removed")
+	EventBusAction.print_action.emit("Cards are removed")
 	card_manager.stack.clear()
 
 func add_score(result : EventBusGL.END_ROUND_RESULT) -> void:
@@ -54,7 +73,3 @@ func add_score(result : EventBusGL.END_ROUND_RESULT) -> void:
 	if result == EventBusGL.END_ROUND_RESULT.CARDS_ARE_DISCARED:
 		cards_are_removed()
 	EventBusGL.update_visualisation.emit()
-
-func update_score_disp() -> void:
-	player_score_disp.text = "Player: " + str(player_score)
-	enemy_score_disp.text = "Enemy: " + str(enemy_score)

@@ -10,5 +10,5 @@ enum PLAYER_ACTION {
 }
 
 signal send_action(action : PLAYER_ACTION, data)
-signal update_visualisation
 signal progress_game
+signal print_action(action : String)

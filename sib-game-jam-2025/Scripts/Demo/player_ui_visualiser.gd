@@ -80,7 +80,7 @@ func check_card() -> void:
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
 
 func place_cards() -> void:
-	if !card_manager.is_stack_correct():
+	if !card_manager.is_selected_correct():
 		return
 	card_manager.place_cards(true)
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
