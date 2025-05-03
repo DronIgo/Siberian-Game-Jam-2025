@@ -39,16 +39,16 @@ func _ready():
 
 # tests
 func _input(ev):
-	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
-	elif Input.is_key_pressed(KEY_2):
+	#if Input.is_key_pressed(KEY_1):
+	#	EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
+	if Input.is_key_pressed(KEY_2):
 		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
 		EventBus.hand_select_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_4):
 		EventBus.hand_unselect_card.emit(MagicNumbers.PLAYER_ID, 0)
-	elif Input.is_key_pressed(KEY_5):
-		EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
+	#elif Input.is_key_pressed(KEY_5):
+	#	EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_6):
 		EventBus.line_remove_card.emit(0)
 	elif Input.is_key_pressed(KEY_7):
@@ -63,8 +63,8 @@ func _input(ev):
 func _increase_nose():
 	_nose.increase()
 
-func _add_card_to_hand(player_id: int, card_type: Card3D.Type):
-	_cards_hands[player_id].add_card(card_type)
+func _add_card_to_hand(player_id: int, base_card: Card):
+	_cards_hands[player_id].add_card(base_card)
 
 func _remove_card_from_hand(player_id: int, index: int):
 	_cards_hands[player_id].remove_card(index)
@@ -75,8 +75,8 @@ func _select_card_in_hand(player_id: int, index: int):
 func _unselect_card_in_hand(player_id: int, index: int):
 	_cards_hands[player_id].unselect_card(index)
 
-func _add_card_to_checkable_line(card_type: Card3D.Type):
-	_checkable_cards_line.add_card(card_type)
+func _add_card_to_checkable_line(base_card: Card):
+	_checkable_cards_line.add_card(base_card)
 
 func _remove_card_from_checkable_line(index: int):
 	_checkable_cards_line.remove_card(index)

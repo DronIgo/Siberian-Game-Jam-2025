@@ -1,14 +1,15 @@
-class_name CardVisualiser
+class_name CardVisualiser3D
 
 extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
+@onready var ray_casting_manager: Node = $"../RayCastingManager"
 
-@onready var player_hand: HBoxContainer = $"../CanvasLayer/Player_Hand"
-@onready var enemy_hand: HBoxContainer = $"../CanvasLayer/Enemy_Hand"
-@onready var last_add_disp: HBoxContainer = $"../CanvasLayer/LastAdd"
-@onready var stack_disp: VBoxContainer = $"../CanvasLayer/Stack"
 @onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
+@onready var player_hand: CardHand = $"../Camera3D/PlayerHand"
+@onready var enemy_hand: CardHand = $"../EnemyFakeCamera/EnemyHand"
+@onready var checkable_cards_line: CardsLine = $"../CheckableCardsLine"
+@onready var non_checkable_cards_stack: CardsStack = $"../NonCheckableCardsStack"
 
 const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
 const GREEN_BUTTON_THEME = preload("res://Resources/Demo/green_button_theme.tres")
@@ -17,8 +18,6 @@ const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tr
 const GREY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
 
 @onready var card_manager: CardManager = $"../CardManager"
-const card_view = preload("res://Scenes/Demo/card_view.tscn")
-const card_view_back = preload("res://Scenes/Demo/card_view_back.tscn")
 
 var last_add_active : bool = false
 var player_cards_active : bool = false
@@ -35,7 +34,7 @@ func display_player_cards() -> void:
 	var hand_player = card_manager.get_player_hand()
 	var present = []
 	for child in player_hand.get_children():
-		var child_card = (child as CardView).base_card
+		var child_card = (child as Card3D).base_card
 		if hand_player.count(child_card) == 0:
 			child.free()
 		else:
@@ -43,55 +42,54 @@ func display_player_cards() -> void:
 	for c in hand_player:
 		if present.count(c) > 0:
 			continue
-		var card = card_view.instantiate()
-		player_hand.add_child(card)
-		card.set_active(player_cards_active)
-		card.set_base_card(c)
+		var base_card = c as Card
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, base_card)
+	for card3d in player_hand._cards:
+		card3d.set_raycast_layer(RaycastLayers.LAYER.COMMON |\
+		RaycastLayers.LAYER.PLAYER_CARDS)
+		card3d.selectable = player_cards_active
 
 func set_cards_active(active : bool) -> void:
 	player_cards_active = active
-	for child in player_hand.get_children():
-		var card_view = child as CardView
-		card_view.active = active
-		if !active:
-			card_view.set_selected(false)
+	for card3d in player_hand._cards:
+		card3d.selectable = player_cards_active
 
 func set_last_active(active : bool) -> void:
 	last_add_active = active
-	for child in last_add_disp.get_children():
-		var card_view = child as CardViewBack
-		card_view.active = active
+	for card3d in checkable_cards_line._current_cards:
+		card3d.flipable = active
+		card3d.set_raycast_mask(RaycastLayers.LAYER.COMMON |\
+		RaycastLayers.LAYER.ENEMY_CARDS)
 
 func display_enemy_cards() -> void:
 	var hand_enemy = card_manager.get_enemy_hand()
+	var present = []
 	for child in enemy_hand.get_children():
-		child.free()
+		var child_card = (child as Card3D).base_card
+		if hand_enemy.count(child_card) == 0:
+			child.free()
+		else:
+			present.append(child_card)
 	for c in hand_enemy:
-		var card = card_view_back.instantiate()
-		card.visible = true
-		enemy_hand.add_child(card)
+		if present.count(c) > 0:
+			continue
+		var base_card = c as Card
+		EventBus.hand_add_card.emit(MagicNumbers.ENEMY_ID, base_card)
 
 func display_last_add() -> void:
 	if last_add_active:
 		return
 	var last = card_manager.get_last_addition()
-	for child in last_add_disp.get_children():
+	for child in checkable_cards_line.get_children():
 		child.free()
 	for c in last:
-		var card = card_view_back.instantiate()
-		card.set_base_card(c as Card)
-		card.set_visualiser(player_actions)
-		card.visible = true
-		last_add_disp.add_child(card)
+		EventBus.line_add_card.emit(c as Card)
+		#card.set_visualiser(player_actions)
 
 func display_stack() -> void:
 	var stack = card_manager.get_current_stack()
-	for child in stack_disp.get_children():
-		child.free()
-	for c in stack:
-		var card = card_view_back.instantiate()
-		card.visible = true
-		stack_disp.add_child(card)
+	while non_checkable_cards_stack.get_children().size() < stack.size():
+		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
 
 func update_selected_color() -> void:
 	selected_color.visible = game_state_manager.color_selected
@@ -108,6 +106,8 @@ func update_selected_color() -> void:
 			Card.CARD_COLOR.VIOLET:
 				selected_color.theme = VIOLET_BUTTON_THEME
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _physics_process(delta):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var card = ray_casting_manager.find_raycast_player_card()
+		if card:
+			print("Cool")

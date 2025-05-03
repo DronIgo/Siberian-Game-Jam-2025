@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwy84f8yeffe"]
+
+[ext_resource type="Script" uid="uid://dmroy2rtg2pyr" path="res://Scripts/Table/ActionsUI/player_ui_visualiser_3d.gd" id="1_t01tp"]
+
+[node name="PlayerUiVisualiser3d" type="Node"]
+script = ExtResource("1_t01tp")

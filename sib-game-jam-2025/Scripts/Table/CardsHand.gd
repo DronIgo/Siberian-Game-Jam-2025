@@ -21,9 +21,12 @@ func _ready():
 		((max_cards if max_cards % 2 == 0 else max_cards + 1) / 2)
 	_nose_half_gap = nose_gap
 
-func add_card(type: Card3D.Type):
+func get_card(index : int) -> Card3D:
+	return _cards[index] as Card3D
+
+func add_card(base_card: Card):
 	var card = card_scene.instantiate()
-	card.init(type)
+	card.init(base_card)
 	card.disable_physics()
 	add_child(card)
 	_cards.append(card)

@@ -8,11 +8,11 @@ extends Node3D
 
 var _current_cards: Array = []
 
-func add_card(type: Card3D.Type):
+func add_card(base_card: Card):
 	for card in _current_cards:
 		card.move_x(-1 * card_width / 100 - cards_gap / 100)
 	var card = card_scene.instantiate()
-	card.init(type)
+	card.init(base_card)
 	card.rotation = Vector3(deg_to_rad(90), 0, 0)
 	card.disable_physics()
 	add_child(card)

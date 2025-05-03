@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://baqct71bfl7sn"]
+
+[ext_resource type="Script" uid="uid://btr2wjby5jac3" path="res://Scripts/Table/ActionsUI/cards_visulaiser_3d.gd" id="1_s4mcn"]
+
+[node name="CardsVisulaiser3d" type="Node"]
+script = ExtResource("1_s4mcn")
