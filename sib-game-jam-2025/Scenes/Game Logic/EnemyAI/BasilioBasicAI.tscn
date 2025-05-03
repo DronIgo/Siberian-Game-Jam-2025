@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm5305ti4cr8j"]
+
+[ext_resource type="Script" uid="uid://c8wjeyhx7of48" path="res://Scripts/Game Logic/EnemyAI/basilio_basic.gd" id="1_glhdy"]
+
+[node name="BasilioBasicAi" type="Node"]
+script = ExtResource("1_glhdy")

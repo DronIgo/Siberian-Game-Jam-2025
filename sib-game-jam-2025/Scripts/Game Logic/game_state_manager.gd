@@ -69,6 +69,7 @@ func end_round() -> void:
 	EventBusGL.start_round.emit()
 	
 func start_round() -> void:
+	EventBus.sit_back_at_table.emit()
 	current_correct_color = Card.CARD_COLOR.GREY
 	color_selected = false
 	check_succesed = false
