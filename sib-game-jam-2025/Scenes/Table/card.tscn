@@ -1,81 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://lxyxtu86gwqx"]
+[gd_scene load_steps=4 format=3 uid="uid://lxyxtu86gwqx"]
 
 [ext_resource type="Script" uid="uid://gl3re7i7a8dr" path="res://Scripts/Table/Card.gd" id="1_b0j6s"]
 [ext_resource type="Texture2D" uid="uid://v14mq4v8dyxf" path="res://Sprites/Table/card_back.png" id="2_b0j6s"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0j6s"]
-
-[sub_resource type="Animation" id="Animation_b0j6s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:freeze")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_hr2vp"]
-resource_name = "card_flip"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(1.5708, 0, 0), Vector3(-1.5708, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:freeze")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.933333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b0j6s"]
-_data = {
-&"RESET": SubResource("Animation_b0j6s"),
-&"card_flip": SubResource("Animation_hr2vp")
-}
 
 [node name="Card" type="RigidBody3D"]
 script = ExtResource("1_b0j6s")
@@ -89,8 +17,3 @@ texture = ExtResource("2_b0j6s")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.7, 0, 0, 0, 0.025, 0, 0, 0)
 shape = SubResource("BoxShape3D_b0j6s")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_b0j6s")
-}

@@ -46,11 +46,11 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_4):
 		EventBus.hand_unselect_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_5):
-		EventBus.stack_add_card.emit(CardsStack.Type.DROPPED)
+		EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_6):
-		EventBus.stack_remove_card.emit(CardsStack.Type.DROPPED)
+		EventBus.line_remove_card.emit(0)
 	elif Input.is_key_pressed(KEY_7):
-		EventBus.token_add.emit(MagicNumbers.PLAYER_ID)
+		EventBus.line_flip_card.emit(0)
 	elif Input.is_key_pressed(KEY_8):
 		EventBus.token_remove.emit(MagicNumbers.PLAYER_ID)
 	elif Input.is_key_pressed(KEY_9):

@@ -13,7 +13,7 @@ func add_card(type: Card3D.Type):
 		card.move_x(-1 * card_width / 100 - cards_gap / 100)
 	var card = card_scene.instantiate()
 	card.init(type)
-	card.rotation = Vector3(90, 0, 0)
+	card.rotation = Vector3(deg_to_rad(90), 0, 0)
 	card.disable_physics()
 	add_child(card)
 	_current_cards.append(card)

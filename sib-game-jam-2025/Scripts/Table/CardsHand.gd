@@ -10,7 +10,8 @@ extends Node3D
 @export var horizontal_step: float = 0.15
 @export var vertical_step: float = 0.05
 
-var _current_cards: Array = []
+var _cards: Array = []
+var _selected_cards: Array = []
 var _nose_half_gap: float = nose_gap / 2
 var _angle_step: float
 
@@ -24,37 +25,42 @@ func add_card(type: Card3D.Type):
 	card.init(type)
 	card.disable_physics()
 	add_child(card)
-	_current_cards.append(card)
+	_cards.append(card)
 	_replace_cards()
 	print("[CARDS HAND] CARD ADDED")
 
 func remove_card(index: int):
-	if _current_cards.is_empty():
+	if _cards.is_empty():
 		return
-	var card = _current_cards[index]
+	var card = _cards[index]
 	card.queue_free()
-	_current_cards.erase(card)
+	_cards.erase(card)
 	_replace_cards()
 	print("[CARDS HAND] CARD REMOVED")
 
 func select_card(index: int):
-	var card = _current_cards[index]
+	var card = _cards[index]
+	_selected_cards.append(index)
 	card.select()
 
 func unselect_card(index: int):
-	var card = _current_cards[index]
+	var card = _cards[index]
+	_selected_cards.erase(index)
 	card.unselect()
 
+func confirm_selected_cards():
+	EventBus.hand_confirm_selected.emit(_selected_cards)
+
 func _replace_cards():
-	var max_left_index = (_current_cards.size() - 1) / 2
+	var max_left_index = (_cards.size() - 1) / 2
 	_replace_left_half(max_left_index)
 	_replace_right_half(max_left_index + 1)
 
 func _replace_left_half(to_index: int):
-	if _current_cards.is_empty():
+	if _cards.is_empty():
 		return
 	for i in to_index + 1:
-		var card = _current_cards[to_index - i]
+		var card = _cards[to_index - i]
 		var pos = position
 		pos.x -= _nose_half_gap + i * horizontal_step
 		pos.y -= i * vertical_step
@@ -64,12 +70,12 @@ func _replace_left_half(to_index: int):
 		card.rotation = Vector3(0, 0, deg_to_rad(angle))
 
 func _replace_right_half(from_index: int):
-	var cards_num = _current_cards.size()
+	var cards_num = _cards.size()
 	if cards_num <= from_index:
 		return
 	var j = 0
 	for i in range(from_index, cards_num):
-		var card: Card3D = _current_cards[i]
+		var card: Card3D = _cards[i]
 		var pos = position
 		pos.x += _nose_half_gap + j * horizontal_step
 		pos.y -= j * vertical_step
