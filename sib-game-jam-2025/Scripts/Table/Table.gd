@@ -2,7 +2,10 @@ class_name Table
 
 extends Node3D
 
-@onready var _player_hand = $Camera3D/PlayerHand
+@export var bend_over_anim_name = "bend_over"
+@export var sit_back_anim_name = "sit_back"
+
+@onready var _player_hand = $PlayerFakeCamera/PlayerHand
 @onready var _enemy_hand = $EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
@@ -13,6 +16,7 @@ extends Node3D
 @onready var _enemy_score_cards_stack = $EnemyScoreCardsStack
 @onready var _checkable_cards_line = $CheckableCardsLine
 @onready var _nose = $Camera3D/Nose
+@onready var _anim_player = $AnimationPlayer
 
 var _cards_hands: Array = []
 var _token_spawners: Array = []
@@ -36,6 +40,8 @@ func _ready():
 	EventBus.line_remove_card.connect(_remove_card_from_checkable_line)
 	EventBus.line_flip_card.connect(_flip_card_in_checkable_line)
 	EventBus.nose_increase.connect(_increase_nose)
+	EventBus.bend_over_table.connect(_bend_over)
+	EventBus.sit_back_at_table.connect(_sit_back)
 
 # tests
 func _input(ev):
@@ -56,9 +62,15 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_8):
 		EventBus.token_add.emit(MagicNumbers.ENEMY_ID)
 	elif Input.is_key_pressed(KEY_9):
-		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
+		EventBus.bend_over_table.emit()
 	elif Input.is_key_pressed(KEY_0):
-		EventBus.nose_increase.emit()
+		EventBus.sit_back_at_table.emit()
+
+func _bend_over():
+	_anim_player.play(bend_over_anim_name)
+
+func _sit_back():
+	_anim_player.play(sit_back_anim_name)
 
 func _increase_nose():
 	_nose.increase()
