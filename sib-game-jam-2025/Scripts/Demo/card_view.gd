@@ -5,6 +5,7 @@ var active : bool = false
 var selected : bool = false
 var base_card : Card
 
+var card_manager: CardManager
 var selected_mark: ColorRect
 
 const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
@@ -16,7 +17,8 @@ const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tr
 func _ready() -> void:
 	pressed.connect(_button_pressed)
 	selected_mark = get_node("Selected")
-	update_view()
+	card_manager = get_tree().get_root().get_node("/root/Node2D/CardManager")
+	EventBusGL.update_visualisation.connect(update_view)
 
 func set_base_card(base : Card) -> void:
 	base_card = base
@@ -31,9 +33,13 @@ func set_selected(new_selected : bool) -> void:
 
 func _button_pressed():
 	if (active):
-		print("pressed")
-		selected = !selected
-		update_view()
+		if !selected:
+			if card_manager.select_card(base_card):
+				selected = !selected
+		else:
+			card_manager.deselect_card(base_card)
+			selected = !selected
+		EventBusGL.update_visualisation.emit()
 
 func update_view() -> void:
 	if base_card:

@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvi0lsee7j2cv"]
+
+[ext_resource type="PackedScene" uid="uid://cdcfnxst2dods" path="res://Scenes/Game Logic/CardManager.tscn" id="1_opw4r"]
+[ext_resource type="PackedScene" uid="uid://kmqdfyuw2yx" path="res://Scenes/Demo/CardVisualiser.tscn" id="2_j5dxk"]
+[ext_resource type="PackedScene" uid="uid://dmm153yvgk4e6" path="res://Scenes/Demo/card_view.tscn" id="2_xut54"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CardManager" parent="." instance=ExtResource("1_opw4r")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player_Hand" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 176.0
+offset_right = 15.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="CardView" parent="CanvasLayer/Player_Hand" instance=ExtResource("2_xut54")]
+layout_mode = 2
+
+[node name="Enemy_Stack" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -25.0
+offset_right = 15.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PlaceCardsButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -74.0
+offset_right = 212.0
+offset_bottom = -12.0
+grow_vertical = 0
+text = "Place cards"
+
+[node name="CardVisualiser" parent="." instance=ExtResource("2_j5dxk")]

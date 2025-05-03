@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 EventBus="*res://Scripts/Common/EventBus.gd"
 EventBusGL="*res://Scripts/Common/EventBusGL.gd"
 MagicNumbers="*res://Scripts/Table/MagicNumbers.gd"
+EventBusAction="*res://Scripts/Common/EventBusAction.gd"
 
 [display]
 

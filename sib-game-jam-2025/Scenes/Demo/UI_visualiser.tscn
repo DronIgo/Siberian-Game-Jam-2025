@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw7fwyuu7jxv4"]
+
+[ext_resource type="Script" uid="uid://d4bwcgx07n1lc" path="res://Scripts/Demo/player_ui_visualiser.gd" id="1_c1yh0"]
+
+[node name="UiVisualiser" type="Node"]
+script = ExtResource("1_c1yh0")
