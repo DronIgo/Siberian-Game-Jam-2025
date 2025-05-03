@@ -29,6 +29,7 @@ func _ready():
 	EventBus.stack_remove_card.connect(_remove_card_from_stack)
 	EventBus.line_add_card.connect(_add_card_to_checkable_line)
 	EventBus.line_remove_card.connect(_remove_card_from_checkable_line)
+	EventBus.line_flip_card.connect(_flip_card_in_checkable_line)
 
 # tests
 func _input(ev):
@@ -37,7 +38,7 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_2):
 		EventBus.line_remove_card.emit(0)
 	elif Input.is_key_pressed(KEY_3):
-		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
+		EventBus.line_flip_card.emit(0)
 	elif Input.is_key_pressed(KEY_4):
 		EventBus.stack_remove_card.emit(CardsStack.Type.NON_CHECKABLE)
 	elif Input.is_key_pressed(KEY_5):
@@ -64,6 +65,9 @@ func _add_card_to_checkable_line(card_type: Card3D.Type):
 
 func _remove_card_from_checkable_line(index: int):
 	_checkable_cards_line.remove_card(index)
+
+func _flip_card_in_checkable_line(index: int):
+	_checkable_cards_line.flip_card(index)
 
 func _add_token(player_id: int):
 	_token_spawners[player_id].add_token()

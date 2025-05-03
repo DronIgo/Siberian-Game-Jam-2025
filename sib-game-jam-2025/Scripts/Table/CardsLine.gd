@@ -26,3 +26,7 @@ func remove_card(index: int):
 	card.queue_free()
 	_current_cards.erase(card)
 	print("[CARDS LINE] CARD REMOVED")
+
+func flip_card(index: int):
+	var card = _current_cards[index]
+	card.flip()
