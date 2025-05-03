@@ -6,7 +6,7 @@ extends Node3D
 @export var nose_gap: float = 1
 @export var init_angle: float = 10
 @export var max_angle: float = 30
-@export var layer_step: float = 0.05
+@export var layer_step: float = 0.052
 @export var horizontal_step: float = 0.15
 @export var vertical_step: float = 0.05
 
@@ -61,11 +61,11 @@ func _replace_left_half(to_index: int):
 	if _cards.is_empty():
 		return
 	for i in to_index + 1:
-		var card = _cards[to_index - i]
+		var card: Card3D = _cards[to_index - i]
 		var pos = position
 		pos.x -= _nose_half_gap + i * horizontal_step
 		pos.y -= i * vertical_step
-		pos.z += i * layer_step
+		pos.z -= i * layer_step
 		card.position = pos
 		var angle = init_angle + i * _angle_step
 		card.rotation = Vector3(0, 0, deg_to_rad(angle))
@@ -80,7 +80,7 @@ func _replace_right_half(from_index: int):
 		var pos = position
 		pos.x += _nose_half_gap + j * horizontal_step
 		pos.y -= j * vertical_step
-		pos.z -= j * layer_step
+		pos.z += (j + 1) * layer_step
 		card.position = pos
 		var angle = -1 * init_angle - j * _angle_step
 		card.rotation = Vector3(0, 0, deg_to_rad(angle))
