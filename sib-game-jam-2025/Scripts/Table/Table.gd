@@ -9,6 +9,8 @@ extends Node3D
 @onready var _new_cards_stack = $NewCardsStack
 @onready var _dropped_cards_stack = $DroppedCardsStack
 @onready var _non_checkable_cards_stack = $NonCheckableCardsStack
+@onready var _player_score_cards_stack = $PlayerScoreCardsStack
+@onready var _enemy_score_cards_stack = $EnemyScoreCardsStack
 @onready var _checkable_cards_line = $CheckableCardsLine
 @onready var _nose = $Camera3D/Nose
 
@@ -38,13 +40,13 @@ func _ready():
 # tests
 func _input(ev):
 	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
+		EventBus.hand_add_card.emit(MagicNumbers.ENEMY_ID, Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_2):
-		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
+		EventBus.hand_remove_card.emit(MagicNumbers.ENEMY_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
-		EventBus.hand_select_card.emit(MagicNumbers.PLAYER_ID, 0)
+		EventBus.hand_select_card.emit(MagicNumbers.ENEMY_ID, 0)
 	elif Input.is_key_pressed(KEY_4):
-		EventBus.hand_unselect_card.emit(MagicNumbers.PLAYER_ID, 0)
+		EventBus.hand_unselect_card.emit(MagicNumbers.ENEMY_ID, 0)
 	elif Input.is_key_pressed(KEY_5):
 		EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
 	elif Input.is_key_pressed(KEY_6):
@@ -52,9 +54,9 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_7):
 		EventBus.line_flip_card.emit(0)
 	elif Input.is_key_pressed(KEY_8):
-		EventBus.token_remove.emit(MagicNumbers.PLAYER_ID)
-	elif Input.is_key_pressed(KEY_9):
 		EventBus.token_add.emit(MagicNumbers.ENEMY_ID)
+	elif Input.is_key_pressed(KEY_9):
+		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
 	elif Input.is_key_pressed(KEY_0):
 		EventBus.nose_increase.emit()
 
@@ -96,6 +98,10 @@ func _add_card_to_stack(stack_type: CardsStack.Type):
 			_dropped_cards_stack.add_card()
 		CardsStack.Type.NON_CHECKABLE:
 			_non_checkable_cards_stack.add_card()
+		CardsStack.Type.PLAYER_SCORE:
+			_player_score_cards_stack.add_card()
+		CardsStack.Type.ENEMY_SCORE:
+			_enemy_score_cards_stack.add_card()
 
 func _remove_card_from_stack(stack_type: CardsStack.Type):
 	match stack_type:
@@ -105,3 +111,7 @@ func _remove_card_from_stack(stack_type: CardsStack.Type):
 			_dropped_cards_stack.remove_card()
 		CardsStack.Type.NON_CHECKABLE:
 			_non_checkable_cards_stack.remove_card()
+		CardsStack.Type.PLAYER_SCORE:
+			_player_score_cards_stack.remove_card()
+		CardsStack.Type.ENEMY_SCORE:
+			_enemy_score_cards_stack.remove_card()
