@@ -142,11 +142,11 @@ func try_flip_card(card : Card3D):
 var mouse_pressed_last_frame = false
 func _physics_process(delta):
 #
-	if (ray_casting_manager.find_raycast_player_card() != null):
-		EventBus.show_cards.emit()
-	elif card_manager.selected_cards.size() <= 0:
-		EventBus.hide_cards.emit()
-		return
+	#if (ray_casting_manager.find_raycast_player_card() != null):
+		#EventBus.show_cards.emit()
+	#elif card_manager.selected_cards.size() <= 0:
+		#EventBus.hide_cards.emit()
+		#return
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if mouse_pressed_last_frame:
