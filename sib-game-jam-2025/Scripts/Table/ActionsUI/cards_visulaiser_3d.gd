@@ -36,6 +36,7 @@ func display_player_cards() -> void:
 	for child in player_hand.get_children():
 		var child_card = (child as Card3D).base_card
 		if hand_player.count(child_card) == 0:
+			player_hand._cards.erase(child as Card3D)
 			child.free()
 		else:
 			present.append(child_card)
@@ -44,6 +45,7 @@ func display_player_cards() -> void:
 			continue
 		var base_card = c as Card
 		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, base_card)
+	player_hand._replace_cards()
 	for card3d in player_hand._cards:
 		card3d.set_raycast_layer(RaycastLayers.LAYER.COMMON |\
 		RaycastLayers.LAYER.PLAYER_CARDS)
@@ -58,7 +60,7 @@ func set_last_active(active : bool) -> void:
 	last_add_active = active
 	for card3d in checkable_cards_line._current_cards:
 		card3d.flipable = active
-		card3d.set_raycast_mask(RaycastLayers.LAYER.COMMON |\
+		card3d.set_raycast_layer(RaycastLayers.LAYER.COMMON |\
 		RaycastLayers.LAYER.ENEMY_CARDS)
 
 func display_enemy_cards() -> void:
@@ -67,6 +69,7 @@ func display_enemy_cards() -> void:
 	for child in enemy_hand.get_children():
 		var child_card = (child as Card3D).base_card
 		if hand_enemy.count(child_card) == 0:
+			enemy_hand._cards.erase(child as Card3D)
 			child.free()
 		else:
 			present.append(child_card)
@@ -81,6 +84,7 @@ func display_last_add() -> void:
 		return
 	var last = card_manager.get_last_addition()
 	for child in checkable_cards_line.get_children():
+		checkable_cards_line._current_cards.erase(child as Card3D)
 		child.free()
 	for c in last:
 		EventBus.line_add_card.emit(c as Card)
@@ -106,8 +110,35 @@ func update_selected_color() -> void:
 			Card.CARD_COLOR.VIOLET:
 				selected_color.theme = VIOLET_BUTTON_THEME
 
+func change_card_select(card : Card3D):
+	if !card.selectable:
+		return
+	var base_card = card.base_card as Card
+	if card_manager.selected_cards.count(base_card) > 0:
+		card_manager.deselect_card(base_card)
+		card.unselect()
+		return
+	if card_manager.select_card(base_card):
+		card.select()
+
+func try_flip_card(card : Card3D):
+	if !card.flipable:
+		return
+	var base_card = card.base_card as Card
+	card.flip()
+	player_actions.check_card(base_card.color)
+
+var mouse_pressed_last_frame = false
 func _physics_process(delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		var card = ray_casting_manager.find_raycast_player_card()
+		if mouse_pressed_last_frame:
+			return
+		mouse_pressed_last_frame = true
+		var card = ray_casting_manager.find_raycast_player_card() as Card3D
 		if card:
-			print("Cool")
+			change_card_select(card)
+		var enemy_card = ray_casting_manager.find_raycast_line_card() as Card3D
+		if enemy_card:
+			try_flip_card(enemy_card)
+	else:
+		mouse_pressed_last_frame = false

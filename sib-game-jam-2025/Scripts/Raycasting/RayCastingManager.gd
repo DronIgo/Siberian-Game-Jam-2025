@@ -29,3 +29,9 @@ func find_raycast_player_card() -> Card3D:
 	if !body:
 		return null
 	return body.get_node("../../Card") as Card3D
+
+func find_raycast_line_card() -> Card3D:
+	var body = find_raycast_object(RaycastLayers.LAYER.ENEMY_CARDS)
+	if !body:
+		return null
+	return body.get_node("../../Card") as Card3D
