@@ -3,6 +3,7 @@ class_name PlayerActions
 extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var card_manager: CardManager = $"../CardManager"
+@onready var game_manager: GameManager = $"../GameManager"
 
 
 func select_color(color : Card.CARD_COLOR) -> void:
@@ -17,10 +18,14 @@ func call_bluff() -> void:
 func declare_trust() -> void:
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
 	
-func check_card() -> void:
-	var color = game_state_manager.current_correct_color
-	var truth = CardUtils.check_random(card_manager.last_add, color)
+func check_card(color : Card.CARD_COLOR) -> void:
+	var correct_color = game_state_manager.current_correct_color
+	var truth = color == correct_color
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+
+func add_extra_check() -> void:
+	game_manager.player_bonus -= game_manager.extra_check_cost
+	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():

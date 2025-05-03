@@ -8,6 +8,7 @@ extends Node
 @onready var last_add_disp: HBoxContainer = $"../CanvasLayer/LastAdd"
 @onready var stack_disp: VBoxContainer = $"../CanvasLayer/Stack"
 @onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
+@onready var player_actions: PlayerActions = $"../PlayerActions"
 
 const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
 const GREEN_BUTTON_THEME = preload("res://Resources/Demo/green_button_theme.tres")
@@ -20,6 +21,7 @@ const GREY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
 const card_view = preload("res://Scenes/Demo/card_view.tscn")
 const card_view_back = preload("res://Scenes/Demo/card_view_back.tscn")
 
+var last_add_active : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_player_cards)
@@ -52,8 +54,11 @@ func set_cards_active(active : bool) -> void:
 		if !active:
 			card_view.set_selected(false)
 
-func set_enemy_cards_selectable(active : bool) -> void:
-	pass
+func set_last_active(active : bool) -> void:
+	last_add_active = active
+	for child in last_add_disp.get_children():
+		var card_view = child as CardViewBack
+		card_view.active = active
 
 func display_enemy_cards() -> void:
 	var hand_enemy = card_manager.get_enemy_hand()
@@ -65,11 +70,15 @@ func display_enemy_cards() -> void:
 		enemy_hand.add_child(card)
 
 func display_last_add() -> void:
+	if last_add_active:
+		return
 	var last = card_manager.get_last_addition()
 	for child in last_add_disp.get_children():
 		child.free()
 	for c in last:
 		var card = card_view_back.instantiate()
+		card.set_base_card(c as Card)
+		card.set_visualiser(player_actions)
 		card.visible = true
 		last_add_disp.add_child(card)
 
