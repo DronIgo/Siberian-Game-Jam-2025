@@ -3,6 +3,8 @@ extends Node
 
 const BasilioBasic = preload("res://Scenes/Game Logic/EnemyAI/basilio_basic.gd")
 
+@onready var checkable_cards_line: CardsLine = $"../CheckableCardsLine"
+
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
@@ -119,12 +121,24 @@ func place_first_cards(hand : Array) -> void:
 	place_cards()
 
 func check_cards(trust : bool) -> void:
+	EventBus.bend_over_table.emit()
 	if trust:
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
 	else:
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
 
 func pick_check_card() -> void:
-	var truth = CardUtils.check_random(card_manager.get_last_addition(), \
-	game_state_manager.current_correct_color)
+	if !checkable_cards_line:
+		var truth = CardUtils.check_random(card_manager.get_last_addition(), \
+		game_state_manager.current_correct_color)
+		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+	var rand_card : Card3D
+	var num_cards = checkable_cards_line._current_cards.size()
+	rand_card = checkable_cards_line._current_cards[randi_range(0, num_cards - 1)]
+	rand_card.flip()
+	var timer = EFFECT_TIMER.instantiate()
+	add_child(timer)
+	timer.start(2.0)
+	await EventBusAction.effect_end
+	var truth = rand_card.base_card.color == game_state_manager.current_correct_color
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
