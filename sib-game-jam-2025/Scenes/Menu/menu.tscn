@@ -1,0 +1,185 @@
+[gd_scene load_steps=6 format=3 uid="uid://q4c2prspc74e"]
+
+[ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
+[ext_resource type="Texture2D" uid="uid://boybnrq7pbou3" path="res://Sprites/Table/cat_example.png" id="1_cqskg"]
+
+[sub_resource type="Animation" id="Animation_3ymnh"]
+resource_name = "authors_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AuthorsBase/JamRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-900, -222), Vector2(100, -222)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AuthorsBase/AuthorsRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(540, 98), Vector2(540, -548)]
+}
+
+[sub_resource type="Animation" id="Animation_3qr6s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AuthorsBase/AuthorsRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(540, 98)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AuthorsBase/JamRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-900, -222)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3qr6s"]
+_data = {
+&"RESET": SubResource("Animation_3qr6s"),
+&"authors_appear": SubResource("Animation_3ymnh")
+}
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_3ymnh")
+
+[node name="Rect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.360784, 0, 1, 1)
+
+[node name="TitleLabel" type="Label" parent="Rect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -268.5
+offset_right = 1026.0
+offset_bottom = -131.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Buratino's Big Bluff"
+
+[node name="PlayButton" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -48.0
+offset_right = 529.0
+offset_bottom = 48.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "играть"
+
+[node name="AuthorsButton" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = 62.0
+offset_right = 529.0
+offset_bottom = 158.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "авторы"
+
+[node name="ExitButton" type="Button" parent="Rect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = 172.0
+offset_right = 529.0
+offset_bottom = 268.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "выйти"
+
+[node name="Sprite2D" type="Sprite2D" parent="Rect"]
+position = Vector2(1800, 1300)
+texture = ExtResource("1_cqskg")
+
+[node name="AuthorsBase" type="Control" parent="Rect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="JamRect" type="ColorRect" parent="Rect/AuthorsBase"]
+offset_left = -900.0
+offset_top = -222.0
+offset_right = -60.0
+offset_bottom = -64.0
+color = Color(0.203922, 0.0588235, 0.458824, 1)
+
+[node name="JamLabel" type="Label" parent="Rect/AuthorsBase/JamRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 42
+text = "игра сделана в рамках
+Siberian Game Jam (май 2025)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AuthorsRect" type="ColorRect" parent="Rect/AuthorsBase"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 98.0
+offset_right = 940.0
+offset_bottom = 414.0
+color = Color(0.203922, 0.0588235, 0.458824, 1)
+
+[node name="AuthorsLabel" type="Label" parent="Rect/AuthorsBase/AuthorsRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 42
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rect"]
+libraries = {
+&"": SubResource("AnimationLibrary_3qr6s")
+}
+
+[connection signal="pressed" from="Rect/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Rect/AuthorsButton" to="." method="_on_authors_button_pressed"]
+[connection signal="pressed" from="Rect/ExitButton" to="." method="_on_exit_button_pressed"]
