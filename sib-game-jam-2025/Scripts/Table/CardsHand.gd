@@ -14,11 +14,14 @@ var _cards: Array = []
 var _selected_cards: Array = []
 var _nose_half_gap: float = nose_gap / 2
 var _angle_step: float
+var _looks_at_camera: bool
 
 func _ready():
 	var max_cards = MagicNumbers.MAX_CARDS_IN_HAND
 	_angle_step = max_angle / \
 		((max_cards if max_cards % 2 == 0 else max_cards + 1) / 2)
+	_looks_at_camera = rotation.y == 0.0
+	print(_looks_at_camera)
 
 func add_card(type: Card3D.Type):
 	var card = card_scene.instantiate()
@@ -61,13 +64,14 @@ func _replace_left_half(to_index: int):
 		return
 	for i in to_index + 1:
 		var card = _cards[to_index - i]
-		var pos = position
+		var pos = global_position
 		pos.x -= _nose_half_gap + i * horizontal_step
 		pos.y -= i * vertical_step
 		pos.z += i * layer_step
-		card.position = pos
-		var angle = init_angle + i * _angle_step
-		card.rotation = Vector3(0, 0, deg_to_rad(angle))
+		card.global_position = pos
+		var multiplyer = -1 if _looks_at_camera else 0
+		var angle = multiplyer * init_angle + i * _angle_step
+		card.global_rotation = Vector3(0, card.global_rotation.y, deg_to_rad(angle))
 
 func _replace_right_half(from_index: int):
 	var cards_num = _cards.size()
@@ -76,11 +80,12 @@ func _replace_right_half(from_index: int):
 	var j = 0
 	for i in range(from_index, cards_num):
 		var card: Card3D = _cards[i]
-		var pos = position
+		var pos = global_position
 		pos.x += _nose_half_gap + j * horizontal_step
 		pos.y -= j * vertical_step
 		pos.z -= j * layer_step
-		card.position = pos
-		var angle = -1 * init_angle - j * _angle_step
-		card.rotation = Vector3(0, 0, deg_to_rad(angle))
+		card.global_position = pos
+		var multiplyer = -1 if _looks_at_camera else 0
+		var angle = multiplyer * init_angle - j * _angle_step
+		card.global_rotation = Vector3(0, card.global_rotation.y, deg_to_rad(angle))
 		j += 1
