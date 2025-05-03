@@ -3,33 +3,6 @@
 [ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
 [ext_resource type="Texture2D" uid="uid://boybnrq7pbou3" path="res://Sprites/Table/cat_example.png" id="1_cqskg"]
 
-[sub_resource type="Animation" id="Animation_3ymnh"]
-resource_name = "authors_appear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AuthorsBase/JamRect:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.4, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-900, -222), Vector2(100, -222)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AuthorsBase/AuthorsRect:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(540, 98), Vector2(540, -548)]
-}
-
 [sub_resource type="Animation" id="Animation_3qr6s"]
 length = 0.001
 tracks/0/type = "value"
@@ -55,6 +28,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-900, -222)]
+}
+
+[sub_resource type="Animation" id="Animation_3ymnh"]
+resource_name = "authors_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AuthorsBase/JamRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-900, -222), Vector2(100, -222)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AuthorsBase/AuthorsRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(540, 98), Vector2(540, -548)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3qr6s"]
@@ -140,6 +140,7 @@ offset_right = 40.0
 grow_vertical = 0
 
 [node name="JamRect" type="ColorRect" parent="Rect/AuthorsBase"]
+layout_mode = 0
 offset_left = -900.0
 offset_top = -222.0
 offset_right = -60.0

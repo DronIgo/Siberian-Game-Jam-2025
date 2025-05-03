@@ -1,0 +1,23 @@
+{
+	"phases": [
+		{
+			"id": "menu",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [],
+			"next_phase_id": ""
+		},
+		{
+			"id": "dialog_papa_1",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": ["res://Configs/Dialog/test.json"],
+			"next_phase_id": "table"
+		},
+		{
+			"id": "table",
+			"scene_name": "res://Scenes/Table/table.tscn",
+			"args": [],
+			"next_phase_id": "menu"
+		}
+	],
+	"init_scene_id": "dialog_papa_1"
+}
