@@ -30,7 +30,8 @@ func start_round() -> void:
 	checked_cards_idx.clear()
 
 func start_turn() -> void:
-	if game_state_manager.current_player == GameStateManager.PLAYER.AI:
+	if game_state_manager.current_player == GameStateManager.PLAYER.AI &&\
+	game_state_manager.player_avialable_actions.size() > 0:
 		var timer = EFFECT_TIMER.instantiate()
 		add_child(timer)
 		timer.start(next_think_time)
