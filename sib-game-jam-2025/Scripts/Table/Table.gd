@@ -45,8 +45,8 @@ func _ready():
 
 # tests
 func _input(ev):
-	#if Input.is_key_pressed(KEY_1):
-	#	EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.values().pick_random())
+	if Input.is_key_pressed(KEY_1):
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
 	if Input.is_key_pressed(KEY_2):
 		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
 	elif Input.is_key_pressed(KEY_3):
@@ -67,6 +67,15 @@ func _input(ev):
 		EventBus.sit_back_at_table.emit()
 
 var sit : bool = true
+
+# tests
+func _new_card() -> Card:
+	var new_card = Card.new()
+	new_card.color = Card.CARD_COLOR.values().pick_random()
+	new_card.value = 1
+	new_card.bonus_mod = 1
+	new_card.score_mod = 1
+	return new_card
 
 func _bend_over():
 	if sit:

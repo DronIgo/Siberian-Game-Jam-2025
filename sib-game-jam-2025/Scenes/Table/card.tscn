@@ -128,9 +128,11 @@ script = ExtResource("1_b0j6s")
 [node name="Body" type="RigidBody3D" parent="."]
 
 [node name="Front" type="Sprite3D" parent="Body"]
+alpha_cut = 2
 
 [node name="Back" type="Sprite3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+alpha_cut = 2
 texture = ExtResource("2_b0j6s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]

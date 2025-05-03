@@ -6,7 +6,7 @@ extends Node3D
 @export var nose_gap: float = 1
 @export var init_angle: float = 10
 @export var max_angle: float = 30
-@export var layer_step: float = 0.052
+@export var layer_step: float = 0.025
 @export var horizontal_step: float = 0.15
 @export var vertical_step: float = 0.05
 
