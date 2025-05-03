@@ -60,13 +60,22 @@ func _input(ev):
 	elif Input.is_key_pressed(KEY_7):
 		EventBus.line_flip_card.emit(0)
 	elif Input.is_key_pressed(KEY_8):
-		EventBus.token_add.emit(MagicNumbers.ENEMY_ID)
+		_next_game_phase()
 	elif Input.is_key_pressed(KEY_9):
 		EventBus.bend_over_table.emit()
 	elif Input.is_key_pressed(KEY_0):
 		EventBus.sit_back_at_table.emit()
 
 var sit : bool = true
+
+func _next_game_phase():
+	var next_phase: Phase = PhaseManager.next()
+	if next_phase.is_replacement:
+		get_tree().change_scene_to_file(next_phase.scene_name)
+	else:
+		var scene = load(next_phase.scene_name)
+		var scene_instance = scene.instantiate()
+		add_child(scene_instance)
 
 # tests
 func _new_card() -> Card:

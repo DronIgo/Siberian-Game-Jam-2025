@@ -14,6 +14,7 @@ static func init():
 		phase.scene_name = phase_dictionary["scene_name"]
 		phase.args = phase_dictionary["args"]
 		phase.next_phase_id = phase_dictionary["next_phase_id"]
+		phase.is_replacement = phase_dictionary["is_replacement"]
 		_phases[phase.id] = phase
 	_next_phase_id = config["init_scene_id"]
 
