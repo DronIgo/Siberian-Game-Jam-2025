@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qigekep2mfhw"]
+
+[ext_resource type="Script" uid="uid://bf5eaht8g25g1" path="res://Scripts/Effects/effect_timer.gd" id="1_11at6"]
+
+[node name="EffectTimer" type="Node"]
+script = ExtResource("1_11at6")
+
+[node name="Timer" type="Timer" parent="."]

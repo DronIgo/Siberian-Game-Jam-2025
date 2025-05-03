@@ -1,6 +1,8 @@
 extends HBoxContainer
 
 @onready var game_manager: GameManager = $"../../GameManager"
+@onready var player_actions: PlayerActions = $"../../PlayerActions"
+
 @onready var button_select_red: Button = $SelectRed
 @onready var button_select_blue: Button = $SelectBlue
 @onready var button_select_green: Button = $SelectGreen
@@ -16,20 +18,16 @@ func _ready() -> void:
 	visible = false
 	
 func select_red() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR,\
-	 Card.CARD_COLOR.RED)
+	player_actions.select_color(Card.CARD_COLOR.RED)
 	selection_done()
 func select_blue() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR,\
-	 Card.CARD_COLOR.BLUE)
+	player_actions.select_color(Card.CARD_COLOR.BLUE)
 	selection_done()
 func select_green() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR,\
-	 Card.CARD_COLOR.GREEN)
+	player_actions.select_color(Card.CARD_COLOR.GREEN)
 	selection_done()
 func select_violet() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR,\
-	 Card.CARD_COLOR.VIOLET)
+	player_actions.select_color(Card.CARD_COLOR.VIOLET)
 	selection_done()
 	
 func selection_done() -> void:

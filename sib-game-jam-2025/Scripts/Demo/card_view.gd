@@ -17,7 +17,7 @@ const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tr
 func _ready() -> void:
 	pressed.connect(_button_pressed)
 	selected_mark = get_node("Selected")
-	card_manager = get_tree().get_root().get_node("/root/Node2D/CardManager")
+	card_manager = get_node("../../../CardManager")
 	EventBusGL.update_visualisation.connect(update_view)
 
 func set_base_card(base : Card) -> void:

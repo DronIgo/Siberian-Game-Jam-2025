@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4xxewo47h8ay"]
+
+[ext_resource type="Script" uid="uid://3ydecdq8uh4" path="res://Scripts/Game Logic/player_actions.gd" id="1_ae4jc"]
+
+[node name="PlayerActions" type="Node"]
+script = ExtResource("1_ae4jc")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bvi0lsee7j2cv"]
+[gd_scene load_steps=14 format=3 uid="uid://bvi0lsee7j2cv"]
 
 [ext_resource type="PackedScene" uid="uid://dgtvnvliwh4aw" path="res://Scenes/Game Logic/EnemyAI.tscn" id="1_87ppc"]
 [ext_resource type="PackedScene" uid="uid://cdcfnxst2dods" path="res://Scenes/Game Logic/CardManager.tscn" id="1_opw4r"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://crjpjpkq5cefd" path="res://Scenes/Game Logic/GameStateManager.tscn" id="10_it2y3"]
 [ext_resource type="PackedScene" uid="uid://bw7fwyuu7jxv4" path="res://Scenes/Demo/UI_visualiser.tscn" id="11_tdon2"]
 [ext_resource type="PackedScene" uid="uid://cqsnixrd8nhfe" path="res://Scenes/Demo/InfoVisualiser.tscn" id="12_kpde6"]
+[ext_resource type="PackedScene" uid="uid://4xxewo47h8ay" path="res://Scenes/Game Logic/PlayerActions.tscn" id="13_vpwev"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -206,3 +207,5 @@ autowrap_mode = 2
 [node name="UiVisualiser" parent="." instance=ExtResource("11_tdon2")]
 
 [node name="InfoVisualiser" parent="." instance=ExtResource("12_kpde6")]
+
+[node name="PlayerActions" parent="." instance=ExtResource("13_vpwev")]

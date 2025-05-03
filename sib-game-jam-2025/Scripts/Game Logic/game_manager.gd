@@ -11,6 +11,8 @@ extends Node
 @onready var player_score_disp: Button = $"../CanvasLayer/PlayerScore"
 @onready var enemy_score_disp: Button = $"../CanvasLayer/EnemyScore"
 
+const EFFECT_NOSE_GROW = preload("res://Scenes/Effects/EffectNoseGrow.tscn")
+
 var player_score : int = 0
 var enemy_score : int = 0
 var player_bonus : int = 0
@@ -20,6 +22,7 @@ var inited : bool = false
 
 func _ready() -> void:
 	EventBusGL.end_round.connect(process_end_round)
+	EventBusAction.player_lied.connect(grow_nose)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -73,3 +76,7 @@ func add_score(result : EventBusGL.END_ROUND_RESULT) -> void:
 	if result == EventBusGL.END_ROUND_RESULT.CARDS_ARE_DISCARED:
 		cards_are_removed()
 	EventBusGL.update_visualisation.emit()
+
+func grow_nose() -> void:
+	var nose_effect = EFFECT_NOSE_GROW.instantiate()
+	add_child(nose_effect)

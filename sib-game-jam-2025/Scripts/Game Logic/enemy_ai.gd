@@ -5,27 +5,21 @@ const BasilioBasic = preload("res://Scenes/Game Logic/EnemyAI/basilio_basic.gd")
 
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
-@onready var timer: Timer = $Timer
+const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
 
 @export_category("Displayed params")
 @export var think_time : float = 3.0
+@export var think_time_quick : float = 1.0
 
-var current_think_time : float
+var next_think_time : float
 var currentAI
 
 var selected_color : Card.CARD_COLOR = Card.CARD_COLOR.RED
 var num_colors : Dictionary
 
-func set_next_think_time(time : float) -> void:
-	current_think_time = time
-	timer.wait_time = current_think_time
-
 func _ready() -> void:
 	EventBusAction.progress_game.connect(start_turn)
-	timer.timeout.connect(take_turn)
-	timer.autostart = false
-	current_think_time = think_time
-	timer.wait_time = current_think_time
+	next_think_time = think_time
 	currentAI = BasilioBasic.new()
 
 func update_color_nums(hand : Array) -> void:
@@ -41,8 +35,6 @@ func take_turn() -> void:
 	#здесь быть не должно, но без этого не работает :D
 	if game_state_manager.current_player != GameStateManager.PLAYER.AI:
 		return
-	timer.stop()
-	set_next_think_time(think_time)
 	var actions = game_state_manager.player_avialable_actions
 	
 	var first_turn = !game_state_manager.color_selected
@@ -52,31 +44,43 @@ func take_turn() -> void:
 	
 	if can_add_cards_to_check:
 		pick_check_card()
+		next_think_time = think_time
+		return
 	var can_add = actions.count(EventBusAction.PLAYER_ACTION.ADD_CARDS) > 0
 	var can_trust = actions.count(EventBusAction.PLAYER_ACTION.DECLARE_TRUST) > 0
 	var can_call_bluff = actions.count(EventBusAction.PLAYER_ACTION.CALL_BLUFF) > 0
 	var can_select_color = actions.count(EventBusAction.PLAYER_ACTION.SELECT_COLOR) > 0
 	if can_select_color:
 		send_color()
+		next_think_time = think_time
+		return
 	if first_turn && can_add:
 		place_first_cards(card_manager.get_enemy_hand())
+		next_think_time = think_time_quick
 		return
 	if can_add:
 		if select_extra_cards(card_manager.get_enemy_hand(), \
 		game_state_manager.current_correct_color):
 			place_cards()
+			next_think_time = think_time
 			return
 	if can_call_bluff:
 		check_cards(false)
+		next_think_time = think_time_quick
 		return
 	if can_trust:
 		check_cards(true)
+		next_think_time = think_time_quick
 		return
 			
 	
 func start_turn() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI:
-		timer.start()
+		var timer = EFFECT_TIMER.instantiate()
+		add_child(timer)
+		timer.start(next_think_time)
+		await EventBusAction.effect_end
+		take_turn()
 
 func select_extra_cards(hand : Array, color : Card.CARD_COLOR) -> bool:
 	for c in hand:
@@ -113,14 +117,12 @@ func place_first_cards(hand : Array) -> void:
 	select_color()
 	select_first_cards(card_manager.get_enemy_hand(), selected_color)
 	place_cards()
-	set_next_think_time(think_time)
 
 func check_cards(trust : bool) -> void:
 	if trust:
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
 	else:
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
-	set_next_think_time(1.0)
 
 func pick_check_card() -> void:
 	var truth = CardUtils.check_random(card_manager.get_last_addition(), \

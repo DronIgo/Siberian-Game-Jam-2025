@@ -3,6 +3,7 @@ extends Node
 
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
+@onready var player_actions: PlayerActions = $"../PlayerActions"
 
 @onready var select_color: HBoxContainer = $"../CanvasLayer/SelectColor"
 @onready var card_visualiser: CardVisualiser = $"../CardVisualiser"
@@ -67,21 +68,18 @@ func _process(delta: float) -> void:
 	pass
 
 func call_bluff() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
+	player_actions.call_bluff()
 	check_card()
 	
 func declare_trust() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
+	player_actions.declare_trust()
 	check_card()
 	
 func check_card() -> void:
-	var color = game_state_manager.current_correct_color
-	var truth = CardUtils.check_random(card_manager.last_add, color)
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+	player_actions.check_card()
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
 		return
-	card_manager.place_cards(true)
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
+	player_actions.place_cards()
 			
