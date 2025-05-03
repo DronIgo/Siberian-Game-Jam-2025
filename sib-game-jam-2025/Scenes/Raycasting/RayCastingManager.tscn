@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgjob4hixs50t"]
+
+[ext_resource type="Script" uid="uid://dmuolqus4cjc8" path="res://Scripts/Raycasting/RayCastingManager.gd" id="1_wyr5q"]
+
+[node name="RayCastingManager" type="Node"]
+script = ExtResource("1_wyr5q")

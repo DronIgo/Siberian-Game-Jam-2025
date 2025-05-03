@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6chh6an7fhok"]
+
+[ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_c3p3p"]
+[ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_bvv7n"]
+[ext_resource type="PackedScene" uid="uid://cdnsca8ucki11" path="res://Scenes/Table/nose.tscn" id="3_b1wai"]
+[ext_resource type="Texture2D" uid="uid://d1nbbeiefm4px" path="res://Sprites/Table/mqufoghqzqooxcmtxhbbadthf1grx1bk.png" id="4_rdx58"]
+[ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="5_stcii"]
+[ext_resource type="Script" uid="uid://8i5ruje3lq3v" path="res://Scripts/Table/TokenSpawner.gd" id="6_gwgd7"]
+[ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="7_teery"]
+[ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="8_0s5dh"]
+[ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="9_rh21d"]
+[ext_resource type="PackedScene" uid="uid://bgjob4hixs50t" path="res://Scenes/Raycasting/RayCastingManager.tscn" id="10_r3y41"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6ax0b"]
+
+[node name="Raycasting" type="Node3D"]
+script = ExtResource("1_c3p3p")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0.57741, -0.0718436, 0.120576)
+
+[node name="PlayerHand" parent="Camera3D" instance=ExtResource("2_bvv7n")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, -0.2, -1)
+
+[node name="Nose" parent="Camera3D" instance=ExtResource("3_b1wai")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.2)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+shape = SubResource("BoxShape3D_6ax0b")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, -5)
+
+[node name="Enemy" type="Sprite3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.25, -5)
+texture = ExtResource("4_rdx58")
+
+[node name="EnemyHand" parent="." instance=ExtResource("2_bvv7n")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -4)
+
+[node name="EnemyTokenSpawner" parent="." instance=ExtResource("5_stcii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -4)
+script = ExtResource("6_gwgd7")
+token_scene = ExtResource("7_teery")
+
+[node name="PlayerTokenSpawner" parent="." instance=ExtResource("5_stcii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2)
+script = ExtResource("6_gwgd7")
+token_scene = ExtResource("7_teery")
+
+[node name="NewCardsStack" parent="." instance=ExtResource("8_0s5dh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.25, -2)
+
+[node name="DroppedCardsStack" parent="." instance=ExtResource("8_0s5dh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.25, -3)
+
+[node name="NonCheckableCardsStack" parent="." instance=ExtResource("8_0s5dh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, -2.5)
+
+[node name="CheckableCardsLine" parent="." instance=ExtResource("9_rh21d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1.5, -2.5)
+
+[node name="RayCastingManager" parent="." instance=ExtResource("10_r3y41")]
+
+[node name="CardsHand" parent="." instance=ExtResource("2_bvv7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57741, -0.0718436, 0.120576)

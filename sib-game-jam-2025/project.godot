@@ -21,6 +21,7 @@ EventBus="*res://Scripts/Common/EventBus.gd"
 EventBusGL="*res://Scripts/Common/EventBusGL.gd"
 MagicNumbers="*res://Scripts/Table/MagicNumbers.gd"
 EventBusAction="*res://Scripts/Common/EventBusAction.gd"
+CollisionLayers="*res://Scripts/Raycasting/CollisionLayers.gd"
 
 [display]
 
