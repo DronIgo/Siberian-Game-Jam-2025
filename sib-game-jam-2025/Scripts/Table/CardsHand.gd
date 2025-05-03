@@ -37,6 +37,14 @@ func remove_card(index: int):
 	_replace_cards()
 	print("[CARDS HAND] CARD REMOVED")
 
+func select_card(index: int):
+	var card = _current_cards[index]
+	card.select()
+
+func unselect_card(index: int):
+	var card = _current_cards[index]
+	card.unselect()
+
 func _replace_cards():
 	var max_left_index = (_current_cards.size() - 1) / 2
 	_replace_left_half(max_left_index)
