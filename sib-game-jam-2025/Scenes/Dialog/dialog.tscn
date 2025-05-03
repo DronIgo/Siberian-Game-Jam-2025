@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 1, 1, 1)
+color = Color(0, 1, 1, 0.501961)
 
 [node name="ReplicasBox" parent="." instance=ExtResource("1_o85vb")]
 anchors_preset = 7
