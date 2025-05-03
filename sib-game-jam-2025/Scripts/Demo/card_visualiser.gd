@@ -22,6 +22,7 @@ const card_view = preload("res://Scenes/Demo/card_view.tscn")
 const card_view_back = preload("res://Scenes/Demo/card_view_back.tscn")
 
 var last_add_active : bool = false
+var player_cards_active : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_player_cards)
@@ -45,9 +46,11 @@ func display_player_cards() -> void:
 			continue
 		var card = card_view.instantiate()
 		player_hand.add_child(card)
+		card.set_active(player_cards_active)
 		card.set_base_card(c)
 
 func set_cards_active(active : bool) -> void:
+	player_cards_active = active
 	for child in player_hand.get_children():
 		var card_view = child as CardView
 		card_view.active = active

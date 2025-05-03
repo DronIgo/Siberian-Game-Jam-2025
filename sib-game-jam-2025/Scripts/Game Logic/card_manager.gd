@@ -61,7 +61,8 @@ func end_round() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	EventBusGL.start_round.connect(fill_hands)
+	#for orediring reasons we do it in game state manager
+	#EventBusGL.start_round.connect(fill_hands)
 	randomize()
 	create_starting_deck()
 

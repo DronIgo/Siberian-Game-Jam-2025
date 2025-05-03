@@ -22,6 +22,7 @@ var check_succesed : bool = false
 
 func _ready() -> void:
 	EventBusAction.send_action.connect(recieve_action)
+	EventBusGL.start_round.connect(card_manager.fill_hands)
 	EventBusGL.start_round.connect(start_round)
 	pass # Replace with function body.
 
@@ -71,11 +72,22 @@ func start_round() -> void:
 	current_correct_color = Card.CARD_COLOR.GREY
 	color_selected = false
 	check_succesed = false
+	if card_manager.hand_player.size() == 0 && \
+	card_manager.hand_enemy.size() == 0:
+		end_game()
+		return
 	current_player = current_player_round
+	if card_manager.hand_player.size() == 0:
+		current_player = PLAYER.AI
+	if card_manager.hand_enemy.size() == 0:
+		current_player = PLAYER.MAN
 	player_avialable_actions.clear()
 	player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
 	EventBusAction.progress_game.emit()
 	EventBusGL.update_visualisation.emit()
+
+func end_game() -> void:
+	EventBusAction.print_action.emit("Game Over!")
 
 func can_increase_card_check() -> bool:
 	var num_bonus : int
