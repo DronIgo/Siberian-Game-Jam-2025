@@ -6,7 +6,7 @@ extends Node3D
 @export var sit_back_anim_name = "sit_back"
 
 @onready var _player_hand = $PlayerFakeCamera/PlayerHand
-@onready var _enemy_hand = $EnemyFakeCamera/EnemyHand
+@onready var _enemy_hand = $Enemy/Shoulder/Joint/Hand/EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack
