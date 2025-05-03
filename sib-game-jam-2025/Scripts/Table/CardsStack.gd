@@ -2,7 +2,7 @@ class_name CardsStack
 
 extends Node3D
 
-enum Type { NEW, DROPPED }
+enum Type { NEW, DROPPED, NON_CHECKABLE }
 
 @export var card_scene: PackedScene
 

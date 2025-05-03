@@ -8,6 +8,8 @@ extends Node3D
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack
 @onready var _dropped_cards_stack = $DroppedCardsStack
+@onready var _non_checkable_cards_stack = $NonCheckableCardsStack
+@onready var _checkable_cards_line = $CheckableCardsLine
 
 var _cards_hands: Array = []
 var _token_spawners: Array = []
@@ -25,17 +27,19 @@ func _ready():
 	EventBus.token_remove.connect(_remove_token)
 	EventBus.stack_add_card.connect(_add_card_to_stack)
 	EventBus.stack_remove_card.connect(_remove_card_from_stack)
+	EventBus.line_add_card.connect(_add_card_to_checkable_line)
+	EventBus.line_remove_card.connect(_remove_card_from_checkable_line)
 
 # tests
 func _input(ev):
 	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, Card3D.Type.GRAY)
+		EventBus.line_add_card.emit(Card3D.Type.GRAY)
 	elif Input.is_key_pressed(KEY_2):
-		EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
+		EventBus.line_remove_card.emit(0)
 	elif Input.is_key_pressed(KEY_3):
-		EventBus.stack_add_card.emit(CardsStack.Type.NEW)
+		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
 	elif Input.is_key_pressed(KEY_4):
-		EventBus.stack_remove_card.emit(CardsStack.Type.NEW)
+		EventBus.stack_remove_card.emit(CardsStack.Type.NON_CHECKABLE)
 	elif Input.is_key_pressed(KEY_5):
 		EventBus.stack_add_card.emit(CardsStack.Type.DROPPED)
 	elif Input.is_key_pressed(KEY_6):
@@ -55,6 +59,12 @@ func _add_card_to_hand(player_id: int, card_type: Card3D.Type):
 func _remove_card_from_hand(player_id: int, index: int):
 	_cards_hands[player_id].remove_card(index)
 
+func _add_card_to_checkable_line(card_type: Card3D.Type):
+	_checkable_cards_line.add_card(card_type)
+
+func _remove_card_from_checkable_line(index: int):
+	_checkable_cards_line.remove_card(index)
+
 func _add_token(player_id: int):
 	_token_spawners[player_id].add_token()
 
@@ -67,6 +77,8 @@ func _add_card_to_stack(stack_type: CardsStack.Type):
 			_new_cards_stack.add_card()
 		CardsStack.Type.DROPPED:
 			_dropped_cards_stack.add_card()
+		CardsStack.Type.NON_CHECKABLE:
+			_non_checkable_cards_stack.add_card()
 
 func _remove_card_from_stack(stack_type: CardsStack.Type):
 	match stack_type:
@@ -74,3 +86,5 @@ func _remove_card_from_stack(stack_type: CardsStack.Type):
 			_new_cards_stack.remove_card()
 		CardsStack.Type.DROPPED:
 			_dropped_cards_stack.remove_card()
+		CardsStack.Type.NON_CHECKABLE:
+			_non_checkable_cards_stack.remove_card()

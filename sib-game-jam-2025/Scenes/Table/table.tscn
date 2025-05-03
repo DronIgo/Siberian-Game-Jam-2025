@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=10 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Texture2D" uid="uid://d1nbbeiefm4px" path="res://Sprites/Table/mqufoghqzqooxcmtxhbbadthf1grx1bk.png" id="1_2orv5"]
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://8i5ruje3lq3v" path="res://Scripts/Table/TokenSpawner.gd" id="5_n4dhq"]
 [ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="6_6ax0b"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="7_q1js6"]
+[ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ax0b"]
 
@@ -58,3 +59,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.25, -2)
 
 [node name="DroppedCardsStack" parent="." instance=ExtResource("7_q1js6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.25, -3)
+
+[node name="NonCheckableCardsStack" parent="." instance=ExtResource("7_q1js6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -0.25, -2.5)
+
+[node name="CheckableCardsLine" parent="." instance=ExtResource("8_vq1v8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1.5, -2.5)

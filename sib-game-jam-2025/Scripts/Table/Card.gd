@@ -13,7 +13,7 @@ func init(type: Type):
 	var texture_path = str("res://Sprites/Table/card_", _type_to_low_str(type),".png")
 	_front.texture = load(texture_path)
 
-func move(delta_x: float):
+func move_x(delta_x: float):
 	position += Vector3(delta_x, 0, 0)
 
 func disable_physics():

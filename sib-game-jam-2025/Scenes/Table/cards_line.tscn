@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1qvodqhuvjxq"]
+
+[ext_resource type="Script" uid="uid://bl3lof8smdxnq" path="res://Scripts/Table/CardsLine.gd" id="1_h5lu2"]
+[ext_resource type="PackedScene" uid="uid://lxyxtu86gwqx" path="res://Scenes/Table/card.tscn" id="2_5wjpd"]
+
+[node name="CardsLine" type="Node3D"]
+script = ExtResource("1_h5lu2")
+card_scene = ExtResource("2_5wjpd")
