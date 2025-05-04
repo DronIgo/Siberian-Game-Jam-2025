@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6gul4yn6koen"]
 
-[ext_resource type="Theme" path="res://Resources/Themes/DIALOG_FONT.tres" id="1_qddvt"]
+[ext_resource type="Theme" uid="uid://cxxipod7ij704" path="res://Resources/Themes/DIALOG_FONT.tres" id="1_qddvt"]
 [ext_resource type="Script" uid="uid://d0s746060f4x" path="res://Scripts/Dialog/ReplicasBox.gd" id="1_t1yfr"]
 [ext_resource type="PackedScene" uid="uid://c6dygmnny2usk" path="res://Scenes/Dialog/speaker.tscn" id="2_5hsq4"]
 
