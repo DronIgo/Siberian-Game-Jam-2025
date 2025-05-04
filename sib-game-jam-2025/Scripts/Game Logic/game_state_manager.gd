@@ -71,9 +71,31 @@ func call_basilio_signals():
 			if checked_all:
 				EventBusAction.basilio_miscalled_and_learns.emit()
 
+var learned = false
 var dialog_id : String
 func check_dialog() -> bool:
-	dialog_id = "dialog_correct_bluff_1"
+	if current_player == PLAYER.AI:
+		if check_succesed && check_trust:
+			dialog_id = PhaseNames.dialog_correct_trust_1
+		if check_succesed && !check_trust:
+			var rand = randi_range(0, 3)
+			if rand == 0:
+				dialog_id = PhaseNames.dialog_id_correct_bluff_1
+			if rand == 1:
+				dialog_id = PhaseNames.dialog_id_correct_bluff_2
+			if rand == 2:
+				dialog_id = PhaseNames.dialog_id_correct_bluff_3
+		if !learned:
+			var checked_all : bool
+			checked_all = card_manager.last_add.size() == card_checks_done
+			if !check_succesed && check_trust:
+				dialog_id = PhaseNames.dialog_basilio_learns_trust
+			if !check_succesed && !check_trust && checked_all:
+				dialog_id = PhaseNames.dialog_basilio_learns_bluff
+			learned = true
+		
+	if PhaseNames.used_dialogs.has(dialog_id):
+		return false
 	return true
 
 func end_round() -> void:

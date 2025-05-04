@@ -1,0 +1,29 @@
+{
+	"data": [
+		{
+			"text": "...",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Буратино, твой нос... Не вырос.",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Ты научился упралять им не так ли?",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Ты подготовился к нашей встрече...",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Тогда и я изменю свою стратегию.",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		}
+	]
+}

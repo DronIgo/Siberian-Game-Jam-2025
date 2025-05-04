@@ -3,8 +3,7 @@
 		{
 			"text": "У тебя все на лице написано!",
 			"speaker_location": "LEFT",
-			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
+			"speaker_name": "Базилио"
 		}
 	]
 }
