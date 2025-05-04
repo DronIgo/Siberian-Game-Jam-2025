@@ -12,6 +12,8 @@ extends Node
 @onready var player_bonuses: Label = $"../CanvasLayer/PlayerBonuses"
 @onready var enemy_bonuses: Label = $"../CanvasLayer/EnemyBonuses"
 @onready var turn_label: Label = $"../CanvasLayer/TurnLabel"
+@onready var stack_counter: Label = $"../CanvasLayer/SelectedColor/StackCounter"
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,6 +27,7 @@ func update_display() -> void:
 	enemy_score.text = "Штрафные очки: " + str(game_manager.enemy_score)
 	player_bonuses.text = "Бонусы: " + str(game_manager.player_bonus)
 	enemy_bonuses.text = "Бонусы: " + str(game_manager.enemy_bonus)
+	stack_counter.text = str(card_manager.stack.size() + card_manager.last_add.size())
 	if game_state_manager.current_player == GameStateManager.PLAYER.MAN:
 		turn_label.text = "Ваш ход!"
 	else:

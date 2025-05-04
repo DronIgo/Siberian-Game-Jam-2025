@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 		sprite.translate_object_local(Vector3(0, delta * 2.0, 0))
 
 func increase():
-	if desired_z > -0.6:
+	if desired_z > -0.5:
 		desired_z -= scale_step
 	
 

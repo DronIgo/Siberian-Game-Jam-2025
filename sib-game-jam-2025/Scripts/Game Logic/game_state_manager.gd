@@ -93,7 +93,8 @@ func check_dialog() -> bool:
 			if !check_succesed && !check_trust && checked_all:
 				dialog_id = PhaseNames.dialog_basilio_learns_bluff
 			learned = true
-		
+	else:
+		return false
 	if PhaseNames.used_dialogs.has(dialog_id):
 		return false
 	return true

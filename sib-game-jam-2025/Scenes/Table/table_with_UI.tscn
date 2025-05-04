@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://bakakojeb88us" path="res://Scripts/Demo/select_color.gd" id="16_s02ep"]
 [ext_resource type="Theme" uid="uid://yerfq4qvcb0i" path="res://Resources/Demo/red_button_theme.tres" id="17_i5h15"]
 [ext_resource type="Theme" uid="uid://bn0nt8tywlwfk" path="res://Resources/Demo/blue_button_theme.tres" id="18_1qvjy"]
-[ext_resource type="Script" uid="uid://wfvmjw08krn6" path="res://Scenes/Table/player_bonuses.gd" id="18_ahbmb"]
+[ext_resource type="Texture2D" uid="uid://b0ymgs8aibex8" path="res://Sprites/CardsLogo/puppet_logo_black.png" id="18_ahbmb"]
 [ext_resource type="FontFile" uid="uid://bt614bxm24b2" path="res://Sprites/UI/fonts/GULAG_Pavljenko.otf" id="18_gv8r2"]
 [ext_resource type="Texture2D" uid="uid://eiydrf5o73ef" path="res://Sprites/UI/buttons/white_300.png" id="18_s02ep"]
 [ext_resource type="Theme" uid="uid://dclbdlmn1jp4n" path="res://Resources/Demo/green_button_theme.tres" id="19_3tq7i"]
@@ -331,7 +331,6 @@ offset_bottom = -452.0
 grow_vertical = 0
 theme = ExtResource("13_i5h15")
 text = "Player: 0"
-script = ExtResource("18_ahbmb")
 
 [node name="PlayerName" type="Label" parent="CanvasLayer"]
 offset_left = 51.0
@@ -426,11 +425,30 @@ text = "Не верю!"
 
 [node name="SelectedColor" type="TextureButton" parent="CanvasLayer"]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 216.0
+offset_left = 64.0
 offset_top = 64.0
-offset_right = 266.0
+offset_right = 114.0
 offset_bottom = 114.0
 theme = ExtResource("17_i5h15")
+texture_normal = ExtResource("18_ahbmb")
+
+[node name="StackCounter" type="Label" parent="CanvasLayer/SelectedColor"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -59.0
+offset_right = 208.0
+offset_bottom = 61.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
+theme_override_font_sizes/font_size = 120
+text = "8"
+vertical_alignment = 1
 
 [node name="LastAction" type="Label" parent="CanvasLayer"]
 visible = false
