@@ -138,6 +138,7 @@ texture = ExtResource("2_hr2vp")
 
 [node name="Middle" type="Sprite3D" parent="Body"]
 transform = Transform3D(0.99, 0, 0, 0, 0.84, 0, 0, 0, 1, 0, 0, 0.003099)
+modulate = Color(0.113725, 0.113725, 0.113725, 1)
 alpha_cut = 2
 texture = ExtResource("2_b0j6s")
 
