@@ -12,11 +12,12 @@ var _type_representations = {
 
 var _value_representations = {
 	Card3D.Value.AVIAN : "AVI",
-	Card3D.Value.BUG : "B",
-	Card3D.Value.DOG : "D",
-	Card3D.Value.FROG : "F",
+	Card3D.Value.SIX : "6",
+	Card3D.Value.SEVEN : "7",
+	Card3D.Value.EIGHT : "8",
 	Card3D.Value.LEECHE : "LE",
-	Card3D.Value.TURTLE : "T",
+	Card3D.Value.NINE : "9",
+	Card3D.Value.TEN : "10",
 	Card3D.Value.TBD : "",
 	Card3D.Value.SCULL : "scull"
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uq1gc3v06q4g"
-path="res://.godot/imported/AVI_pu_mute_trans.png-b8c119aa3107ee2b3944df3214bbfab8.ctex"
+uid="uid://d3i643a6tek3r"
+path="res://.godot/imported/6_pu_mute_trans.png-36945787593d809b62db988b275899f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Table/Cards/AVI_pu_mute_trans.png"
-dest_files=["res://.godot/imported/AVI_pu_mute_trans.png-b8c119aa3107ee2b3944df3214bbfab8.ctex"]
+source_file="res://Sprites/Table/Cards/6_pu_mute_trans.png"
+dest_files=["res://.godot/imported/6_pu_mute_trans.png-36945787593d809b62db988b275899f9.ctex"]
 
 [params]
 
