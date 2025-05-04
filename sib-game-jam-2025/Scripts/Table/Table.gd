@@ -4,9 +4,11 @@ extends Node3D
 
 @export var bend_over_anim_name = "bend_over"
 @export var sit_back_anim_name = "sit_back"
+@export var enemy_hand_up_anim_name = "hand_up"
+@export var enemy_hand_down_anim_name = "hand_down"
 
 @onready var _player_hand = $PlayerFakeCamera/PlayerHand
-@onready var _enemy_hand = $Enemy/Shoulder/Joint/Hand/EnemyFakeCamera/EnemyHand
+@onready var _enemy_hand = $Enemy/Shoulder/EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack
@@ -18,9 +20,11 @@ extends Node3D
 @onready var _nose = $Camera3D/Nose
 @onready var _anim_player = $AnimationPlayer
 @onready var _animation_player_cards: AnimationPlayer = $AnimationPlayerCards
+@onready var _enemy_hand_anim_player = $Enemy/Shoulder/AnimationPlayer
 
 var _cards_hands: Array = []
 var _token_spawners: Array = []
+var _enemy_hand_raised: bool = true
 
 func _ready():
 	CardTexturesHolder.init()
@@ -48,6 +52,8 @@ func _ready():
 	EventBus.sit_back_at_table.connect(_sit_back)
 	EventBus.show_cards.connect(_show_cards)
 	EventBus.hide_cards.connect(_hide_cards)
+	EventBus.enemy_hand_up.connect(_enemy_hand_up)
+	EventBus.enemy_hand_down.connect(_enemy_hand_down)
 
 # tests
 func _process(delta):
@@ -72,9 +78,9 @@ func _process(delta):
 	elif Input.is_key_pressed(KEY_8):
 		_next_game_phase()
 	elif Input.is_key_pressed(KEY_9):
-		EventBus.bend_over_table.emit()
+		EventBus.enemy_hand_down.emit()
 	elif Input.is_key_pressed(KEY_0):
-		EventBus.sit_back_at_table.emit()
+		EventBus.enemy_hand_up.emit()
 
 var sit : bool = true
 var card_choosing = false
@@ -209,3 +215,13 @@ func _remove_card_from_stack(stack_type: CardsStack.Type):
 			_player_score_cards_stack.remove_card()
 		CardsStack.Type.ENEMY_SCORE:
 			_enemy_score_cards_stack.remove_card()
+
+func _enemy_hand_up():
+	if not _enemy_hand_raised:
+		_enemy_hand_raised = true
+		_enemy_hand_anim_player.play(enemy_hand_up_anim_name)
+
+func _enemy_hand_down():
+	if _enemy_hand_raised:
+		_enemy_hand_raised = false
+		_enemy_hand_anim_player.play(enemy_hand_down_anim_name)

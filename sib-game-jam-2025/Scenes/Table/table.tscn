@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=20 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
@@ -12,6 +12,132 @@
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ax0b"]
+
+[sub_resource type="Animation" id="Animation_86ca4"]
+resource_name = "hand_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.523599), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.5, -4.5, -1.75), Vector3(-1.25, 0, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, -1.0472), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ldda2"]
+resource_name = "hand_down"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.523599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.25, 0, -1.75), Vector3(-3.5, -4.5, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, -1.0472)]
+}
+
+[sub_resource type="Animation" id="Animation_46yol"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.25, 0, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldda2"]
+_data = {
+&"RESET": SubResource("Animation_46yol"),
+&"hand_down": SubResource("Animation_ldda2"),
+&"hand_up": SubResource("Animation_86ca4")
+}
 
 [sub_resource type="Animation" id="Animation_bpp0a"]
 length = 0.001
@@ -139,6 +265,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 alpha_cut = 2
 texture = ExtResource("5_g8tfy")
 
+[node name="EnemyFakeCamera" type="Node3D" parent="Enemy/Shoulder"]
+transform = Transform3D(-2, 0, 3.01992e-07, 0, 2, 0, -3.01992e-07, 0, -2, -1.25, 0, -1.75)
+
+[node name="EnemyHand" parent="Enemy/Shoulder/EnemyFakeCamera" instance=ExtResource("2_65vo3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
+nose_gap = 0.1
+layer_step = 0.01
+
 [node name="Joint" type="Node3D" parent="Enemy/Shoulder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -4, 0.5)
 
@@ -147,12 +281,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 4, 0)
 alpha_cut = 2
 texture = ExtResource("6_86ca4")
 
-[node name="EnemyFakeCamera" type="Node3D" parent="Enemy/Shoulder/Joint/Hand"]
-transform = Transform3D(-2, 4.52534e-08, -1.68888e-07, 0, 1.93185, 0.517638, 1.74846e-07, 0.517638, -1.93185, -1, 0.5, -1.75)
-
-[node name="EnemyHand" parent="Enemy/Shoulder/Joint/Hand/EnemyFakeCamera" instance=ExtResource("2_65vo3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
-nose_gap = 0.1
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy/Shoulder"]
+libraries = {
+&"": SubResource("AnimationLibrary_ldda2")
+}
 
 [node name="EnemyTokenSpawner" parent="." instance=ExtResource("4_5al06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -4.25)
