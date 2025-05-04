@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gl3re7i7a8dr" path="res://Scripts/Table/Card.gd" id="1_b0j6s"]
 [ext_resource type="Texture2D" uid="uid://ci5146ex0t03p" path="res://Sprites/Table/card_white.png" id="2_b0j6s"]
-[ext_resource type="Texture2D" uid="uid://bj156fmf37no7" path="res://Sprites/Table/card_gray.png" id="3_ybx6g"]
+[ext_resource type="Texture2D" uid="uid://dkwmjwfpn1tg6" path="res://Sprites/Table/Cards/card_back.png" id="2_hr2vp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0j6s"]
 
@@ -134,23 +134,24 @@ script = ExtResource("1_b0j6s")
 [node name="Front" type="Sprite3D" parent="Body"]
 transform = Transform3D(0.033, 0, 0, 0, 0.033, 0, 0, 0, 0.033, 0, 0, 0.004)
 alpha_cut = 2
+texture = ExtResource("2_hr2vp")
 
 [node name="Middle" type="Sprite3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+transform = Transform3D(0.99, 0, 0, 0, 0.84, 0, 0, 0, 1, 0, 0, 0.003099)
 alpha_cut = 2
 texture = ExtResource("2_b0j6s")
 
 [node name="Back" type="Sprite3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.003)
+transform = Transform3D(0.033, 0, 0, 0, 0.033, 0, 0, 0, 0.033, 0, 0, -0.003)
 alpha_cut = 2
-texture = ExtResource("3_ybx6g")
+texture = ExtResource("2_hr2vp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
-transform = Transform3D(0.4, 0, 0, 0, 0.7, 0, 0, 0, 0.006, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.006, 0, 0, 0)
 shape = SubResource("BoxShape3D_b0j6s")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Body"]
-transform = Transform3D(0.4, 0, 0, 0, 0.7, 0, 0, 0, 0.005, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.005, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
