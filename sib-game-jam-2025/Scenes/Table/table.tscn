@@ -231,7 +231,7 @@ _data = {
 &"sit_back": SubResource("Animation_g8tfy")
 }
 
-[node name="Table" type="Node3D"]
+[node name="Table2" type="Node3D"]
 script = ExtResource("1_4w2lj")
 
 [node name="Table" type="RigidBody3D" parent="."]

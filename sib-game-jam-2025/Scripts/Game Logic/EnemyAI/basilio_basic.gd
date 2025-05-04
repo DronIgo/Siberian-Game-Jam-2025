@@ -207,13 +207,14 @@ func setup_turns(color : Card.CARD_COLOR) -> void:
 
 func split_into_turns(all_used_cards : Array) -> void:
 	var all_size = all_used_cards.size()
+	print("All_size", all_size)
 	if all_size == 0:
 		return
 	if all_size == 1:
 		cards_for_turns.append(all_used_cards)
 		return
 	if all_size < 4:
-		var end_first = randi_range(1, all_size - 2)
+		var end_first = randi_range(1, all_size - 1)
 		cards_for_turns.append(all_used_cards.slice(0, end_first))
 		cards_for_turns.append(all_used_cards.slice(end_first, all_size))
 		return
