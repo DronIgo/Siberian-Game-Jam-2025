@@ -7,7 +7,7 @@ extends Node
 @onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 @onready var player_hand: CardHand = $"../PlayerFakeCamera/PlayerHand"
-@onready var enemy_hand: CardHand = $"../Enemy/Shoulder/Joint/Hand/EnemyFakeCamera/EnemyHand"
+@onready var enemy_hand: CardHand = $"../Enemy/Shoulder/EnemyFakeCamera/EnemyHand"
 @onready var checkable_cards_line: CardsLine = $"../CheckableCardsLine"
 @onready var non_checkable_cards_stack: CardsStack = $"../NonCheckableCardsStack"
 

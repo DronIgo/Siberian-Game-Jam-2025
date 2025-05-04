@@ -1,11 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://cikwpq7gmfthh"]
 
-[ext_resource type="Texture2D" uid="uid://meip3sbippdn" path="res://Sprites/Table/poleno.png" id="1_1g2a7"]
 [ext_resource type="Script" uid="uid://cjm2e8i81hsmw" path="res://Scripts/Table/Nose.gd" id="1_hf7n2"]
+[ext_resource type="Texture2D" uid="uid://b5ds2ddjo3i8b" path="res://Sprites/Table/nose.png" id="2_hf7n2"]
 
 [node name="Nose" type="Node3D"]
 script = ExtResource("1_hf7n2")
+scale_step = 0.02
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.0258819, 0.0965926, 0, -0.0965926, 0.0258819, 0, 0, 0)
-texture = ExtResource("1_1g2a7")
+transform = Transform3D(0.06, 0, 0, 0, 0.0258819, 0.0965926, 0, -0.0965926, 0.0258819, 0, 0, 0)
+texture = ExtResource("2_hf7n2")

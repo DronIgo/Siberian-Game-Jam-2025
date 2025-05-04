@@ -137,6 +137,7 @@ alpha_cut = 2
 
 [node name="Middle" type="Sprite3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.003)
+visible = false
 alpha_cut = 2
 texture = ExtResource("2_b0j6s")
 
@@ -151,6 +152,7 @@ shape = SubResource("BoxShape3D_b0j6s")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Body"]
 transform = Transform3D(0.4, 0, 0, 0, 0.7, 0, 0, 0, 0.005, 0, 0, 0)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
