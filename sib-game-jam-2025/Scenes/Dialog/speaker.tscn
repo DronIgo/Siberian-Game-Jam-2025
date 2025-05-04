@@ -18,7 +18,7 @@ offset_top = -136.0
 offset_right = 384.0
 offset_bottom = -40.0
 grow_vertical = 0
-color = Color(1, 0, 0.501961, 1)
+color = Color(0.145066, 0.131421, 0.109821, 1)
 
 [node name="NameLabel" type="Label" parent="NameFrame"]
 layout_mode = 1
