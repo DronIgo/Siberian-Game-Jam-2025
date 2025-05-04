@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://q4c2prspc74e"]
+[gd_scene load_steps=10 format=3 uid="uid://q4c2prspc74e"]
 
 [ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
+[ext_resource type="Texture2D" uid="uid://bfd7bnlca2ixc" path="res://Sprites/Back/bg_casino.png" id="2_3qr6s"]
 [ext_resource type="Texture2D" uid="uid://uyjavjreteo5" path="res://Sprites/Table/Cat/cat_example.png" id="2_3ymnh"]
 
 [sub_resource type="Animation" id="Animation_3qr6s"]
@@ -63,6 +64,44 @@ _data = {
 &"authors_appear": SubResource("Animation_3ymnh")
 }
 
+[sub_resource type="Animation" id="Animation_j7r1e"]
+resource_name = "cat_float"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 5, 7, 7.5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1800, 1800), Vector2(1800, 1300), Vector2(1800, 1350), Vector2(1800, 1300), Vector2(1800, 1350), Vector2(1800, 1300), Vector2(1800, 1800)]
+}
+
+[sub_resource type="Animation" id="Animation_8inha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cat:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1800, 1300)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2mnh"]
+_data = {
+&"RESET": SubResource("Animation_8inha"),
+&"cat_float": SubResource("Animation_j7r1e")
+}
+
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_3ymnh")
 
@@ -73,6 +112,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.360784, 0, 1, 1)
+
+[node name="BackBase" type="Control" parent="Rect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Back" type="Sprite2D" parent="Rect/BackBase"]
+position = Vector2(-916, -496)
+scale = Vector2(0.51, 0.51)
+texture = ExtResource("2_3qr6s")
 
 [node name="TitleLabel" type="Label" parent="Rect"]
 layout_mode = 1
@@ -126,7 +182,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "выйти"
 
-[node name="Sprite2D" type="Sprite2D" parent="Rect"]
+[node name="Cat" type="Sprite2D" parent="Rect"]
 position = Vector2(1800, 1300)
 texture = ExtResource("2_3ymnh")
 
@@ -176,10 +232,17 @@ offset_right = 50.0
 offset_bottom = 68.0
 theme_override_font_sizes/font_size = 42
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rect"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rect/AuthorsBase"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_3qr6s")
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rect"]
+libraries = {
+&"": SubResource("AnimationLibrary_n2mnh")
+}
+autoplay = "cat_float"
 
 [connection signal="pressed" from="Rect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Rect/AuthorsButton" to="." method="_on_authors_button_pressed"]
