@@ -1,11 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://dtxgsvi5qkltb"]
+[gd_scene load_steps=29 format=3 uid="uid://dtxgsvi5qkltb"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_7wgxd"]
 [ext_resource type="PackedScene" uid="uid://cikwpq7gmfthh" path="res://Scenes/Table/nose.tscn" id="2_doyny"]
-[ext_resource type="Texture2D" uid="uid://bq6esk7ur5k51" path="res://Sprites/Table/cat_body.png" id="3_c7r1b"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="4_ml76t"]
 [ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="5_c5xd3"]
-[ext_resource type="Script" uid="uid://8i5ruje3lq3v" path="res://Scripts/Table/TokenSpawner.gd" id="6_yxfet"]
 [ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="7_d2omj"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="8_ksj5c"]
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="9_2unbh"]
@@ -93,6 +91,36 @@ tracks/1/keys = {
 "values": [Vector3(-0.261799, 0, 0), Vector3(-1.39626, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_s02ep"]
+resource_name = "cards_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerFakeCamera/PlayerHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.466667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lbt75"]
+resource_name = "cards_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerFakeCamera/PlayerHand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_g8tfy"]
 resource_name = "sit_back"
 length = 0.5
@@ -121,36 +149,6 @@ tracks/1/keys = {
 "values": [Vector3(-1.39626, 0, 0), Vector3(-0.261799, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_lbt75"]
-resource_name = "cards_up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerFakeCamera/PlayerHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 0.666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_s02ep"]
-resource_name = "cards_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerFakeCamera/PlayerHand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.466667, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g8tfy"]
 _data = {
 &"RESET": SubResource("Animation_bpp0a"),
@@ -160,7 +158,7 @@ _data = {
 &"sit_back": SubResource("Animation_g8tfy")
 }
 
-[node name="Table" type="Node3D"]
+[node name="Table2" type="Node3D"]
 script = ExtResource("1_7wgxd")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
@@ -189,7 +187,6 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 
 
 [node name="Enemy" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.25, -5)
-texture = ExtResource("3_c7r1b")
 
 [node name="EnemyFakeCamera" type="Node3D" parent="."]
 transform = Transform3D(-1, 2.26267e-08, -8.44439e-08, 0, 0.965926, 0.258819, 8.74228e-08, 0.258819, -0.965926, 0, 0, -5)
@@ -202,12 +199,10 @@ max_angle = 20.0
 
 [node name="EnemyTokenSpawner" parent="." instance=ExtResource("5_c5xd3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -4.25)
-script = ExtResource("6_yxfet")
 token_scene = ExtResource("7_d2omj")
 
 [node name="PlayerTokenSpawner" parent="." instance=ExtResource("5_c5xd3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1.75)
-script = ExtResource("6_yxfet")
 token_scene = ExtResource("7_d2omj")
 
 [node name="NewCardsStack" parent="." instance=ExtResource("8_ksj5c")]

@@ -18,16 +18,21 @@ offset_top = -136.0
 offset_right = 384.0
 offset_bottom = -40.0
 grow_vertical = 0
-color = Color(1, 0, 0.501961, 1)
+color = Color(0.145066, 0.131421, 0.109821, 1)
 
 [node name="NameLabel" type="Label" parent="NameFrame"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 4.0
+offset_right = -19.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
+text = "fdsfsad"
 horizontal_alignment = 1
 vertical_alignment = 1
 

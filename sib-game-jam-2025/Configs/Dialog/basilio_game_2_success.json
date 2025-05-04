@@ -1,0 +1,29 @@
+{
+	"data": [
+		{
+			"text": "Что?!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Невозможно... Это невозможно!!!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "И всё-таки.",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		},
+		{
+			"text": "Деньги на бочку, мистер Базилио.",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		},
+		{
+			"text": "Или мне лучше называть вас Отдавай-Газиллио?",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		}
+	]
+}

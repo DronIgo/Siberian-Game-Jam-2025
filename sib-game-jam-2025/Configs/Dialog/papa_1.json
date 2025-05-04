@@ -3,8 +3,7 @@
 		{
 			"text": "Здравствуй, Папа.",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Боже мой, Буратино! Где ты был? Что произошло?",
@@ -14,62 +13,52 @@
 		{
 			"text": "Всё в порядке, Папа. Разве что у нас больше нет той замечательной смартлопаты…",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Смартлопаты?.. Буратино, выкладывай всё как есть!",
 			"speaker_location": "LEFT",
-			"speaker_name": "Папа Карло",
-			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+			"speaker_name": "Папа Карло"
 		},
 		{
 			"text": "Не ругай меня, я хотел как лучше! Недавно я рассказал местным ребятам байку, будто бы пустырь на окраине Города - это Поле Чудес.",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Если закопать там золотые, полить гидрогелем и сказать “ПУСТЬ РАСТЁТ ТУТ ДЕРЕВО И ДЕНЬГИ ИЗ КАРМАНОВ КОРПОРАТОВ СТАНОВЯТСЯ ЕГО ЛИСТЬЯМИ!”, то так оно и будет.",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Мне показалось, что кто-то даже поверил, поэтому спустя время я взял твою смартлопату и пошёл собирать урожай. Но, конечно, закапывать ребятам было нечего, так что время я потратил зря.",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Зато, пока перекапывал пустырь, привлёк внимание законников, так что они меня задержали…",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Какой ужас! Буратино, прошу, оставь это своему старику!",
 			"speaker_location": "LEFT",
-			"speaker_name": "Папа Карло",
-			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+			"speaker_name": "Папа Карло"
 		},
 		{
 			"text": "Я уже заканчиваю новую модификацию своей шарманки - теперь-то она перекричит шум Фулс Сити!",
 			"speaker_location": "LEFT",
-			"speaker_name": "Папа Карло",
-			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+			"speaker_name": "Папа Карло"
 		},
 		{
 			"text": "Послушай, Папа. Возможно, ей не придётся. Я подслушал разговор законников и узнал про какое-то злачное заведение под названием “Молния”.",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		},
 		{
 			"text": "Я пойду туда, думаю, это наш шанс. Обещаю тебе, скоро вместо голой луковицы на обед у нас будет самая настоящая кимчи!",
 			"speaker_location": "RIGHT",
-			"speaker_name": "Буратино",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_name": "Буратино"
 		}
 	]
 }
