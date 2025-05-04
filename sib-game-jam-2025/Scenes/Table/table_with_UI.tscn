@@ -312,34 +312,36 @@ texture_normal = ExtResource("25_xqlre")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = -147.0
-offset_right = 245.0
-offset_bottom = -85.0
+offset_left = 52.0
+offset_top = -367.0
+offset_right = 242.0
+offset_bottom = -305.0
 grow_vertical = 0
 theme = ExtResource("13_i5h15")
 text = "Player: 0"
 
 [node name="PlayerBonuses" type="Label" parent="CanvasLayer"]
+z_index = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 55.0
-offset_top = -197.0
-offset_right = 163.0
-offset_bottom = -174.0
+offset_left = 52.0
+offset_top = -417.0
+offset_right = 160.0
+offset_bottom = -394.0
 grow_vertical = 0
 theme = ExtResource("13_i5h15")
 text = "Player: 0"
 
 [node name="PlayerName" type="Label" parent="CanvasLayer"]
+z_index = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 35.0
-offset_top = -262.0
-offset_right = 226.0
-offset_bottom = -223.0
+offset_left = 32.0
+offset_top = -482.0
+offset_right = 223.0
+offset_bottom = -443.0
 grow_vertical = 0
 theme = ExtResource("13_i5h15")
 theme_override_font_sizes/font_size = 40
@@ -700,7 +702,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -2.11852)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8503, -0.25, -3.23845)
 
 [node name="NonCheckableCardsStack" parent="." instance=ExtResource("8_6ba3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76399, -0.25, -3.30451)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.04231, -0.25, -2.48425)
 
 [node name="CheckableCardsLine" parent="." instance=ExtResource("9_glym1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1.5, -2.5)

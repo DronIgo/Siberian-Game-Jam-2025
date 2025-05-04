@@ -23,9 +23,9 @@ MagicNumbers="*res://Scripts/Table/MagicNumbers.gd"
 EventBusAction="*res://Scripts/Common/EventBusAction.gd"
 CollisionLayers="*res://Scripts/Raycasting/RaycastLayers.gd"
 CardTexturesHolder="*res://Scripts/Table/CardTexturesHolder.gd"
-PhaseNames="*res://Scripts/Common/PhasesNames.gd"
 SoundConstants="*res://Scripts/Common/SoundConstants.gd"
 MusicProcessor="*res://Scenes/Common/music_processor.tscn"
+PhaseNames="*res://Scripts/Common/PhasesNames.gd"
 
 [display]
 

@@ -39,7 +39,9 @@ static func exact_phase(id: String) -> Phase:
 static func start_event(id: String) -> Phase:
 	is_event = true
 	_current_event_id = id
-	return _events[id]
+	if _events.has(id):
+		return _events[id]
+	return null
 
 static func finish_event():
 	is_event = false
