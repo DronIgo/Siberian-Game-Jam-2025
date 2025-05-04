@@ -35,8 +35,10 @@ func _ready():
 	EventBus.hand_select_card.connect(_select_card_in_hand)
 	EventBus.hand_unselect_card.connect(_unselect_card_in_hand)
 	EventBus.token_add.connect(_add_token)
+	EventBus.token_add_several.connect(_add_several_tokens)
 	EventBus.token_remove.connect(_remove_token)
 	EventBus.stack_add_card.connect(_add_card_to_stack)
+	EventBus.stack_add_several_cards.connect(_add_several_cards_to_stack)
 	EventBus.stack_remove_card.connect(_remove_card_from_stack)
 	EventBus.line_add_card.connect(_add_card_to_checkable_line)
 	EventBus.line_remove_card.connect(_remove_card_from_checkable_line)
@@ -46,7 +48,6 @@ func _ready():
 	EventBus.sit_back_at_table.connect(_sit_back)
 	EventBus.show_cards.connect(_show_cards)
 	EventBus.hide_cards.connect(_hide_cards)
-	
 
 # tests
 func _process(delta):
@@ -164,6 +165,9 @@ func _flip_card_in_checkable_line(index: int):
 func _add_token(player_id: int):
 	_token_spawners[player_id].add_token()
 
+func _add_several_tokens(player_id: int, num: int):
+	_token_spawners[player_id].add_tokens(num)
+
 func _remove_token(player_id: int):
 	_token_spawners[player_id].remove_token()
 
@@ -179,6 +183,19 @@ func _add_card_to_stack(stack_type: CardsStack.Type):
 			_player_score_cards_stack.add_card()
 		CardsStack.Type.ENEMY_SCORE:
 			_enemy_score_cards_stack.add_card()
+
+func _add_several_cards_to_stack(stack_type: CardsStack.Type, num: int):
+	match stack_type:
+		CardsStack.Type.NEW:
+			_new_cards_stack.add_cards(num)
+		CardsStack.Type.DROPPED:
+			_dropped_cards_stack.add_cards(num)
+		CardsStack.Type.NON_CHECKABLE:
+			_non_checkable_cards_stack.add_cards(num)
+		CardsStack.Type.PLAYER_SCORE:
+			_player_score_cards_stack.add_cards(num)
+		CardsStack.Type.ENEMY_SCORE:
+			_enemy_score_cards_stack.add_cards(num)
 
 func _remove_card_from_stack(stack_type: CardsStack.Type):
 	match stack_type:
