@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=16 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
 [ext_resource type="PackedScene" uid="uid://cikwpq7gmfthh" path="res://Scenes/Table/nose.tscn" id="3_cv3oe"]
 [ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="4_5al06"]
-[ext_resource type="Texture2D" uid="uid://bq6esk7ur5k51" path="res://Sprites/Table/cat_body.png" id="4_cv3oe"]
+[ext_resource type="Texture2D" uid="uid://cohh0hve2q4aq" path="res://Sprites/Table/Cat/cat_body.png" id="4_bpp0a"]
+[ext_resource type="Texture2D" uid="uid://fh36gfupxy42" path="res://Sprites/Table/Cat/cat_arm_shoulder.png" id="5_g8tfy"]
 [ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="6_6ax0b"]
+[ext_resource type="Texture2D" uid="uid://dhed2sq074g4o" path="res://Sprites/Table/Cat/cat_arm_hand.png" id="6_86ca4"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="7_q1js6"]
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
 
@@ -118,13 +120,6 @@ transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
 shape = SubResource("BoxShape3D_6ax0b")
 
-[node name="EnemyFakeCamera" type="Node3D" parent="."]
-transform = Transform3D(-1, 2.26267e-08, -8.44439e-08, 0, 0.965926, 0.258819, 8.74228e-08, 0.258819, -0.965926, 0, 0, -5)
-
-[node name="EnemyHand" parent="EnemyFakeCamera" instance=ExtResource("2_65vo3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
-nose_gap = 0.1
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
@@ -135,8 +130,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.1)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, -5)
 
 [node name="Enemy" type="Sprite3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.25, -5)
-texture = ExtResource("4_cv3oe")
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.25, -6.5)
+alpha_cut = 2
+texture = ExtResource("4_bpp0a")
+
+[node name="Shoulder" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+alpha_cut = 2
+texture = ExtResource("5_g8tfy")
+
+[node name="Joint" type="Node3D" parent="Enemy/Shoulder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -4, 0.5)
+
+[node name="Hand" type="Sprite3D" parent="Enemy/Shoulder/Joint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 4, 0)
+alpha_cut = 2
+texture = ExtResource("6_86ca4")
+
+[node name="EnemyFakeCamera" type="Node3D" parent="Enemy/Shoulder/Joint/Hand"]
+transform = Transform3D(-2, 4.52534e-08, -1.68888e-07, 0, 1.93185, 0.517638, 1.74846e-07, 0.517638, -1.93185, -1, 0.5, -1.75)
+
+[node name="EnemyHand" parent="Enemy/Shoulder/Joint/Hand/EnemyFakeCamera" instance=ExtResource("2_65vo3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
+nose_gap = 0.1
 
 [node name="EnemyTokenSpawner" parent="." instance=ExtResource("4_5al06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -4.25)
