@@ -4,31 +4,31 @@
 			"text": "...",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		},
 		{
 			"text": "Буратино, твой нос... Не вырос.",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		},
 		{
 			"text": "Ты научился упралять им не так ли?",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		},
 		{
 			"text": "Ты подготовился к нашей встрече...",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		},
 		{
 			"text": "Тогда и я изменю свою стратегию.",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		}
 	]
 }

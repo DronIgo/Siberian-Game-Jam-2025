@@ -4,7 +4,7 @@
 			"text": "Я же вижу, что ты не врешь! Ха-Ха-Ха!",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
+			"speaker_texture_path": "res://Sprites/Table/Cat/cat_example.png"
 		}
 	]
 }
