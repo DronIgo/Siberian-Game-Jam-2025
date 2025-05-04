@@ -97,6 +97,7 @@ func check_dialog() -> bool:
 		return false
 	if PhaseNames.used_dialogs.has(dialog_id):
 		return false
+	PhaseNames.used_dialogs.append(dialog_id)
 	return true
 
 func end_round() -> void:

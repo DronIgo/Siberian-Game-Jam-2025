@@ -106,9 +106,9 @@ func take_turn() -> void:
 			else:
 				var num : float
 				num = get_cards_in_stack_num()
-				if pure_risk_turns.size() > 0 && roll_risk(num / 5.0):
+				if pure_risk_turns.size() > 0 && roll_risk(num / 5.0 + 1.5):
 					select_cards(pure_risk_turns.pop_front())
-				elif roll_risk(-1.0):
+				elif roll_risk(num / 4.0):
 					cards_for_turns.pop_front()
 					select_cards(cards_for_risky_turns.pop_front())
 				else:

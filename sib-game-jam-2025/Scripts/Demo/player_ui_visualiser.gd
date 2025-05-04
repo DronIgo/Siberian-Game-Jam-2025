@@ -77,9 +77,6 @@ func call_bluff() -> void:
 func declare_trust() -> void:
 	player_actions.declare_trust()
 	
-func check_card(color : Card.CARD_COLOR) -> void:
-	player_actions.check_card(color)
-
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
 		return

@@ -33,6 +33,8 @@ func declare_trust() -> void:
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
 	
 func check_card(color : Card.CARD_COLOR) -> void:
+	if color == Card.CARD_COLOR.GREY:
+		print("cool")
 	var correct_color = game_state_manager.current_correct_color
 	var truth = color == correct_color
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
