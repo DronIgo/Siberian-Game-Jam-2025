@@ -1,0 +1,39 @@
+{
+	"data": [
+		{
+			"text": "Здравствуй, мальчик!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Рад снова видеть тебя в стенах этого заведения! В этот раз удача наверняка тебе улыбнётся!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Да, я хотел бы сыграть ещё.",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		},
+		{
+			"text": "Сколько же ты будешь ставить на этот раз?",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Газиллион.",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		},
+		{
+			"text": "Газиллион? Ха-ха, а ты шутник! Это ведь больше суммарного госдолга Фулс Кантри!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио"
+		},
+		{
+			"text": "Именно. Не будем терять времени - к столу!",
+			"speaker_location": "RIGHT",
+			"speaker_name": "Буратино"
+		}
+	]
+}

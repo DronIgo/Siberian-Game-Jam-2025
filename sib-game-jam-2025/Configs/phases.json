@@ -15,15 +15,87 @@
 				"res://Configs/Dialog/papa_1.json",
 				"res://Sprites/Back/bg_carlo.png"
 			],
-			"music": "res://Resources/Sounds/Tutorial.mp3",
-			"next_phase_id": "table_1",
+			"next_phase_id": "dialog_basilio_meeting",
 			"is_replacement": true
 		},
 		{
-			"id": "table_1",
+			"id": "dialog_basilio_meeting",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_meeting.json",
+				"res://Sprites/Back/bg_casino.png"
+			],
+			"next_phase_id": "tutorial",
+			"is_replacement": true
+		},
+		{
+			"id": "tutorial",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/tutorial.json",
+				"res://Sprites/Back/bg_casino.png"
+			],
+			"music": "res://Resources/Sounds/Tutorial.mp3",
+			"next_phase_id": "dialog_basilio_game_1_failure",
+			"is_replacement": true
+		},
+		{
+			"id": "game_1",
 			"scene_name": "res://Scenes/Table/table.tscn",
 			"args": [],
 			"music": "res://Resources/Sounds/Versus_cat.mp3",
+			"next_phase_id": "dialog_basilio_game_1_failure",
+			"is_replacement": true
+		},
+		{
+			"id": "dialog_basilio_game_1_failure",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_game_1_failure.json",
+				"res://Sprites/Back/bg_casino.png"
+			],
+			"music": "res://Resources/Sounds/Tutorial.mp3",
+			"next_phase_id": "dialog_papa_game_1_failure",
+			"is_replacement": true
+		},
+		{
+			"id": "dialog_papa_game_1_failure",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/papa_game_1_failure.json",
+				"res://Sprites/Back/bg_carlo.png"
+			],
+			"music": "res://Resources/Sounds/Menu.mp3",
+			"next_phase_id": "dialog_basilio_revenge",
+			"is_replacement": true
+		},
+		{
+			"id": "dialog_basilio_revenge",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_revenge.json",
+				"res://Sprites/Back/bg_casino.png"
+			],
+			"music": "res://Resources/Sounds/Tutorial.mp3",
+			"next_phase_id": "dialog_basilio_game_2_success",
+			"is_replacement": true
+		},
+		{
+			"id": "game_2",
+			"scene_name": "res://Scenes/Table/table.tscn",
+			"args": [],
+			"music": "res://Resources/Sounds/Versus_cat.mp3",
+			"next_phase_id": "dialog_basilio_game_2_success",
+			"is_replacement": true
+		},
+		{
+			"id": "dialog_basilio_game_2_success",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_game_2_success.json",
+				"res://Sprites/Back/bg_casino.png"
+			],
+			"music": "res://Resources/Sounds/Tutorial.mp3",
 			"next_phase_id": "",
 			"is_replacement": true
 		}
@@ -93,5 +165,5 @@
 			"is_replacement": false
 		}
 	],
-	"init_scene_id": "dialog_papa_1"
+	"init_scene_id": "menu"
 }
