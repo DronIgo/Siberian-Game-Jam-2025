@@ -15,3 +15,4 @@ signal print_action(action : String)
 signal effect_end
 
 signal player_lied
+signal player_told_truth
