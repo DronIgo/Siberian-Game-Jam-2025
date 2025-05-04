@@ -6,7 +6,7 @@ extends Node3D
 @export var max_tokens_in_stack = 5
 @export var max_stacks_in_row = 3
 @export var stacks_offset = 0.33
-@export var adding_gap_seconds: float = 0.2
+@export var adding_gap_seconds: float = 0.1
 
 @onready var _timer = $Timer
 
@@ -19,14 +19,11 @@ func _ready():
 func add_tokens(num: int):
 	for i in num:
 		_tokens_to_add.append(token_scene.instantiate())
-	_check_tokens_to_add()
+	if _timer.is_stopped():
+		_timer.start()
 
 func add_token():
-	var token = token_scene.instantiate()
-	_fix_token_position(token)
-	add_child(token)
-	_current_tokens.append(token)
-	print("[TOKENS SPAWNER] TOKEN ADDED")
+	add_tokens(1)
 
 func remove_token():
 	if _current_tokens.is_empty():

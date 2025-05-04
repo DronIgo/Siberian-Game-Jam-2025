@@ -5,7 +5,7 @@ extends Node3D
 enum Type { NEW, DROPPED, NON_CHECKABLE, PLAYER_SCORE, ENEMY_SCORE }
 
 @export var card_scene: PackedScene
-@export var adding_gap_seconds: float = 0.25
+@export var adding_gap_seconds: float = 0.1
 
 @onready var _timer = $Timer
 
@@ -20,13 +20,11 @@ func add_cards(num: int):
 		var card = card_scene.instantiate()
 		card.rotation = Vector3(90, 0, 0)
 		_cards_to_add.append(card)
-	_check_cards_to_add()
+	if _timer.is_stopped():
+		_timer.start()
 
 func add_card():
-	var card = card_scene.instantiate()
-	card.rotation = Vector3(90, 0, 0)
-	add_child(card)
-	_current_cards.append(card)
+	add_cards(1)
 	print("[CARDS STACK] CARD ADDED")
 
 func remove_card():
