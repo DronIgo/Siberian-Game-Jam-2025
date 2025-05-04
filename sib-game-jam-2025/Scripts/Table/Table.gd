@@ -59,11 +59,11 @@ func _ready():
 
 # tests
 func _process(delta):
-	if Input.is_key_pressed(KEY_1):
-		EventBus.show_cards.emit()
-	
 	#if Input.is_key_pressed(KEY_1):
-		#EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
+		#EventBus.show_cards.emit()
+	
+	if Input.is_key_pressed(KEY_1):
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
 	if Input.is_key_pressed(KEY_2):
 		EventBus.hide_cards.emit()
 		#EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
