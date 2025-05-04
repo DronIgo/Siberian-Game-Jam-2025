@@ -8,8 +8,8 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 
 #TO DO: move elsewhere
-@onready var player_score_disp: Button = $"../CanvasLayer/PlayerScore"
-@onready var enemy_score_disp: Button = $"../CanvasLayer/EnemyScore"
+@onready var player_score_disp: Label = $"../CanvasLayer/PlayerScore"
+@onready var enemy_score_disp: Label = $"../CanvasLayer/EnemyScore"
 
 const EFFECT_NOSE_GROW = preload("res://Scenes/Effects/EffectNoseGrow.tscn")
 

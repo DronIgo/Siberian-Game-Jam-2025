@@ -7,10 +7,10 @@ extends Node
 
 @onready var last_action: Label = $"../CanvasLayer/LastAction"
 @onready var cards_in_deck: Label = $"../CanvasLayer/CardsInDeck"
-@onready var player_score: Button = $"../CanvasLayer/PlayerScore"
-@onready var enemy_score: Button = $"../CanvasLayer/EnemyScore"
-@onready var player_bonuses: Button = $"../CanvasLayer/PlayerBonuses"
-@onready var enemy_bonuses: Button = $"../CanvasLayer/EnemyBonuses"
+@onready var player_score: Label = $"../CanvasLayer/PlayerScore"
+@onready var enemy_score: Label = $"../CanvasLayer/EnemyScore"
+@onready var player_bonuses: Label = $"../CanvasLayer/PlayerBonuses"
+@onready var enemy_bonuses: Label = $"../CanvasLayer/EnemyBonuses"
 @onready var turn_label: Label = $"../CanvasLayer/TurnLabel"
 
 
@@ -21,10 +21,10 @@ func _ready() -> void:
 
 func update_display() -> void:
 	cards_in_deck.text = "В колоде ещё " + str(card_manager.deck.size()) + " карт"
-	player_score.text = "Счет игрока: " + str(game_manager.player_score)
-	enemy_score.text = "Счет противника: " + str(game_manager.enemy_score)
-	player_bonuses.text = "Бонусы игрока: " + str(game_manager.player_bonus)
-	enemy_bonuses.text = "Бонусы противника: " + str(game_manager.enemy_bonus)
+	player_score.text = "Штрафные очки: " + str(game_manager.player_score)
+	enemy_score.text = "Штрафные очки: " + str(game_manager.enemy_score)
+	player_bonuses.text = "Бонусы: " + str(game_manager.player_bonus)
+	enemy_bonuses.text = "Бонусы: " + str(game_manager.enemy_bonus)
 	if game_state_manager.current_player == GameStateManager.PLAYER.MAN:
 		turn_label.text = "Ваш ход!"
 	else:
