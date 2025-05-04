@@ -36,7 +36,7 @@
 				"res://Sprites/Back/bg_casino.png"
 			],
 			"music": "res://Resources/Sounds/Tutorial.mp3",
-			"next_phase_id": "dialog_basilio_game_1_failure",
+			"next_phase_id": "game_1",
 			"is_replacement": true
 		},
 		{
@@ -77,7 +77,7 @@
 				"res://Sprites/Back/bg_casino.png"
 			],
 			"music": "res://Resources/Sounds/Tutorial.mp3",
-			"next_phase_id": "dialog_basilio_game_2_success",
+			"next_phase_id": "game_2",
 			"is_replacement": true
 		},
 		{

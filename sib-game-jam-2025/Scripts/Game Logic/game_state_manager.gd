@@ -28,7 +28,7 @@ func _ready() -> void:
 	EventBusGL.start_round.connect(card_manager.fill_hands)
 	EventBusGL.start_round.connect(start_round)
 	#TODO: delete
-	PhaseManager.init()
+	#PhaseManager.init()
 	pass # Replace with function body.
 
 func switch_player_round() -> void:

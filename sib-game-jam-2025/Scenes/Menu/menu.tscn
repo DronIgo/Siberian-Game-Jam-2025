@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
 [ext_resource type="Texture2D" uid="uid://djf23lpvsxf6" path="res://Sprites/Back/menu.png" id="2_3qr6s"]
 [ext_resource type="Theme" uid="uid://cp5jo1yfiwsd7" path="res://Resources/Themes/BUTTONS_FONT.tres" id="3_j7r1e"]
-[ext_resource type="Theme" path="res://Resources/Themes/DIALOG_FONT.tres" id="4_j7r1e"]
+[ext_resource type="Theme" uid="uid://cxxipod7ij704" path="res://Resources/Themes/DIALOG_FONT.tres" id="4_j7r1e"]
 
 [sub_resource type="Animation" id="Animation_3qr6s"]
 length = 0.001
