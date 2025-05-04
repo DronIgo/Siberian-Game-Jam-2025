@@ -4,6 +4,7 @@
 			"id": "menu",
 			"scene_name": "res://Scenes/Dialog/dialog.tscn",
 			"args": [],
+			"music": "res://Resources/Sounds/Menu.mp3",
 			"next_phase_id": "dialog_papa_1",
 			"is_replacement": true
 		},
@@ -14,6 +15,7 @@
 				"res://Configs/Dialog/papa_1.json",
 				"res://Sprites/Back/bg_carlo.png"
 			],
+			"music": "res://Resources/Sounds/Tutorial.mp3",
 			"next_phase_id": "table_1",
 			"is_replacement": true
 		},
@@ -21,6 +23,7 @@
 			"id": "table_1",
 			"scene_name": "res://Scenes/Table/table.tscn",
 			"args": [],
+			"music": "res://Resources/Sounds/Versus_cat.mp3",
 			"next_phase_id": "",
 			"is_replacement": true
 		}

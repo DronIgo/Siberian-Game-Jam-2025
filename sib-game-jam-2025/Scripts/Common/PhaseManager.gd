@@ -13,23 +13,14 @@ static func init():
 	var config: Dictionary = StorageManager.read_from(_config_path)
 	var phases_array = config["phases"]
 	for phase_dictionary: Dictionary in phases_array:
-		var phase = Phase.new()
-		phase.id = phase_dictionary["id"]
-		phase.scene_name = phase_dictionary["scene_name"]
-		phase.args = phase_dictionary["args"]
-		phase.next_phase_id = phase_dictionary["next_phase_id"]
-		phase.is_replacement = phase_dictionary["is_replacement"]
+		var phase = _parse_phase(phase_dictionary)
 		_phases[phase.id] = phase
 	var events_array = config["events"]
 	for event_dictionary: Dictionary in events_array:
-		var event = Phase.new()
-		event.id = event_dictionary["id"]
-		event.scene_name = event_dictionary["scene_name"]
-		event.args = event_dictionary["args"]
-		event.next_phase_id = event_dictionary["next_phase_id"]
-		event.is_replacement = event_dictionary["is_replacement"]
+		var event = _parse_phase(event_dictionary)
 		_events[event.id] = event
-	_next_phase_id = config["init_scene_id"]
+	_current_phase_id = config["init_scene_id"]
+	_next_phase_id = _phases[_current_phase_id].next_phase_id
 
 static func try_next_phase() -> Phase:
 	return exact_phase(_next_phase_id)
@@ -55,3 +46,13 @@ static func finish_event():
 
 static func current_event():
 	return _events[_current_event_id]
+
+static func _parse_phase(source: Dictionary) -> Phase:
+	var phase = Phase.new()
+	phase.id = source["id"]
+	phase.scene_name = source["scene_name"]
+	phase.args = source["args"]
+	phase.music = source["music"] if source.has("music") else SoundConstants.NO_MUSIC
+	phase.next_phase_id = source["next_phase_id"]
+	phase.is_replacement = source["is_replacement"]
+	return phase

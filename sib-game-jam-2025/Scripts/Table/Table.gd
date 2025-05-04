@@ -54,6 +54,8 @@ func _ready():
 	EventBus.hide_cards.connect(_hide_cards)
 	EventBus.enemy_hand_up.connect(_enemy_hand_up)
 	EventBus.enemy_hand_down.connect(_enemy_hand_down)
+	var phase = PhaseManager.current_phase()
+	MusicProcessor.process(phase)
 
 var b = false
 

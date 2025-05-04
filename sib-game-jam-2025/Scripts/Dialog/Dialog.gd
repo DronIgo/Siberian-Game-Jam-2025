@@ -25,6 +25,7 @@ func start(phase: Phase):
 		_back.texture = bg
 	var config: Dictionary = StorageManager.read_from(phase.args[0])
 	_current_replica_dictionaries = config["data"]
+	MusicProcessor.process(phase)
 	next()
 
 func next():
