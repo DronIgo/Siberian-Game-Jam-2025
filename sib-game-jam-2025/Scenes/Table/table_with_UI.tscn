@@ -643,13 +643,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1.75)
 token_scene = ExtResource("7_0lqd0")
 
 [node name="NewCardsStack" parent="." instance=ExtResource("8_6ba3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -2.11852)
 
 [node name="DroppedCardsStack" parent="." instance=ExtResource("8_6ba3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8503, -0.25, -3.23845)
 
 [node name="NonCheckableCardsStack" parent="." instance=ExtResource("8_6ba3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.25, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.76399, -0.25, -3.30451)
 
 [node name="CheckableCardsLine" parent="." instance=ExtResource("9_glym1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1.5, -2.5)
@@ -664,8 +664,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, -4)
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 
 [node name="PlayerHand" parent="PlayerFakeCamera" instance=ExtResource("2_1x3b8")]
-transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, -0.2, -0.5)
-nose_gap = 0.5
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, -0.3, -0.5)
+nose_gap = 0.17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
