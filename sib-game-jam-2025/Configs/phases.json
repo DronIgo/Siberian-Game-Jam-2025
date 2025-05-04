@@ -39,7 +39,52 @@
 			"id": "dialog_correct_bluff_1",
 			"scene_name": "res://Scenes/Dialog/dialog.tscn",
 			"args": [
-				"res://Configs/Dialog/basilio_correct_bluff_1.json"
+				"res://Configs/Dialog/dialog_correct_bluff_1.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
+		},
+		{
+			"id": "dialog_correct_bluff_2",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/dialog_correct_bluff_2.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
+		},
+		{
+			"id": "dialog_correct_bluff_3",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/dialog_correct_bluff_3.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
+		},
+		{
+			"id": "dialog_correct_trust_1",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/dialog_correct_trust_1.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
+		},
+		{
+			"id": "basilio_learns_bluff",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_learns_bluff.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
+		},
+		{
+			"id": "basilio_learns_trust",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/basilio_learns_trust.json"
 			],
 			"next_phase_id": "",
 			"is_replacement": false
