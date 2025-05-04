@@ -3,10 +3,10 @@ extends HBoxContainer
 @onready var game_manager: GameManager = $"../../GameManager"
 @onready var player_actions: PlayerActions = $"../../PlayerActions"
 
-@onready var button_select_red: Button = $SelectRed
-@onready var button_select_blue: Button = $SelectBlue
-@onready var button_select_green: Button = $SelectGreen
-@onready var button_select_violet: Button = $SelectViolet
+@onready var button_select_red: TextureButton = $SelectRed
+@onready var button_select_blue: TextureButton = $SelectBlue
+@onready var button_select_green: TextureButton = $SelectGreen
+@onready var button_select_violet: TextureButton = $SelectViolet
 
 
 # Called when the node enters the scene tree for the first time.

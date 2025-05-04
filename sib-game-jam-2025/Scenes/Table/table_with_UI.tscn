@@ -202,25 +202,36 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("16_s02ep")
 
-[node name="SelectRed" type="Button" parent="CanvasLayer/SelectColor"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme = ExtResource("17_i5h15")
-
-[node name="SelectBlue" type="Button" parent="CanvasLayer/SelectColor"]
+[node name="SelectBlue" type="TextureButton" parent="CanvasLayer/SelectColor"]
+modulate = Color(0.0904541, 0, 0.656607, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("18_1qvjy")
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
 
-[node name="SelectGreen" type="Button" parent="CanvasLayer/SelectColor"]
+[node name="SelectGreen" type="TextureButton" parent="CanvasLayer/SelectColor"]
+modulate = Color(0, 0.501961, 0, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("19_3tq7i")
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
 
-[node name="SelectViolet" type="Button" parent="CanvasLayer/SelectColor"]
+[node name="SelectViolet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+modulate = Color(0.490399, 0.000129472, 0.473088, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("20_kpvdj")
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
+
+[node name="SelectRed" type="TextureButton" parent="CanvasLayer/SelectColor"]
+modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("17_i5h15")
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
 
 [node name="PlayerScore" type="Button" parent="CanvasLayer"]
 anchors_preset = 2
