@@ -4,7 +4,7 @@
 			"text": "Я знал что ты пытаешься меня обмануть!",
 			"speaker_location": "LEFT",
 			"speaker_name": "Базилио",
-			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+			"speaker_texture_path": "res://Sprites/Dialog/Cat/cat_example.png"
 		}
 	]
 }
