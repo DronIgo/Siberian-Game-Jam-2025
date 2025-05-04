@@ -7,7 +7,7 @@ var game_state_manager : GameStateManager
 var enemy_ai : EnemyAI
 var player_lied_last_turn : bool = false
 
-@export var knows_buratino_cant_lie : int = true
+@export var knows_buratino_cant_lie : bool = true
 @export var big_enough_stack : int = 6
 @export_range(1, 5, 1) var risk_koef : float = 2.0
 @export var start_risk_mod : float = -1.5

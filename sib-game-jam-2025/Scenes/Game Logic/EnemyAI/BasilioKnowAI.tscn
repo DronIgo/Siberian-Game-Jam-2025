@@ -4,4 +4,3 @@
 
 [node name="BasilioBasicAi" type="Node"]
 script = ExtResource("1_647af")
-knows_buratino_cant_lie = 0
