@@ -3,6 +3,7 @@ class_name GameStateManager
 extends Node
 @onready var game_manager: GameManager = $"../GameManager"
 @onready var card_manager: CardManager = $"../CardManager"
+@onready var player_actions: PlayerActions = $"../PlayerActions"
 
 enum PLAYER {
 	MAN,
@@ -141,7 +142,21 @@ func start_round() -> void:
 	EventBusGL.update_visualisation.emit()
 
 func end_game() -> void:
-	EventBusAction.print_action.emit("Game Over!")
+	#самый быстрый способ это сделать
+	var first_game = !player_actions.can_control_lie
+	var player_won = game_manager.player_score < game_manager.enemy_score
+	if first_game || player_won:
+		var next_phase = PhaseManager.try_next_phase()
+		if next_phase != null:
+			get_tree().change_scene_to_file(next_phase.scene_name)
+	else:
+		var dialog = PhaseManager.start_event("game_2_failure")
+		var scene = load(dialog.scene_name)
+		var scene_instance = scene.instantiate()
+		add_child(scene_instance)
+		await EventBus.dialog_finished
+		get_tree().reload_current_scene()
+	#EventBusAction.print_action.emit("Game Over!")
 
 func can_increase_card_check() -> bool:
 	var num_bonus : int

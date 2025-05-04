@@ -41,6 +41,8 @@ func check_card(color : Card.CARD_COLOR) -> void:
 
 func add_extra_check() -> void:
 	game_manager.player_bonus -= game_manager.extra_check_cost
+	for i in game_manager.extra_check_cost:
+		EventBus.token_remove.emit(MagicNumbers.PLAYER_ID)
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 func place_cards() -> void:

@@ -89,6 +89,8 @@ func add_extra_check() -> void:
 	add_child(voice)
 	voice.start("Buy")
 	game_manager.enemy_bonus -= game_manager.extra_check_cost
+	for i in game_manager.extra_check_cost:
+		EventBus.token_remove.emit(MagicNumbers.ENEMY_ID)
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 var checked_cards_idx : Array

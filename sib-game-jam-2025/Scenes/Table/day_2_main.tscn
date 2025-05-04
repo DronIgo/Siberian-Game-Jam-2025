@@ -1,0 +1,733 @@
+[gd_scene load_steps=45 format=3 uid="uid://duupedqjk64sh"]
+
+[ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_wr6bk"]
+[ext_resource type="PackedScene" uid="uid://cdcfnxst2dods" path="res://Scenes/Game Logic/CardManager.tscn" id="2_xnotq"]
+[ext_resource type="PackedScene" uid="uid://jn7o7q01waf0" path="res://Scenes/Game Logic/GameManager.tscn" id="3_3xgxq"]
+[ext_resource type="PackedScene" uid="uid://crjpjpkq5cefd" path="res://Scenes/Game Logic/GameStateManager.tscn" id="4_4wmkf"]
+[ext_resource type="PackedScene" uid="uid://4xxewo47h8ay" path="res://Scenes/Game Logic/PlayerActions.tscn" id="5_5p7b3"]
+[ext_resource type="PackedScene" uid="uid://dgtvnvliwh4aw" path="res://Scenes/Game Logic/EnemyAI.tscn" id="6_3h5ne"]
+[ext_resource type="PackedScene" uid="uid://cqsnixrd8nhfe" path="res://Scenes/Demo/InfoVisualiser.tscn" id="7_08754"]
+[ext_resource type="Script" uid="uid://bakakojeb88us" path="res://Scripts/Demo/select_color.gd" id="8_yvm1u"]
+[ext_resource type="Theme" uid="uid://bn0nt8tywlwfk" path="res://Resources/Demo/blue_button_theme.tres" id="9_b84mt"]
+[ext_resource type="Texture2D" uid="uid://bjkphiw3gqv0o" path="res://Sprites/UI/buttons/coin_button_glow.png" id="10_7065f"]
+[ext_resource type="Theme" uid="uid://dclbdlmn1jp4n" path="res://Resources/Demo/green_button_theme.tres" id="11_r15tq"]
+[ext_resource type="Texture2D" uid="uid://dnht6gnc83q6m" path="res://Sprites/UI/buttons/puppet_button_glow.png" id="12_frtw4"]
+[ext_resource type="Theme" uid="uid://bjxsr2atb27ka" path="res://Resources/Demo/violet_button_theme.tres" id="13_7uqey"]
+[ext_resource type="Texture2D" uid="uid://bjrbbasuflux3" path="res://Sprites/UI/buttons/alpha_button_glow.png" id="14_io8gs"]
+[ext_resource type="Theme" uid="uid://yerfq4qvcb0i" path="res://Resources/Demo/red_button_theme.tres" id="15_t4lix"]
+[ext_resource type="Texture2D" uid="uid://byt78d2alagva" path="res://Sprites/UI/buttons/key_button_glow.png" id="16_eo3fs"]
+[ext_resource type="Theme" uid="uid://cp5jo1yfiwsd7" path="res://Resources/Themes/BUTTONS_FONT.tres" id="17_5umu2"]
+[ext_resource type="Texture2D" uid="uid://b0ymgs8aibex8" path="res://Sprites/CardsLogo/puppet_logo_black.png" id="18_5oas5"]
+[ext_resource type="FontFile" uid="uid://bt614bxm24b2" path="res://Sprites/UI/fonts/GULAG_Pavljenko.otf" id="19_oufaa"]
+[ext_resource type="Texture2D" uid="uid://eiydrf5o73ef" path="res://Sprites/UI/buttons/white_300.png" id="20_ppkcv"]
+[ext_resource type="Texture2D" uid="uid://b8b3tyiklpn86" path="res://Sprites/UI/buttons/white_glow_300.png" id="21_vn4at"]
+[ext_resource type="PackedScene" uid="uid://bgjob4hixs50t" path="res://Scenes/Raycasting/RayCastingManager.tscn" id="22_52xu0"]
+[ext_resource type="PackedScene" uid="uid://baqct71bfl7sn" path="res://Scenes/Table/Actions/CardsVisulaiser3D.tscn" id="23_dimk3"]
+[ext_resource type="PackedScene" uid="uid://dwy84f8yeffe" path="res://Scenes/Table/Actions/PlayerUIVisualiser3D.tscn" id="24_tx5du"]
+[ext_resource type="Texture2D" uid="uid://cclj8l18pbxf2" path="res://Sprites/Table/table.png" id="25_xqwou"]
+[ext_resource type="PackedScene" uid="uid://cikwpq7gmfthh" path="res://Scenes/Table/nose.tscn" id="26_cxibw"]
+[ext_resource type="Texture2D" uid="uid://cohh0hve2q4aq" path="res://Sprites/Table/Cat/cat_body.png" id="27_84aul"]
+[ext_resource type="Texture2D" uid="uid://fh36gfupxy42" path="res://Sprites/Table/Cat/cat_arm_shoulder.png" id="28_tvbpq"]
+[ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="29_mbqi1"]
+[ext_resource type="Texture2D" uid="uid://dhed2sq074g4o" path="res://Sprites/Table/Cat/cat_arm_hand.png" id="30_qkt68"]
+[ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="31_p8jpc"]
+[ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="32_87max"]
+[ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="33_om2hk"]
+[ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="34_w37ns"]
+[ext_resource type="Texture2D" uid="uid://bfd7bnlca2ixc" path="res://Sprites/Back/bg_casino.png" id="35_sqsvv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r4bfu"]
+
+[sub_resource type="Animation" id="Animation_46yol"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.25, 0, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ldda2"]
+resource_name = "hand_down"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.523599)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.25, 0, -1.75), Vector3(-3.5, -4.5, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, -1.0472)]
+}
+
+[sub_resource type="Animation" id="Animation_86ca4"]
+resource_name = "hand_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Joint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.523599), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemyFakeCamera:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-3.5, -4.5, -1.75), Vector3(-1.25, 0, -1.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyFakeCamera:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, -1.0472), Vector3(0, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldda2"]
+_data = {
+&"RESET": SubResource("Animation_46yol"),
+&"hand_down": SubResource("Animation_ldda2"),
+&"hand_up": SubResource("Animation_86ca4")
+}
+
+[sub_resource type="Animation" id="Animation_bpp0a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.261799, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cv3oe"]
+resource_name = "bend_over"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.261799, 0, 0), Vector3(-1.39626, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g8tfy"]
+resource_name = "sit_back"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, -2), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.39626, 0, 0), Vector3(-0.261799, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8tfy"]
+_data = {
+&"RESET": SubResource("Animation_bpp0a"),
+&"bend_over": SubResource("Animation_cv3oe"),
+&"sit_back": SubResource("Animation_g8tfy")
+}
+
+[node name="Table" type="Node3D"]
+script = ExtResource("1_wr6bk")
+
+[node name="CardManager" parent="." instance=ExtResource("2_xnotq")]
+
+[node name="GameManager" parent="." instance=ExtResource("3_3xgxq")]
+
+[node name="GameStateManager" parent="." instance=ExtResource("4_4wmkf")]
+
+[node name="PlayerActions" parent="." instance=ExtResource("5_5p7b3")]
+can_control_lie = true
+
+[node name="EnemyAi" parent="." instance=ExtResource("6_3h5ne")]
+
+[node name="InfoVisualiser" parent="." instance=ExtResource("7_08754")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SelectColor" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -25.0
+offset_right = 15.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("8_yvm1u")
+
+[node name="SelectBlue" type="TextureButton" parent="CanvasLayer/SelectColor"]
+layout_mode = 2
+theme = ExtResource("9_b84mt")
+texture_normal = ExtResource("10_7065f")
+
+[node name="SelectGreen" type="TextureButton" parent="CanvasLayer/SelectColor"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("11_r15tq")
+texture_normal = ExtResource("12_frtw4")
+
+[node name="SelectViolet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme = ExtResource("13_7uqey")
+texture_normal = ExtResource("14_io8gs")
+
+[node name="SelectRed" type="TextureButton" parent="CanvasLayer/SelectColor"]
+layout_mode = 2
+theme = ExtResource("15_t4lix")
+texture_normal = ExtResource("16_eo3fs")
+
+[node name="PlayerScore" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -445.0
+offset_right = 242.0
+offset_bottom = -383.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+text = "Player: 0"
+
+[node name="PlayerBonuses" type="Label" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -495.0
+offset_right = 160.0
+offset_bottom = -472.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+text = "Player: 0"
+
+[node name="PlayerName" type="Label" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -560.0
+offset_right = 223.0
+offset_bottom = -521.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+theme_override_font_sizes/font_size = 40
+text = "BURATINO"
+
+[node name="EnemyName" type="Label" parent="CanvasLayer"]
+offset_left = 1610.0
+offset_top = 60.0
+offset_right = 1764.0
+offset_bottom = 99.0
+theme = ExtResource("17_5umu2")
+theme_override_font_sizes/font_size = 40
+text = "BASILIO"
+
+[node name="EnemyScore" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1620.0
+offset_top = -926.0
+offset_right = 1810.0
+offset_bottom = -864.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+text = "Enemy: 0"
+
+[node name="EnemyBonuses" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1620.0
+offset_top = -967.0
+offset_right = 1810.0
+offset_bottom = -936.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+text = "Enemy: 0"
+
+[node name="OLD_PlaceCardsButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -180.0
+offset_right = 242.0
+offset_bottom = -118.0
+grow_vertical = 0
+theme = ExtResource("17_5umu2")
+text = "Положить карты"
+
+[node name="OLD_DeclareTrustButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1576.0
+offset_top = -180.0
+offset_right = 1766.0
+offset_bottom = -118.0
+grow_vertical = 0
+text = "Верю!"
+
+[node name="OLD_ExtraCheckButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1320.0
+offset_top = -180.0
+offset_right = 1510.0
+offset_bottom = -118.0
+grow_vertical = 0
+text = "Купить проверку"
+
+[node name="OLD_CallBluffButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1576.0
+offset_top = -298.0
+offset_right = 1766.0
+offset_bottom = -236.0
+grow_vertical = 0
+text = "Не верю!"
+
+[node name="SelectedColor" type="TextureButton" parent="CanvasLayer"]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 114.0
+offset_bottom = 114.0
+theme = ExtResource("15_t4lix")
+texture_normal = ExtResource("18_5oas5")
+
+[node name="StackCounter" type="Label" parent="CanvasLayer/SelectedColor"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -59.0
+offset_right = 208.0
+offset_bottom = 61.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+theme_override_font_sizes/font_size = 120
+text = "8"
+vertical_alignment = 1
+
+[node name="LastAction" type="Label" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(180, 90)
+offset_left = 1584.0
+offset_top = 256.0
+offset_right = 1624.0
+offset_bottom = 279.0
+size_flags_horizontal = 4
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(180, 90)
+offset_left = 1667.0
+offset_top = 386.0
+offset_right = 1847.0
+offset_bottom = 476.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("19_oufaa")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CardsInDeck" type="Label" parent="CanvasLayer"]
+custom_minimum_size = Vector2(180, 90)
+offset_left = 1665.0
+offset_top = 508.0
+offset_right = 1845.0
+offset_bottom = 598.0
+size_flags_horizontal = 4
+theme = ExtResource("17_5umu2")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DeclareTrustButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.533801, 1, 0.712365, 0.784314)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = 130.0
+offset_right = -20.0
+offset_bottom = 302.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("20_ppkcv")
+texture_hover = ExtResource("21_vn4at")
+
+[node name="Label" type="Label" parent="CanvasLayer/DeclareTrustButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+text = "ВЕРЮ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CallBluffButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.928361, 0.345342, 0, 0.784314)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -230.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("20_ppkcv")
+texture_hover = ExtResource("21_vn4at")
+
+[node name="Label" type="Label" parent="CanvasLayer/CallBluffButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+text = "НЕ ВЕРЮ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExtraCheckButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.909804, 0.831373, 0, 0.784314)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -230.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1, 0.991246)
+theme = ExtResource("17_5umu2")
+texture_normal = ExtResource("20_ppkcv")
+texture_hover = ExtResource("21_vn4at")
+
+[node name="Label" type="Label" parent="CanvasLayer/ExtraCheckButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+text = "Купить проверку"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlaceCardsButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.67451, 1, 0, 0.784314)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("20_ppkcv")
+texture_hover = ExtResource("21_vn4at")
+
+[node name="Label" type="Label" parent="CanvasLayer/PlaceCardsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+text = "ВЫЛОЖИТЬ КАРТЫ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressSpaceHint" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -206.5
+offset_right = 228.0
+offset_bottom = -183.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("17_5umu2")
+theme_override_font_sizes/font_size = 40
+text = "НАЖМИ ПРОБЕЛ ЧТОБЫ УВЕЛИЧИТЬ НОС"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RayCastingManager" parent="." instance=ExtResource("22_52xu0")]
+
+[node name="CardsVisulaiser3d" parent="." instance=ExtResource("23_dimk3")]
+
+[node name="PlayerUiVisualiser3d" parent="." instance=ExtResource("24_tx5du")]
+
+[node name="Table" type="RigidBody3D" parent="."]
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="Table"]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, -1.5, -2.5)
+texture = ExtResource("25_xqwou")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Table"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 5, 0, -1.99, -2.5)
+shape = SubResource("BoxShape3D_r4bfu")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="Nose" parent="Camera3D" instance=ExtResource("26_cxibw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, -5)
+
+[node name="Enemy" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, -0.25, -6.5)
+alpha_cut = 2
+texture = ExtResource("27_84aul")
+
+[node name="Shoulder" type="Sprite3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+alpha_cut = 2
+texture = ExtResource("28_tvbpq")
+
+[node name="EnemyFakeCamera" type="Node3D" parent="Enemy/Shoulder"]
+transform = Transform3D(-2, 0, 5.07036e-06, 0, 2, 0, -5.07036e-06, 0, -2, -1.25, 0, -1.75)
+
+[node name="EnemyHand" parent="Enemy/Shoulder/EnemyFakeCamera" instance=ExtResource("29_mbqi1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
+nose_gap = 0.1
+layer_step = 0.01
+
+[node name="Joint" type="Node3D" parent="Enemy/Shoulder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, -4, 0.5)
+
+[node name="Hand" type="Sprite3D" parent="Enemy/Shoulder/Joint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 4, 0)
+alpha_cut = 2
+texture = ExtResource("30_qkt68")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy/Shoulder"]
+libraries = {
+&"": SubResource("AnimationLibrary_ldda2")
+}
+
+[node name="EnemyTokenSpawner" parent="." instance=ExtResource("31_p8jpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -4.25)
+token_scene = ExtResource("32_87max")
+
+[node name="PlayerTokenSpawner" parent="." instance=ExtResource("31_p8jpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1.75)
+token_scene = ExtResource("32_87max")
+
+[node name="NewCardsStack" parent="." instance=ExtResource("33_om2hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, -2.11852)
+
+[node name="DroppedCardsStack" parent="." instance=ExtResource("33_om2hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8503, -0.25, -3.23845)
+
+[node name="NonCheckableCardsStack" parent="." instance=ExtResource("33_om2hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.04231, -0.25, -2.48425)
+
+[node name="CheckableCardsLine" parent="." instance=ExtResource("34_w37ns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, -1.5, -2.5)
+
+[node name="PlayerScoreCardsStack" parent="." instance=ExtResource("33_om2hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, -1.5)
+
+[node name="EnemyScoreCardsStack" parent="." instance=ExtResource("33_om2hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, -4)
+
+[node name="PlayerFakeCamera" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="PlayerHand" parent="PlayerFakeCamera" instance=ExtResource("29_mbqi1")]
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, -0.3, -0.5)
+nose_gap = 0.17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g8tfy")
+}
+
+[node name="Backs" type="Node" parent="."]
+
+[node name="Back" type="Sprite3D" parent="Backs"]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, -3, -7)
+texture = ExtResource("35_sqsvv")

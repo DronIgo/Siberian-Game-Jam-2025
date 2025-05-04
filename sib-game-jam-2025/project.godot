@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Sib Game Jam 2025"
-run/main_scene="uid://bvi0lsee7j2cv"
+run/main_scene="uid://q4c2prspc74e"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

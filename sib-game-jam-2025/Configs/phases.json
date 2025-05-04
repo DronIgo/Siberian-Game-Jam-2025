@@ -41,7 +41,7 @@
 		},
 		{
 			"id": "game_1",
-			"scene_name": "res://Scenes/Table/table.tscn",
+			"scene_name": "res://Scenes/Table/day_1_main.tscn",
 			"args": [],
 			"music": "res://Resources/Sounds/Versus_cat.mp3",
 			"next_phase_id": "dialog_basilio_game_1_failure",
@@ -82,7 +82,7 @@
 		},
 		{
 			"id": "game_2",
-			"scene_name": "res://Scenes/Table/table.tscn",
+			"scene_name": "res://Scenes/Table/day_2_main.tscn",
 			"args": [],
 			"music": "res://Resources/Sounds/Versus_cat.mp3",
 			"next_phase_id": "dialog_basilio_game_2_success",

@@ -52,6 +52,7 @@ func player_takes_cards() -> void:
 		var card = c as Card
 		player_score += card.score_mod
 		player_bonus += card.bonus_mod
+		EventBus.token_add_several.emit(MagicNumbers.PLAYER_ID, card.bonus_mod)
 	card_manager.stack.clear()
 
 func enemy_takes_cards() -> void:
@@ -61,6 +62,8 @@ func enemy_takes_cards() -> void:
 		var card = c as Card
 		enemy_score += card.score_mod
 		enemy_bonus += card.bonus_mod
+		EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, card.bonus_mod)
+		
 	card_manager.stack.clear()
 
 func cards_are_removed() -> void:
