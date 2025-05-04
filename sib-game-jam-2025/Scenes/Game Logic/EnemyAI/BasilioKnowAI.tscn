@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvh6r1tv6065l"]
+
+[ext_resource type="Script" uid="uid://c8wjeyhx7of48" path="res://Scripts/Game Logic/EnemyAI/basilio_basic.gd" id="1_647af"]
+
+[node name="BasilioBasicAi" type="Node"]
+script = ExtResource("1_647af")
+knows_buratino_cant_lie = 0

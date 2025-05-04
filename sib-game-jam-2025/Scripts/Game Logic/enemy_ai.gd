@@ -24,11 +24,11 @@ func _ready() -> void:
 	currentAI = BASILIO_BASIC_AI.instantiate()
 	add_child(currentAI)
 	currentAI.init(card_manager, game_manager, game_state_manager, self as EnemyAI)
-	EventBusGL.start_round.connect(start_round)
+	EventBusGL.end_round.connect(end_round)
 	EventBusAction.player_lied.connect(detect_lie)
 	EventBusAction.player_told_truth.connect(detect_truth)
 	
-func start_round() -> void:
+func end_round(res : EventBusGL.END_ROUND_RESULT) -> void:
 	checked_cards_idx.clear()
 	currentAI.generated_card_turns = false
 

@@ -35,7 +35,7 @@ func take_turn() -> void:
 			select_color()
 		else:
 			selected_color = game_state_manager.current_correct_color
-		setup_turns()
+		setup_turns(selected_color)
 		
 	var can_select_color = actions.has(EventBusAction.PLAYER_ACTION.SELECT_COLOR)
 	var can_add_cards_to_check = \
@@ -75,14 +75,29 @@ func take_turn() -> void:
 				enemy_ai.check_cards(false)
 				return
 		else:
-			select_cards(cards_for_turns.pop_front())
+			if can_lose_this_turn():
+				select_cards(cards_for_turns.pop_front())
+				cards_for_risky_turns.pop_front()
+			else:
+				var num : float
+				num = get_cards_in_stack_num()
+				if pure_risk_turns.size() > 0 && roll_risk(num / 5.0):
+					select_cards(pure_risk_turns.pop_front())
+				elif roll_risk(-1.0):
+					cards_for_turns.pop_front()
+					select_cards(cards_for_risky_turns.pop_front())
+				else:
+					select_cards(cards_for_turns.pop_front())
+					cards_for_risky_turns.pop_front()
 			enemy_ai.place_cards()
 			return
 
+func get_cards_in_stack_num() -> int:
+	return card_manager.stack.size() + card_manager.last_add.size()
 	
 func can_lose_this_turn() -> bool:
 	var lose_threshold = card_manager.deck_total_score / 2
-	if (card_manager.stack.size() + card_manager.last_add.size() +\
+	if (get_cards_in_stack_num() +\
 	game_manager.enemy_score) > lose_threshold:
 		return true
 	return false
@@ -115,39 +130,76 @@ func roll_risk(mod : float) -> bool:
 	return (risk_koef > rand + mod)
 
 var cards_for_turns : Array = []
+var cards_for_risky_turns : Array = []
+var pure_risk_turns : Array = []
 
 #sets up 2-3 turns where mainly the selected color is used
-func setup_turns() -> void:
+func setup_turns(color : Card.CARD_COLOR) -> void:
 	generated_card_turns = true
 	cards_for_turns.clear()
-	var all_used_cards = []
-	var risk_mod : float = start_risk_mod
+	cards_for_risky_turns.clear()
+	pure_risk_turns.clear()
+	var safe_cards = []
+	var risky_cards = []
 	for card in card_manager.get_enemy_hand():
-		if card.color == selected_color:
-			all_used_cards.append(card)
-		elif card.color == Card.CARD_COLOR.GREY:
-			if roll_risk(risk_mod):
-				risk_mod += risk_step
-				all_used_cards.append(card)
+		if card.color == color:
+			safe_cards.append(card)
 		else:
-			if roll_risk(risk_mod + 2.0):
-				risk_mod += risk_step
-				all_used_cards.append(card)
+			risky_cards.append(card)
+	split_into_turns(safe_cards)
+	var risk_mod : float = start_risk_mod
+	for cards in cards_for_turns:
+		var turn = []
+		turn.append_array(cards)
+		cards_for_risky_turns.append(turn)
+		if cards.size() == 3:
+			risk_mod += risk_step
+		else:
+			for i in range(0, 2 - cards.size()):
+				if roll_risk(risk_mod) && risky_cards.size() > 0:
+					cards_for_risky_turns.back().append(risky_cards.pop_back())
+					risk_mod += risk_step
+			risk_mod += risk_step
+	while risky_cards.size() > 0:
+		var amount = randi_range(1, min(risky_cards.size(), 3))
+		var turn = []
+		for i in range(0, amount):
+			turn.append(risky_cards.pop_back())
+		pure_risk_turns.append(turn)
+	print(Card.CARD_COLOR.keys()[color])
+	for c in cards_for_turns:
+		print("Safe turn")
+		for card in c:
+			(card as Card).debug_print()
+	for c in cards_for_risky_turns:
+		print("Risky turn")
+		for card in c:
+			(card as Card).debug_print()
+	for c in pure_risk_turns:
+		print("Extra risky turn")
+		for card in c:
+			(card as Card).debug_print()
+
+func split_into_turns(all_used_cards : Array) -> void:
 	var all_size = all_used_cards.size()
-	if all_size <= 2:
+	if all_size == 0:
+		return
+	if all_size == 1:
 		cards_for_turns.append(all_used_cards)
 		return
-	if all_size <= 4:
-		var end_first = randi_range(0, all_size - 2)
+	if all_size < 4:
+		var end_first = randi_range(1, all_size - 2)
 		cards_for_turns.append(all_used_cards.slice(0, end_first))
 		cards_for_turns.append(all_used_cards.slice(end_first, all_size))
 		return
-	var end_first = randi_range(0, 2)
-	var end_second = randi_range(end_first + 1, all_size - 2)
-	cards_for_turns.append(all_used_cards.slice(0, end_first))
-	cards_for_turns.append(all_used_cards.slice(end_first, end_second))
-	cards_for_turns.append(all_used_cards.slice(end_second, all_size))
-	
+	var start_prev = 0
+	var end_prev = randi_range(1, min(all_size - 3, 2))
+	while end_prev < all_size - 2:
+		cards_for_turns.append(all_used_cards.slice(start_prev, end_prev))
+		start_prev = end_prev
+		end_prev = randi_range(start_prev + 1, min(all_size - 2, start_prev + 3))
+	cards_for_turns.append(all_used_cards.slice(end_prev + 1, all_size))
+
 func select_color() -> void:
 	update_color_nums(card_manager.get_enemy_hand())
 	selected_color = Card.CARD_COLOR.RED

@@ -2,11 +2,6 @@ extends Node
 @onready var cards_hand: CardHand = $"../CardsHand"
 @onready var camera_3d: Camera3D = $"../Camera3D"
 
-func _physics_process(delta: float) -> void:
-	var card = find_raycast_player_card()
-	if card:
-		print(Card.CARD_COLOR.keys()[card.base_card.color])
-
 func find_raycast_object(mask: int) -> Object:
 	var mouse_screen_pos = get_viewport().get_mouse_position()
 	
