@@ -57,8 +57,6 @@ func _ready():
 	var phase = PhaseManager.current_phase()
 	MusicProcessor.process(phase)
 
-var b = false
-
 # tests
 func _process(delta):
 	if Input.is_key_pressed(KEY_1):
@@ -84,10 +82,7 @@ func _process(delta):
 	elif Input.is_key_pressed(KEY_9):
 		EventBus.enemy_hand_down.emit()
 	elif Input.is_key_pressed(KEY_0):
-		EventBus.enemy_hand_up.emit()
-	elif Input.is_action_just_pressed("dialog_next") and not b:
-		b = true
-		_next_game_event("dialog_cat_test")
+		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
 
 var sit : bool = true
 var card_choosing = false

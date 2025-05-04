@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfd7bnlca2ixc"
-path.s3tc="res://.godot/imported/bg_casino.png-9480bbda45c6f43bd328a8ad8a2a4a96.s3tc.ctex"
+uid="uid://cclj8l18pbxf2"
+path.s3tc="res://.godot/imported/table.png-4ae02244f9e6f3addee239ab62cb310c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Sprites/Back/bg_casino.png"
-dest_files=["res://.godot/imported/bg_casino.png-9480bbda45c6f43bd328a8ad8a2a4a96.s3tc.ctex"]
+source_file="res://Sprites/Table/table.png"
+dest_files=["res://.godot/imported/table.png-4ae02244f9e6f3addee239ab62cb310c.s3tc.ctex"]
 
 [params]
 

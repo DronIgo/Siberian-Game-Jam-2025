@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=22 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
+[ext_resource type="Texture2D" uid="uid://cclj8l18pbxf2" path="res://Sprites/Table/table.png" id="2_86ca4"]
 [ext_resource type="PackedScene" uid="uid://cikwpq7gmfthh" path="res://Scenes/Table/nose.tscn" id="3_cv3oe"]
 [ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="4_5al06"]
 [ext_resource type="Texture2D" uid="uid://cohh0hve2q4aq" path="res://Sprites/Table/Cat/cat_body.png" id="4_bpp0a"]
@@ -10,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dhed2sq074g4o" path="res://Sprites/Table/Cat/cat_arm_hand.png" id="6_86ca4"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="7_q1js6"]
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
-[ext_resource type="Texture2D" uid="uid://dan2jlrcu37ws" path="res://Sprites/Table/back.jpg" id="11_g8tfy"]
+[ext_resource type="Texture2D" uid="uid://bfd7bnlca2ixc" path="res://Sprites/Back/bg_casino.png" id="11_g8tfy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ax0b"]
 
@@ -233,18 +234,23 @@ _data = {
 [node name="Table" type="Node3D"]
 script = ExtResource("1_4w2lj")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
+[node name="Table" type="RigidBody3D" parent="."]
 mass = 0.001
 gravity_scale = 0.0
 lock_rotation = true
 freeze = true
 freeze_mode = 1
 
-[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
-transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+[node name="Sprite3D" type="Sprite3D" parent="Table"]
+transform = Transform3D(0.25, 0, 0, 0, -1.09278e-08, -0.25, 0, 0.25, -1.09278e-08, 0, -1.5, -2.5)
+texture = ExtResource("2_86ca4")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Table"]
 transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 5, 0, -2, -2.5)
 shape = SubResource("BoxShape3D_6ax0b")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -328,5 +334,5 @@ libraries = {
 [node name="Backs" type="Node" parent="."]
 
 [node name="Back" type="Sprite3D" parent="Backs"]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -7)
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, -3, -7)
 texture = ExtResource("11_g8tfy")
