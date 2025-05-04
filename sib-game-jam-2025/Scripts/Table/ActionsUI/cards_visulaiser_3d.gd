@@ -4,7 +4,7 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var ray_casting_manager: Node = $"../RayCastingManager"
 
-@onready var selected_color: Button = $"../CanvasLayer/SelectedColor"
+@onready var selected_color: TextureButton = $"../CanvasLayer/SelectedColor"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 @onready var player_hand: CardHand = $"../PlayerFakeCamera/PlayerHand"
 @onready var enemy_hand: CardHand = $"../Enemy/Shoulder/EnemyFakeCamera/EnemyHand"
@@ -103,18 +103,20 @@ func display_stack() -> void:
 
 func update_selected_color() -> void:
 	selected_color.visible = game_state_manager.color_selected
+	selected_color.scale = Vector2(0.4, 0.4)
 	if ! game_state_manager.color_selected:
 		return
 	else:
 		match game_state_manager.current_correct_color:
 			Card.CARD_COLOR.RED:
-				selected_color.theme = RED_BUTTON_THEME
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/key_button.png")
 			Card.CARD_COLOR.BLUE:
-				selected_color.theme = BLUE_BUTTON_THEME
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
 			Card.CARD_COLOR.GREEN:
-				selected_color.theme = GREEN_BUTTON_THEME
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/puppet_button.png")
 			Card.CARD_COLOR.VIOLET:
-				selected_color.theme = VIOLET_BUTTON_THEME
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/alpha_button.png")
+
 
 func deselect_card(card : Card3D):
 	var base_card = card.base_card as Card

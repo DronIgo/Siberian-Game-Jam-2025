@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://wkejd16i1b8q"]
+[gd_scene load_steps=43 format=3 uid="uid://wkejd16i1b8q"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_172km"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_1x3b8"]
@@ -14,20 +14,24 @@
 [ext_resource type="PackedScene" uid="uid://4xxewo47h8ay" path="res://Scenes/Game Logic/PlayerActions.tscn" id="13_uxepg"]
 [ext_resource type="PackedScene" uid="uid://dgtvnvliwh4aw" path="res://Scenes/Game Logic/EnemyAI.tscn" id="14_4w4ur"]
 [ext_resource type="PackedScene" uid="uid://cqsnixrd8nhfe" path="res://Scenes/Demo/InfoVisualiser.tscn" id="15_lbt75"]
+[ext_resource type="Texture2D" uid="uid://bjkphiw3gqv0o" path="res://Sprites/UI/buttons/coin_button_glow.png" id="16_2pupv"]
 [ext_resource type="Script" uid="uid://bakakojeb88us" path="res://Scripts/Demo/select_color.gd" id="16_s02ep"]
 [ext_resource type="Theme" uid="uid://yerfq4qvcb0i" path="res://Resources/Demo/red_button_theme.tres" id="17_i5h15"]
 [ext_resource type="Theme" uid="uid://bn0nt8tywlwfk" path="res://Resources/Demo/blue_button_theme.tres" id="18_1qvjy"]
 [ext_resource type="Texture2D" uid="uid://eiydrf5o73ef" path="res://Sprites/UI/buttons/white_300.png" id="18_s02ep"]
 [ext_resource type="Theme" uid="uid://dclbdlmn1jp4n" path="res://Resources/Demo/green_button_theme.tres" id="19_3tq7i"]
+[ext_resource type="Texture2D" uid="uid://dnht6gnc83q6m" path="res://Sprites/UI/buttons/puppet_button_glow.png" id="19_4k06g"]
 [ext_resource type="Texture2D" uid="uid://b8b3tyiklpn86" path="res://Sprites/UI/buttons/white_glow_300.png" id="19_i5h15"]
 [ext_resource type="Texture2D" uid="uid://cclj8l18pbxf2" path="res://Sprites/Table/table.png" id="19_kpvdj"]
 [ext_resource type="Theme" uid="uid://bjxsr2atb27ka" path="res://Resources/Demo/violet_button_theme.tres" id="20_kpvdj"]
 [ext_resource type="PackedScene" uid="uid://baqct71bfl7sn" path="res://Scenes/Table/Actions/CardsVisulaiser3D.tscn" id="21_r7qkd"]
 [ext_resource type="PackedScene" uid="uid://bgjob4hixs50t" path="res://Scenes/Raycasting/RayCastingManager.tscn" id="21_uxepg"]
 [ext_resource type="Texture2D" uid="uid://cohh0hve2q4aq" path="res://Sprites/Table/Cat/cat_body.png" id="22_4w4ur"]
+[ext_resource type="Texture2D" uid="uid://bjrbbasuflux3" path="res://Sprites/UI/buttons/alpha_button_glow.png" id="22_dpb1v"]
 [ext_resource type="PackedScene" uid="uid://dwy84f8yeffe" path="res://Scenes/Table/Actions/PlayerUIVisualiser3D.tscn" id="22_uxepg"]
 [ext_resource type="Texture2D" uid="uid://fh36gfupxy42" path="res://Sprites/Table/Cat/cat_arm_shoulder.png" id="23_lbt75"]
 [ext_resource type="Texture2D" uid="uid://dhed2sq074g4o" path="res://Sprites/Table/Cat/cat_arm_hand.png" id="24_s02ep"]
+[ext_resource type="Texture2D" uid="uid://byt78d2alagva" path="res://Sprites/UI/buttons/key_button_glow.png" id="25_xqlre"]
 [ext_resource type="Texture2D" uid="uid://bfd7bnlca2ixc" path="res://Sprites/Back/bg_casino.png" id="29_xcmtd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r4bfu"]
@@ -281,35 +285,26 @@ alignment = 1
 script = ExtResource("16_s02ep")
 
 [node name="SelectBlue" type="TextureButton" parent="CanvasLayer/SelectColor"]
-modulate = Color(0.0904541, 0, 0.656607, 1)
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("18_1qvjy")
-texture_normal = ExtResource("18_s02ep")
-texture_hover = ExtResource("19_i5h15")
+texture_normal = ExtResource("16_2pupv")
 
 [node name="SelectGreen" type="TextureButton" parent="CanvasLayer/SelectColor"]
-modulate = Color(0, 0.501961, 0, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("19_3tq7i")
-texture_normal = ExtResource("18_s02ep")
-texture_hover = ExtResource("19_i5h15")
+texture_normal = ExtResource("19_4k06g")
 
 [node name="SelectViolet" type="TextureButton" parent="CanvasLayer/SelectColor"]
-modulate = Color(0.490399, 0.000129472, 0.473088, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("20_kpvdj")
-texture_normal = ExtResource("18_s02ep")
-texture_hover = ExtResource("19_i5h15")
+texture_normal = ExtResource("22_dpb1v")
 
 [node name="SelectRed" type="TextureButton" parent="CanvasLayer/SelectColor"]
-modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("17_i5h15")
-texture_normal = ExtResource("18_s02ep")
-texture_hover = ExtResource("19_i5h15")
+texture_normal = ExtResource("25_xqlre")
 
 [node name="PlayerScore" type="Button" parent="CanvasLayer"]
 anchors_preset = 2
@@ -404,7 +399,7 @@ offset_bottom = -236.0
 grow_vertical = 0
 text = "Не верю!"
 
-[node name="SelectedColor" type="Button" parent="CanvasLayer"]
+[node name="SelectedColor" type="TextureButton" parent="CanvasLayer"]
 custom_minimum_size = Vector2(50, 50)
 offset_left = 216.0
 offset_top = 64.0
