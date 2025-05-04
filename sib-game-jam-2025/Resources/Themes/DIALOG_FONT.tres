@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cxxipod7ij704"]
 
-[ext_resource type="FontFile" uid="uid://bt614bxm24b2" path="res://Sprites/UI/fonts/GULAG_Pavljenko.otf" id="1_qw07p"]
+[ext_resource type="FontFile" uid="uid://bgxmliqu42o6p" path="res://Sprites/UI/fonts/0_BlackerSansProVariableGX.ttf" id="1_qw07p"]
 
 [resource]
 default_font = ExtResource("1_qw07p")

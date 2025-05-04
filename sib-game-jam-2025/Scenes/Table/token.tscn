@@ -1,9 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxgtuiu2e58qa"]
+[gd_scene load_steps=3 format=3 uid="uid://dxgtuiu2e58qa"]
+
+[ext_resource type="Texture2D" uid="uid://b1ch7eg0topv" path="res://Sprites/Table/coin.png" id="1_mi6ek"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2647c"]
 
 [node name="Token" type="RigidBody3D"]
 mass = 1000.0
+
+[node name="Back" type="Sprite3D" parent="."]
+transform = Transform3D(-0.027, 2.36041e-09, 0, 1.03177e-16, 1.18021e-09, -0.027, -2.36041e-09, -0.027, -1.18021e-09, 0, -0.026, 0)
+alpha_cut = 2
+texture = ExtResource("1_mi6ek")
+
+[node name="Front" type="Sprite3D" parent="."]
+transform = Transform3D(0.027, 0, 0, 0, -1.18021e-09, 0.027, 0, -0.027, -1.18021e-09, 0, 0.026, 0)
+alpha_cut = 2
+texture = ExtResource("1_mi6ek")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.025, 0, 0, 0, 0.25, 0, 0, 0)
