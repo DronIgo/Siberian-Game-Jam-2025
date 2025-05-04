@@ -5,6 +5,7 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 
+@onready var selected_color: TextureButton = $"../CanvasLayer/SelectedColor"
 @onready var select_color: HBoxContainer = $"../CanvasLayer/SelectColor"
 @onready var cards_visulaiser_3d: CardVisualiser3D = $"../CardsVisulaiser3d"
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 	call_bluff_button.pressed.connect(call_bluff)
 	place_cards_button.pressed.connect(place_cards)
 	extra_check_button.pressed.connect(add_extra_check)
+	EventBusGL.update_visualisation.connect(update_selected_color)
 	disable_all_UI()
 	
 func disable_all_UI() -> void:
@@ -98,3 +100,20 @@ func place_cards() -> void:
 	player_actions.place_cards()
 func add_extra_check() -> void:
 	player_actions.add_extra_check()
+
+
+func update_selected_color() -> void:
+	selected_color.visible = game_state_manager.color_selected
+	selected_color.scale = Vector2(0.4, 0.4)
+	if ! game_state_manager.color_selected:
+		return
+	else:
+		match game_state_manager.current_correct_color:
+			Card.CARD_COLOR.RED:
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/key_button.png")
+			Card.CARD_COLOR.BLUE:
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
+			Card.CARD_COLOR.GREEN:
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/puppet_button.png")
+			Card.CARD_COLOR.VIOLET:
+				selected_color.texture_normal = load("res://Sprites/UI/buttons/alpha_button.png")

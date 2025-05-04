@@ -30,10 +30,9 @@
 		},
 		{
 			"id": "tutorial",
-			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"scene_name": "res://Scenes/Table/tutorial.tscn",
 			"args": [
-				"res://Configs/Dialog/tutorial.json",
-				"res://Sprites/Back/bg_casino.png"
+				"res://Configs/Dialog/tutorial.json"
 			],
 			"music": "res://Resources/Sounds/Tutorial.mp3",
 			"next_phase_id": "game_1",

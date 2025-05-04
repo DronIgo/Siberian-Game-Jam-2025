@@ -54,36 +54,10 @@ func _ready():
 	EventBus.hide_cards.connect(_hide_cards)
 	EventBus.enemy_hand_up.connect(_enemy_hand_up)
 	EventBus.enemy_hand_down.connect(_enemy_hand_down)
-	var phase = PhaseManager.current_phase()
-	MusicProcessor.process(phase)
-	EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, 10)
-
-# tests
-func _process(delta):
-	#if Input.is_key_pressed(KEY_1):
-		#EventBus.show_cards.emit()
-	
-	if Input.is_key_pressed(KEY_1):
-		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
-	if Input.is_key_pressed(KEY_2):
-		EventBus.hide_cards.emit()
-		#EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
-	elif Input.is_key_pressed(KEY_3):
-		EventBus.hand_select_card.emit(MagicNumbers.PLAYER_ID, 0)
-	elif Input.is_key_pressed(KEY_4):
-		EventBus.hand_unselect_card.emit(MagicNumbers.PLAYER_ID, 0)
-	#elif Input.is_key_pressed(KEY_5):
-	#	EventBus.line_add_card.emit(Card3D.Type.values().pick_random())
-	elif Input.is_key_pressed(KEY_6):
-		EventBus.line_remove_card.emit(0)
-	elif Input.is_key_pressed(KEY_7):
-		EventBus.line_flip_card.emit(0)
-	elif Input.is_key_pressed(KEY_8):
-		_next_game_phase()
-	elif Input.is_key_pressed(KEY_9):
-		EventBus.enemy_hand_down.emit()
-	elif Input.is_key_pressed(KEY_0):
-		EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, 10)
+	#var phase = PhaseManager.current_phase()
+	#MusicProcessor.process(phase)
+	EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, 5)
+	EventBus.token_add_several.emit(MagicNumbers.PLAYER_ID, 5)
 
 var sit : bool = true
 var card_choosing = false

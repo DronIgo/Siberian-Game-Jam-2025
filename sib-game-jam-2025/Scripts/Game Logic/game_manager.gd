@@ -15,8 +15,8 @@ const EFFECT_NOSE_GROW = preload("res://Scenes/Effects/EffectNoseGrow.tscn")
 
 var player_score : int = 0
 var enemy_score : int = 0
-var player_bonus : int = 0
-var enemy_bonus : int = 0
+var player_bonus : int = 5
+var enemy_bonus : int = 5
 
 var inited : bool = false
 
