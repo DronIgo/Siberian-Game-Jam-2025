@@ -9,6 +9,7 @@ enum PLAYER {
 	AI
 }
 const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
+const EFFECT_DIALOG = preload("res://Scenes/Effects/EffectDialog.tscn")
 
 var player_avialable_actions : Array
 var current_player : PLAYER = PLAYER.MAN
@@ -67,7 +68,10 @@ func call_basilio_signals():
 			EventBusAction.basilio_miscalled.emit()
 			if checked_all:
 				EventBusAction.basilio_miscalled_and_learns.emit()
-		
+
+var dialog_id : String
+func check_dialog() -> bool:
+	return false
 
 func end_round() -> void:
 	if current_player == PLAYER.AI:
@@ -76,6 +80,12 @@ func end_round() -> void:
 	add_child(timer_effect)
 	timer_effect.start(2.0)
 	await EventBusAction.effect_end
+	if check_dialog():
+		var dialog_effect = EFFECT_DIALOG.instantiate()
+		add_child(dialog_effect)
+		dialog_effect.start(dialog_id)
+		await EventBusAction.effect_end
+		
 	var result = get_round_result()
 	print("ROUND ENDED")
 	EventBusGL.end_round.emit(result)

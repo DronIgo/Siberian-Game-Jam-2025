@@ -86,6 +86,7 @@ func pick_random_check_card() -> void:
 		game_state_manager.current_correct_color)
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
 		return 
+
 	var rand_card : Card3D
 	var num_cards = checkable_cards_line._current_cards.size()
 	var rand_idx = randi_range(0, num_cards - 1)

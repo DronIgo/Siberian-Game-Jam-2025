@@ -8,7 +8,7 @@ extends Node3D
 @export var enemy_hand_down_anim_name = "hand_down"
 
 @onready var _player_hand = $PlayerFakeCamera/PlayerHand
-@onready var _enemy_hand = $Enemy/Shoulder/EnemyFakeCamera/EnemyHand
+@onready var _enemy_hand: CardHand = $Enemy/Shoulder/Joint/Hand/EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack

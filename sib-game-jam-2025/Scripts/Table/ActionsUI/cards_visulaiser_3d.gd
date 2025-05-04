@@ -97,7 +97,8 @@ func display_last_add() -> void:
 
 func display_stack() -> void:
 	var stack = card_manager.get_current_stack()
-	while non_checkable_cards_stack.get_children().size() < stack.size():
+	var num = stack.size() - non_checkable_cards_stack.get_children().size()
+	for i in num:
 		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
 
 func update_selected_color() -> void:
