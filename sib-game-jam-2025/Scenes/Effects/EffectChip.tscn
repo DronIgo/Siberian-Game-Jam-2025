@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm3a0iybbtbvm"]
+
+[ext_resource type="Script" uid="uid://d3rsvcrg7apyh" path="res://Scripts/Effects/effect_audio.gd" id="1_q8sik"]
+[ext_resource type="AudioStream" uid="uid://cix30yrwkqdrp" path="res://Resources/Sounds/Poker_chip.mp3" id="2_q8sik"]
+
+[node name="EffectChip" type="Node"]
+script = ExtResource("1_q8sik")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_q8sik")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0

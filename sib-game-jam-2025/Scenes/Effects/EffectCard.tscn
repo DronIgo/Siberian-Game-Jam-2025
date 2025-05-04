@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://biy32fiol4hx3"]
+
+[ext_resource type="Script" uid="uid://d3rsvcrg7apyh" path="res://Scripts/Effects/effect_audio.gd" id="1_gm8yp"]
+[ext_resource type="AudioStream" uid="uid://dq1o1enahso5e" path="res://Resources/Sounds/Card_played.mp3" id="2_gm8yp"]
+
+[node name="EffectCard" type="Node"]
+script = ExtResource("1_gm8yp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gm8yp")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
