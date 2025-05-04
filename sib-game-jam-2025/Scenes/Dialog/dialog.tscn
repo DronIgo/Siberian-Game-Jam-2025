@@ -6,13 +6,30 @@
 [node name="Dialog" type="CanvasLayer"]
 script = ExtResource("1_agsmp")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BackBase" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Sprite2D" parent="BackBase"]
+scale = Vector2(0.5, 0.5)
+
+[node name="TransparentBack" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 1, 1, 0.501961)
+color = Color(0, 0, 0, 0.25098)
 
 [node name="ReplicasBox" parent="." instance=ExtResource("1_o85vb")]
 anchors_preset = 7

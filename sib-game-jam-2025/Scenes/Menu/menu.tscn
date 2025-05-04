@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://q4c2prspc74e"]
 
 [ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
-[ext_resource type="Texture2D" uid="uid://boybnrq7pbou3" path="res://Sprites/Table/cat_example.png" id="1_cqskg"]
+[ext_resource type="Texture2D" uid="uid://uyjavjreteo5" path="res://Sprites/Table/Cat/cat_example.png" id="2_3ymnh"]
 
 [sub_resource type="Animation" id="Animation_3qr6s"]
 length = 0.001
@@ -128,7 +128,7 @@ text = "выйти"
 
 [node name="Sprite2D" type="Sprite2D" parent="Rect"]
 position = Vector2(1800, 1300)
-texture = ExtResource("1_cqskg")
+texture = ExtResource("2_3ymnh")
 
 [node name="AuthorsBase" type="Control" parent="Rect"]
 layout_mode = 1

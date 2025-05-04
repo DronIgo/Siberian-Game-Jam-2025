@@ -3,6 +3,7 @@ class_name Dialog
 extends CanvasLayer
 
 @onready var _replicas_box = $ReplicasBox
+@onready var _back: Sprite2D = $BackBase/Back
 
 var _current_replica_dictionaries: Array
 var _next_replica_index = 0
@@ -10,14 +11,17 @@ var _next_replica_index = 0
 func _ready():
 	EventBus.dialog_start.connect(start)
 	var current_phase = PhaseManager.current()
-	start(current_phase.args[0])
+	start(current_phase)
 
 func _process(delta):
 	if Input.is_action_just_pressed("dialog_next"):
 		next()
 
-func start(config_path: String):
-	var config: Dictionary = StorageManager.read_from(config_path)
+func start(phase: Phase):
+	if phase.args.size() > 1:
+		var bg = load(phase.args[1])
+		_back.texture = bg
+	var config: Dictionary = StorageManager.read_from(phase.args[0])
 	_current_replica_dictionaries = config["data"]
 	next()
 

@@ -10,7 +10,10 @@
 		{
 			"id": "dialog_papa_1",
 			"scene_name": "res://Scenes/Dialog/dialog.tscn",
-			"args": ["res://Configs/Dialog/test.json"],
+			"args": [
+				"res://Configs/Dialog/papa_1.json",
+				"res://Sprites/Back/bg_carlo.png"
+			],
 			"next_phase_id": "table_1",
 			"is_replacement": true
 		},
@@ -24,7 +27,9 @@
 		{
 			"id": "dialog_cat_test",
 			"scene_name": "res://Scenes/Dialog/dialog.tscn",
-			"args": ["res://Configs/Dialog/testtest.json"],
+			"args": [
+				"res://Configs/Dialog/testtest.json"
+			],
 			"next_phase_id": "table_2",
 			"is_replacement": false
 		},

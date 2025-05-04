@@ -30,7 +30,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 50
+autowrap_mode = 2
 
 [node name="SpeakerLeft" parent="." instance=ExtResource("2_5hsq4")]
 layout_mode = 1
