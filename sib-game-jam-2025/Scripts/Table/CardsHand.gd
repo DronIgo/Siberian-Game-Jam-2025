@@ -31,7 +31,6 @@ func add_card(base_card: Card):
 	add_child(card)
 	_cards.append(card)
 	_replace_cards()
-	print("[CARDS HAND] CARD ADDED")
 
 func remove_card(index: int):
 	if _cards.is_empty():
@@ -40,7 +39,6 @@ func remove_card(index: int):
 	card.queue_free()
 	_cards.erase(card)
 	_replace_cards()
-	print("[CARDS HAND] CARD REMOVED")
 
 func select_card(index: int):
 	var card = _cards[index]

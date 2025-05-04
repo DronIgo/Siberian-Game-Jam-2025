@@ -2,11 +2,13 @@ class_name Dialog
 
 extends CanvasLayer
 
-@onready var _replicas_box = $ReplicasBox
+@export var dialog_next_action_name = "dialog_next"
+
+@onready var _replicas_box: ReplicasBox = $ReplicasBox
 @onready var _back: Sprite2D = $BackBase/Back
 
 var _current_replica_dictionaries: Array
-var _next_replica_index = 0
+var _next_replica_index: int = 0
 
 func _ready():
 	EventBus.dialog_start.connect(start)
@@ -16,7 +18,7 @@ func _ready():
 		start(PhaseManager.current_phase())
 
 func _process(delta):
-	if Input.is_action_just_pressed("dialog_next"):
+	if Input.is_action_just_pressed(dialog_next_action_name):
 		next()
 
 func start(phase: Phase):

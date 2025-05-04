@@ -3,12 +3,12 @@ class_name TokenSpawner
 extends Node3D
 
 @export var token_scene: PackedScene
-@export var max_tokens_in_stack = 5
-@export var max_stacks_in_row = 3
-@export var stacks_offset = 0.33
+@export var max_tokens_in_stack: float = 5
+@export var max_stacks_in_row: float = 3
+@export var stacks_offset: float = 0.33
 @export var adding_gap_seconds: float = 0.1
 
-@onready var _timer = $Timer
+@onready var _timer: Timer = $Timer
 
 var _current_tokens: Array = []
 var _tokens_to_add: Array = []
@@ -31,7 +31,6 @@ func remove_token():
 	var token = _current_tokens[_current_tokens.size() - 1]
 	token.queue_free()
 	_current_tokens.erase(token)
-	print("[TOKENS SPAWNER] TOKEN REMOVED")
 
 func _on_timer_timeout():
 	_check_tokens_to_add()

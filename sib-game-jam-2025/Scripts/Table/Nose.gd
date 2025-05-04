@@ -2,7 +2,7 @@ class_name Nose
 
 extends Node3D
 
-@export var scale_step = 0.01
+@export var scale_step: float = 0.01
 
 @onready var sprite: Sprite3D = $Sprite3D
 

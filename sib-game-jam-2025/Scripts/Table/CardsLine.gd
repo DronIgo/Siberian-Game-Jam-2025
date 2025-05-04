@@ -17,7 +17,6 @@ func add_card(base_card: Card):
 	card.disable_physics()
 	add_child(card)
 	_current_cards.append(card)
-	print("[CARDS LINE] CARD ADDED")
 
 func remove_card(index: int):
 	if _current_cards.is_empty():
@@ -25,7 +24,6 @@ func remove_card(index: int):
 	var card = _current_cards[index]
 	card.queue_free()
 	_current_cards.erase(card)
-	print("[CARDS LINE] CARD REMOVED")
 
 func flip_card(index: int):
 	var card = _current_cards[index]

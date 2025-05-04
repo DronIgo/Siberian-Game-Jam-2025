@@ -19,7 +19,7 @@ extends Node3D
 @onready var _checkable_cards_line = $CheckableCardsLine
 @onready var _nose = $Camera3D/Nose
 @onready var _anim_player = $AnimationPlayer
-@onready var _animation_player_cards: AnimationPlayer = $AnimationPlayerCards
+@onready var _animation_player_cards = $AnimationPlayerCards
 @onready var _enemy_hand_anim_player = $Enemy/Shoulder/AnimationPlayer
 
 var _cards_hands: Array = []
@@ -186,43 +186,13 @@ func _remove_token(player_id: int):
 	_token_spawners[player_id].remove_token()
 
 func _add_card_to_stack(stack_type: CardsStack.Type):
-	match stack_type:
-		CardsStack.Type.NEW:
-			_new_cards_stack.add_card()
-		CardsStack.Type.DROPPED:
-			_dropped_cards_stack.add_card()
-		CardsStack.Type.NON_CHECKABLE:
-			_non_checkable_cards_stack.add_card()
-		CardsStack.Type.PLAYER_SCORE:
-			_player_score_cards_stack.add_card()
-		CardsStack.Type.ENEMY_SCORE:
-			_enemy_score_cards_stack.add_card()
+	_get_stack(stack_type).add_card()
 
 func _add_several_cards_to_stack(stack_type: CardsStack.Type, num: int):
-	match stack_type:
-		CardsStack.Type.NEW:
-			_new_cards_stack.add_cards(num)
-		CardsStack.Type.DROPPED:
-			_dropped_cards_stack.add_cards(num)
-		CardsStack.Type.NON_CHECKABLE:
-			_non_checkable_cards_stack.add_cards(num)
-		CardsStack.Type.PLAYER_SCORE:
-			_player_score_cards_stack.add_cards(num)
-		CardsStack.Type.ENEMY_SCORE:
-			_enemy_score_cards_stack.add_cards(num)
+	_get_stack(stack_type).add_cards(num)
 
 func _remove_card_from_stack(stack_type: CardsStack.Type):
-	match stack_type:
-		CardsStack.Type.NEW:
-			_new_cards_stack.remove_card()
-		CardsStack.Type.DROPPED:
-			_dropped_cards_stack.remove_card()
-		CardsStack.Type.NON_CHECKABLE:
-			_non_checkable_cards_stack.remove_card()
-		CardsStack.Type.PLAYER_SCORE:
-			_player_score_cards_stack.remove_card()
-		CardsStack.Type.ENEMY_SCORE:
-			_enemy_score_cards_stack.remove_card()
+	_get_stack(stack_type).remove_card()
 
 func _enemy_hand_up():
 	if not _enemy_hand_raised:
@@ -233,3 +203,17 @@ func _enemy_hand_down():
 	if _enemy_hand_raised:
 		_enemy_hand_raised = false
 		_enemy_hand_anim_player.play(enemy_hand_down_anim_name)
+
+func _get_stack(type: CardsStack.Type) -> CardsStack:
+	match type:
+		CardsStack.Type.NEW:
+			return _new_cards_stack
+		CardsStack.Type.DROPPED:
+			return _dropped_cards_stack
+		CardsStack.Type.NON_CHECKABLE:
+			return _non_checkable_cards_stack
+		CardsStack.Type.PLAYER_SCORE:
+			return _player_score_cards_stack
+		CardsStack.Type.ENEMY_SCORE:
+			return _enemy_score_cards_stack
+	return null

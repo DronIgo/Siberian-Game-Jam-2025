@@ -7,7 +7,7 @@ enum Type { NEW, DROPPED, NON_CHECKABLE, PLAYER_SCORE, ENEMY_SCORE }
 @export var card_scene: PackedScene
 @export var adding_gap_seconds: float = 0.1
 
-@onready var _timer = $Timer
+@onready var _timer: Timer = $Timer
 
 var _current_cards: Array = []
 var _cards_to_add: Array = []
@@ -25,7 +25,6 @@ func add_cards(num: int):
 
 func add_card():
 	add_cards(1)
-	print("[CARDS STACK] CARD ADDED")
 
 func remove_card():
 	if _current_cards.is_empty() and _cards_to_add.is_empty():
@@ -35,7 +34,6 @@ func remove_card():
 	var card = target_array[target_array.size() - 1]
 	card.queue_free()
 	target_array.erase(card)
-	print("[CARDS STACK] CARD REMOVED")
 
 func _on_timer_timeout():
 	_check_cards_to_add()
