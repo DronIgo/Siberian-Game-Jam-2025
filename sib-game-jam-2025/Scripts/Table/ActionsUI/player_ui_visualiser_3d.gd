@@ -13,6 +13,8 @@ extends Node
 @onready var call_bluff_button: TextureButton = $"../CanvasLayer/CallBluffButton"
 @onready var extra_check_button: TextureButton = $"../CanvasLayer/ExtraCheckButton"
 
+var can_have_place_button = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventBusAction.progress_game.connect(update_avialable_actions_UI)
@@ -39,7 +41,7 @@ func enable_select_cards(enable : bool) -> void:
 	if enable:
 		EventBus.sit_back_at_table.emit()
 func enable_place_cards(enable : bool) -> void:
-	place_cards_button.visible = enable
+	can_have_place_button = enable
 func enable_declare_trust(enable : bool) -> void:
 	declare_trust_button.visible = enable
 func enable_call_bluff(enable : bool) -> void:
@@ -63,6 +65,7 @@ func update_avialable_actions_UI() -> void:
 		match action:
 			EventBusAction.PLAYER_ACTION.ADD_CARDS:
 				enable_select_cards(true)
+				enable_place_cards(true)
 			EventBusAction.PLAYER_ACTION.SELECT_COLOR:
 				enable_color_select(true)
 			EventBusAction.PLAYER_ACTION.DECLARE_TRUST:
@@ -75,7 +78,10 @@ func update_avialable_actions_UI() -> void:
 				enable_pick_card_check()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if card_manager.selected_cards.size() > 0 && can_have_place_button:
+		place_cards_button.visible = true
+	else:
+		place_cards_button.visible = false
 
 func call_bluff() -> void:
 	player_actions.call_bluff()
