@@ -163,6 +163,15 @@
 			],
 			"next_phase_id": "",
 			"is_replacement": false
+		},
+		{
+			"id": "game_2_failure",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"args": [
+				"res://Configs/Dialog/game_2_failure.json"
+			],
+			"next_phase_id": "",
+			"is_replacement": false
 		}
 	],
 	"init_scene_id": "menu"
