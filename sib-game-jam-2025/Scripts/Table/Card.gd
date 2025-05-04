@@ -6,12 +6,13 @@ enum Type { KEY, COIN, PUPPET, ALPHABET, SKULL }
 
 enum Value {
 	AVIAN = 1,
-	BUG = 2,
-	DOG = 3,
-	FROG = 4,
-	LEECHE = 5,
-	TURTLE = 6,
-	TBD = 7,
+	LEECHE = 2,
+	SIX = 3,
+	SEVEN = 4,
+	EIGHT = 5,
+	NINE = 6,
+	TEN = 7,
+	TBD = 8,
 	SCULL = 9
 }
 
