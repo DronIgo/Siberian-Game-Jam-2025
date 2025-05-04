@@ -55,6 +55,8 @@ func _ready():
 	EventBus.enemy_hand_up.connect(_enemy_hand_up)
 	EventBus.enemy_hand_down.connect(_enemy_hand_down)
 
+var b = false
+
 # tests
 func _process(delta):
 	if Input.is_key_pressed(KEY_1):
@@ -81,6 +83,9 @@ func _process(delta):
 		EventBus.enemy_hand_down.emit()
 	elif Input.is_key_pressed(KEY_0):
 		EventBus.enemy_hand_up.emit()
+	elif Input.is_action_just_pressed("dialog_next") and not b:
+		b = true
+		_next_game_event("dialog_cat_test")
 
 var sit : bool = true
 var card_choosing = false
