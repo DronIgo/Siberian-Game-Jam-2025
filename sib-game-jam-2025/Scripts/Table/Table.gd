@@ -8,7 +8,7 @@ extends Node3D
 @export var enemy_hand_down_anim_name = "hand_down"
 
 @onready var _player_hand = $PlayerFakeCamera/PlayerHand
-@onready var _enemy_hand: CardHand = $Enemy/Shoulder/Joint/Hand/EnemyFakeCamera/EnemyHand
+@onready var _enemy_hand: CardHand = $Enemy/Shoulder/EnemyFakeCamera/EnemyHand
 @onready var _player_token_spawner = $PlayerTokenSpawner
 @onready var _enemy_token_spawner = $EnemyTokenSpawner
 @onready var _new_cards_stack = $NewCardsStack
@@ -59,11 +59,11 @@ func _ready():
 
 # tests
 func _process(delta):
-	if Input.is_key_pressed(KEY_1):
-		EventBus.show_cards.emit()
-	
 	#if Input.is_key_pressed(KEY_1):
-		#EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
+		#EventBus.show_cards.emit()
+	
+	if Input.is_key_pressed(KEY_1):
+		EventBus.hand_add_card.emit(MagicNumbers.PLAYER_ID, _new_card())
 	if Input.is_key_pressed(KEY_2):
 		EventBus.hide_cards.emit()
 		#EventBus.hand_remove_card.emit(MagicNumbers.PLAYER_ID, 0)
