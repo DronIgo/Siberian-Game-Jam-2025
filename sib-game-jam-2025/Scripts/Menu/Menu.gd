@@ -10,6 +10,8 @@ var _authors_shown = false
 
 func _ready():
 	PhaseManager.init()
+	var phase = PhaseManager.current_phase()
+	MusicProcessor.process(phase)
 
 func _on_play_button_pressed():
 	var phase: Phase = PhaseManager.try_next_phase()
