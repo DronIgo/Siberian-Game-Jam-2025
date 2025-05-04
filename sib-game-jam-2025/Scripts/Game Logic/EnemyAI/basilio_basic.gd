@@ -223,14 +223,14 @@ func split_into_turns(all_used_cards : Array) -> void:
 		cards_for_turns.append(all_used_cards.slice(start_prev, end_prev))
 		start_prev = end_prev
 		end_prev = randi_range(start_prev + 1, min(all_size - 2, start_prev + 3))
-	cards_for_turns.append(all_used_cards.slice(end_prev + 1, all_size))
+	cards_for_turns.append(all_used_cards.slice(end_prev, all_size))
 
 func calc_trust() -> bool:
 	var trust_level : int = 10
 	if game_state_manager.current_player_round == GameStateManager.PLAYER.MAN:
 		trust_level += 5
 	trust_level -= get_cards_in_stack_num()
-	trust_level -= randi_range(0, 4)
+	trust_level -= randi_range(0, 3)
 	return trust_level > trust_treshold
 
 func select_color() -> void:

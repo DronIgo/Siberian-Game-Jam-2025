@@ -10,6 +10,7 @@ const BASILIO_BASIC_AI = preload("res://Scenes/Game Logic/EnemyAI/BasilioBasicAI
 @onready var game_manager: GameManager = $"../GameManager"
 
 const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
+const EFFECT_VOICE = preload("res://Scenes/Effects/EffectVoice.tscn")
 
 @export_category("Displayed params")
 @export var think_time : float = 3.0
@@ -65,16 +66,28 @@ func send_color(color : Card.CARD_COLOR) -> void:
 
 func place_cards() -> void:
 	card_manager.place_cards(false)
+	var voice = EFFECT_VOICE.instantiate()
+	add_child(voice)
+	voice.start("Add")
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
 
 func check_cards(trust : bool) -> void:
 	EventBus.bend_over_table.emit()
 	if trust:
+		var voice = EFFECT_VOICE.instantiate()
+		add_child(voice)
+		voice.start("Trust")
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
 	else:
+		var voice = EFFECT_VOICE.instantiate()
+		add_child(voice)
+		voice.start("Call_Bluff")
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
 
 func add_extra_check() -> void:
+	var voice = EFFECT_VOICE.instantiate()
+	add_child(voice)
+	voice.start("Buy")
 	game_manager.enemy_bonus -= game_manager.extra_check_cost
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
 

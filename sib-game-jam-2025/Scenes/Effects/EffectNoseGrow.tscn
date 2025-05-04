@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b87okitd8dctr"]
 
 [ext_resource type="AudioStream" uid="uid://bsk3kddvuiw2y" path="res://Resources/Sounds/Nose_Grow_SFX.mp3" id="1_3kfue"]
-[ext_resource type="Script" uid="uid://d3rsvcrg7apyh" path="res://Scripts/Effects/effect_nose_grow.gd" id="1_ibyso"]
+[ext_resource type="Script" uid="uid://d3rsvcrg7apyh" path="res://Scripts/Effects/effect_audio.gd" id="1_ibyso"]
 
 [node name="EffectNoseGrow" type="Node"]
 script = ExtResource("1_ibyso")

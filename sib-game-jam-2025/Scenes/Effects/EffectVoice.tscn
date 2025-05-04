@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm17yjb46wpud"]
+
+[ext_resource type="Script" uid="uid://7kb65j4pgvpo" path="res://Scripts/Effects/effect_voice.gd" id="1_nx7u3"]
+[ext_resource type="AudioStream" uid="uid://bsk3kddvuiw2y" path="res://Resources/Sounds/Nose_Grow_SFX.mp3" id="2_psxrf"]
+
+[node name="EffectVoice" type="Node"]
+script = ExtResource("1_nx7u3")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_psxrf")
+autoplay = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0

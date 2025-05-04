@@ -4,10 +4,3 @@
 
 [node name="BasilioBasicAi" type="Node"]
 script = ExtResource("1_647af")
-knows_buratino_cant_lie = null
-big_enough_stack = null
-risk_koef = null
-start_risk_mod = null
-risk_step = null
-trust_treshold = null
-trust_step = null
