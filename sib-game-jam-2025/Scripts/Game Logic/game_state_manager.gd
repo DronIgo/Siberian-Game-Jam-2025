@@ -17,6 +17,7 @@ var current_correct_color : Card.CARD_COLOR = Card.CARD_COLOR.GREY
 var color_selected : bool = false
 
 var card_checks_left : int = 1
+var card_checks_done : int = 0
 var check_trust : bool = false
 var check_succesed : bool = false
 
@@ -56,7 +57,21 @@ func get_round_result() -> EventBusGL.END_ROUND_RESULT:
 		else:
 			return EventBusGL.END_ROUND_RESULT.ENEMY_TAKES_CARDS
 
+func call_basilio_signals():
+	var checked_all : bool
+	checked_all = card_manager.last_add.size() == card_checks_done
+	if !check_succesed:
+		if check_trust:
+			EventBusAction.basilio_mistrusted.emit()
+		else: 
+			EventBusAction.basilio_miscalled.emit()
+			if checked_all:
+				EventBusAction.basilio_miscalled_and_learns.emit()
+		
+
 func end_round() -> void:
+	if current_player == PLAYER.AI:
+		call_basilio_signals()
 	var timer_effect = EFFECT_TIMER.instantiate()
 	add_child(timer_effect)
 	timer_effect.start(2.0)
@@ -71,6 +86,7 @@ func end_round() -> void:
 func start_round() -> void:
 	EventBus.sit_back_at_table.emit()
 	current_correct_color = Card.CARD_COLOR.GREY
+	card_checks_done = 0
 	color_selected = false
 	check_succesed = false
 	if card_manager.hand_player.size() == 0 && \
@@ -159,6 +175,7 @@ func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
 		EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK:
 			card_checks_left -= 1
+			card_checks_done += 1
 			var truth = data as bool
 			update_check_success(truth)
 			if check_succesed:

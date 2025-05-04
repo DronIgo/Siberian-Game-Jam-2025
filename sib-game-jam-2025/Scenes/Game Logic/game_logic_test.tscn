@@ -242,3 +242,4 @@ text = "Купить проверку"
 [node name="InfoVisualiser" parent="." instance=ExtResource("12_kpde6")]
 
 [node name="PlayerActions" parent="." instance=ExtResource("13_vpwev")]
+can_control_lie = true

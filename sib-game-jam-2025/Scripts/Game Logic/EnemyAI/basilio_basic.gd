@@ -12,6 +12,15 @@ var player_lied_last_turn : bool = false
 @export_range(1, 5, 1) var risk_koef : float = 2.0
 @export var start_risk_mod : float = -1.5
 @export var risk_step : float = 1.0
+@export var trust_treshold : int = 10
+@export var trust_step : int = 2
+
+func incr_trust():
+	trust_treshold += trust_step
+func decr_trust():
+	trust_treshold -= trust_step
+func learn():
+	knows_buratino_cant_lie = false
 
 var selected_color : Card.CARD_COLOR = Card.CARD_COLOR.RED
 var num_colors : Dictionary
@@ -58,22 +67,38 @@ func take_turn() -> void:
 	
 	#runned out of cards, need to check opponent
 	if can_check && !can_add:
-		if !player_lied_last_turn:
-			enemy_ai.check_cards(true)
-			return
-		else:
-			enemy_ai.check_cards(false)
-			return
-
-	if can_add:
-		#should check
-		if cards_for_turns.is_empty():
+		if knows_buratino_cant_lie:
 			if !player_lied_last_turn:
 				enemy_ai.check_cards(true)
 				return
 			else:
 				enemy_ai.check_cards(false)
 				return
+		else:
+			if calc_trust():
+				enemy_ai.check_cards(true)
+				return
+			else:
+				enemy_ai.check_cards(false)
+				return
+			
+	if can_add:
+		#should check
+		if cards_for_turns.is_empty():
+			if knows_buratino_cant_lie:
+				if !player_lied_last_turn:
+					enemy_ai.check_cards(true)
+					return
+				else:
+					enemy_ai.check_cards(false)
+					return
+			else:
+				if calc_trust():
+					enemy_ai.check_cards(true)
+					return
+				else:
+					enemy_ai.check_cards(false)
+					return
 		else:
 			if can_lose_this_turn():
 				select_cards(cards_for_turns.pop_front())
@@ -199,6 +224,14 @@ func split_into_turns(all_used_cards : Array) -> void:
 		start_prev = end_prev
 		end_prev = randi_range(start_prev + 1, min(all_size - 2, start_prev + 3))
 	cards_for_turns.append(all_used_cards.slice(end_prev + 1, all_size))
+
+func calc_trust() -> bool:
+	var trust_level : int = 10
+	if game_state_manager.current_player_round == GameStateManager.PLAYER.MAN:
+		trust_level += 5
+	trust_level -= get_cards_in_stack_num()
+	trust_level -= randi_range(0, 4)
+	return trust_level > trust_treshold
 
 func select_color() -> void:
 	update_color_nums(card_manager.get_enemy_hand())

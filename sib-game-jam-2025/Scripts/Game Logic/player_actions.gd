@@ -5,10 +5,21 @@ extends Node
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_manager: GameManager = $"../GameManager"
 
+@export var can_control_lie : bool = false
+var can_lie_this_turn : bool = false
 
+func _ready() -> void:
+	EventBusAction.progress_game.connect(update_can_lie_this_turn)
+	
+func update_can_lie_this_turn():
+	can_lie_this_turn = false
+	if game_state_manager.current_player == GameStateManager.PLAYER.AI:
+		if game_state_manager.player_avialable_actions.has(\
+		EventBusAction.PLAYER_ACTION.CALL_BLUFF):
+			can_lie_this_turn = true
 func select_color(color : Card.CARD_COLOR) -> void:
 	var lied = !CardUtils.check_truth(card_manager.last_add, color)
-	if lied:
+	if lied && !can_control_lie:
 		EventBusAction.player_lied.emit()
 	else:
 		EventBusAction.player_told_truth.emit()
@@ -37,9 +48,16 @@ func place_cards() -> void:
 	if game_state_manager.color_selected:
 		var lied = !CardUtils.check_truth(card_manager.last_add, \
 		game_state_manager.current_correct_color)
-		if lied:
+		if lied && !can_control_lie:
 			EventBusAction.player_lied.emit()
 		else:
 			EventBusAction.player_told_truth.emit()
 	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
-			
+	
+func _process(delta: float) -> void:
+	if !can_control_lie:
+		return
+	if can_lie_this_turn:
+		if Input.is_key_pressed(KEY_SPACE):
+			can_lie_this_turn = false
+			EventBusAction.player_lied.emit()

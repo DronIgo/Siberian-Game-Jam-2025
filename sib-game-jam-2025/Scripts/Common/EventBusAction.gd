@@ -16,3 +16,6 @@ signal effect_end
 
 signal player_lied
 signal player_told_truth
+signal basilio_mistrusted
+signal basilio_miscalled
+signal basilio_miscalled_and_learns

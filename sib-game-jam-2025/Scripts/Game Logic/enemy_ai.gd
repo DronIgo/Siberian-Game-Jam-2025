@@ -28,10 +28,24 @@ func _ready() -> void:
 	EventBusAction.player_lied.connect(detect_lie)
 	EventBusAction.player_told_truth.connect(detect_truth)
 	
+	EventBusAction.basilio_miscalled.connect(miscalled)
+	EventBusAction.basilio_miscalled.connect(mistrusted)
+	EventBusAction.basilio_miscalled.connect(learned)
+	
 func end_round(res : EventBusGL.END_ROUND_RESULT) -> void:
 	checked_cards_idx.clear()
 	currentAI.generated_card_turns = false
 
+func miscalled() -> void:
+	currentAI.incr_trust()
+	print("miscalled")
+func mistrusted() -> void:
+	currentAI.decr_trust()
+	currentAI.learn()
+	print("mistrust")
+func learned() -> void:
+	print("learn")
+	currentAI.learn()
 func detect_lie() -> void:
 	currentAI.player_lied_last_turn = true
 func detect_truth() -> void:
@@ -71,7 +85,7 @@ func pick_random_check_card() -> void:
 		var truth = CardUtils.check_random(card_manager.get_last_addition(), \
 		game_state_manager.current_correct_color)
 		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
-	
+		return 
 	var rand_card : Card3D
 	var num_cards = checkable_cards_line._current_cards.size()
 	var rand_idx = randi_range(0, num_cards - 1)
