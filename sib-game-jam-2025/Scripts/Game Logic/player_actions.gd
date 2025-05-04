@@ -4,6 +4,7 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_manager: GameManager = $"../GameManager"
+@onready var press_space_hint: Label = $"../CanvasLayer/PressSpaceHint"
 
 @export var can_control_lie : bool = false
 var can_lie_this_turn : bool = false
@@ -56,8 +57,12 @@ func place_cards() -> void:
 	
 func _process(delta: float) -> void:
 	if !can_control_lie:
+		press_space_hint.visible = false
 		return
 	if can_lie_this_turn:
+		press_space_hint.visible = true
 		if Input.is_key_pressed(KEY_SPACE):
 			can_lie_this_turn = false
 			EventBusAction.player_lied.emit()
+	else:
+		press_space_hint.visible = false

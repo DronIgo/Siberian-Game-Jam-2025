@@ -478,6 +478,24 @@ text = "ВЫЛОЖИТЬ КАРТЫ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PressSpaceHint" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -206.5
+offset_right = 228.0
+offset_bottom = -183.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
+theme_override_font_sizes/font_size = 40
+text = "НАЖМИ ПРОБЕЛ ЧТОБЫ УВЕЛИЧИТЬ НОС"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="RayCastingManager" parent="." instance=ExtResource("21_uxepg")]
 
 [node name="CardsVisulaiser3d" parent="." instance=ExtResource("21_r7qkd")]
