@@ -26,6 +26,8 @@ func _ready() -> void:
 	EventBusAction.send_action.connect(recieve_action)
 	EventBusGL.start_round.connect(card_manager.fill_hands)
 	EventBusGL.start_round.connect(start_round)
+	#TODO: delete
+	PhaseManager.init()
 	pass # Replace with function body.
 
 func switch_player_round() -> void:
@@ -71,7 +73,8 @@ func call_basilio_signals():
 
 var dialog_id : String
 func check_dialog() -> bool:
-	return false
+	dialog_id = "dialog_correct_bluff_1"
+	return true
 
 func end_round() -> void:
 	if current_player == PLAYER.AI:

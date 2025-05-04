@@ -1,0 +1,10 @@
+{
+	"data": [
+		{
+			"text": "Я же вижу, что ты не врешь! Ха-Ха-Ха!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио",
+			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+		}
+	]
+}

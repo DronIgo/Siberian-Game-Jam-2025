@@ -1,0 +1,10 @@
+{
+	"data": [
+		{
+			"text": "Ха-Ха! Мальчик, боюсь, что твой нос тебя выдает!",
+			"speaker_location": "LEFT",
+			"speaker_name": "Базилио",
+			"speaker_texture_path": "res://Sprites/Dialog/boorateeno.png"
+		}
+	]
+}
