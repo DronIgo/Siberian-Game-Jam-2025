@@ -69,7 +69,7 @@ func select():
 	EventBus.card_select_animation_in_progress = false
 
 func unselect():
-	_anim_player.play(unselection_anim_name)
+	_anim_player.play_backwards(selection_anim_name)
 	EventBus.card_select_animation_in_progress = true
 	await _anim_player.animation_finished
 	EventBus.card_select_animation_in_progress = false
