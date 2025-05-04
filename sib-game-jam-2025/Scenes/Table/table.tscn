@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=21 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dhed2sq074g4o" path="res://Sprites/Table/Cat/cat_arm_hand.png" id="6_86ca4"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="7_q1js6"]
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
+[ext_resource type="Texture2D" uid="uid://dan2jlrcu37ws" path="res://Sprites/Table/back.jpg" id="11_g8tfy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6ax0b"]
 
@@ -323,3 +324,9 @@ nose_gap = 0.5
 libraries = {
 &"": SubResource("AnimationLibrary_g8tfy")
 }
+
+[node name="Backs" type="Node" parent="."]
+
+[node name="Back" type="Sprite3D" parent="Backs"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -7)
+texture = ExtResource("11_g8tfy")
