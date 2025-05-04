@@ -2,9 +2,9 @@
 	"phases": [
 		{
 			"id": "menu",
-			"scene_name": "res://Scenes/Dialog/dialog.tscn",
+			"scene_name": "res://Scenes/Menu/menu.tscn",
 			"args": [],
-			"next_phase_id": "",
+			"next_phase_id": "dialog_papa_1",
 			"is_replacement": true
 		},
 		{

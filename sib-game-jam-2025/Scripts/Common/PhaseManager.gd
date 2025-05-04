@@ -19,10 +19,13 @@ static func init():
 	_next_phase_id = config["init_scene_id"]
 
 static func next() -> Phase:
-	var next_phase: Phase = _phases[_next_phase_id]
-	_current_phase_id = next_phase.id
-	_next_phase_id = next_phase.next_phase_id
-	return next_phase
+	return exact(_next_phase_id)
 
 static func current() -> Phase:
 	return _phases[_current_phase_id]
+
+static func exact(id: String) -> Phase:
+	var next_phase: Phase = _phases[id]
+	_current_phase_id = next_phase.id
+	_next_phase_id = next_phase.next_phase_id
+	return next_phase
