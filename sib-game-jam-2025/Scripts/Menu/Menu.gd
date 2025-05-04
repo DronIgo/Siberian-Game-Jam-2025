@@ -3,7 +3,7 @@ class_name Menu
 extends CanvasLayer
 
 @onready var _authors_label = $Rect/AuthorsBase/AuthorsRect/AuthorsLabel
-@onready var _anim_player = $Rect/AnimationPlayer
+@onready var _anim_player = $Rect/AuthorsBase/AnimationPlayer
 
 var _authors = ["Dron231", "sintaxiz", "deerboy1940", "doorvendoor", "zheltog"]
 var _authors_shown = false
