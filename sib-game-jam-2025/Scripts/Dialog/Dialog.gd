@@ -10,8 +10,10 @@ var _next_replica_index = 0
 
 func _ready():
 	EventBus.dialog_start.connect(start)
-	var current_phase = PhaseManager.current()
-	start(current_phase)
+	if PhaseManager.is_event:
+		start(PhaseManager.current_event())
+	else:
+		start(PhaseManager.current_phase())
 
 func _process(delta):
 	if Input.is_action_just_pressed("dialog_next"):
@@ -34,8 +36,13 @@ func next():
 	_next_replica_index += 1
 
 func finish():
-	var next_phase = PhaseManager.next()
-	if next_phase.is_replacement:
+	EventBus.dialog_finished.emit()
+	if PhaseManager.is_event:
+		PhaseManager.finish_event()
+		queue_free()
+		return
+	var next_phase = PhaseManager.try_next_phase()
+	if not next_phase == null and next_phase.is_replacement:
 		get_tree().change_scene_to_file(next_phase.scene_name)
 	else:
 		queue_free()

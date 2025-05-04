@@ -2,6 +2,7 @@ extends Node
 
 # dialog
 signal dialog_start(config_path: String)
+signal dialog_finished()
 
 var card_select_animation_in_progress : bool = false
 var cards_move_animation_in_progress : bool = false

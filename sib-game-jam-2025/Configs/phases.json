@@ -2,7 +2,7 @@
 	"phases": [
 		{
 			"id": "menu",
-			"scene_name": "res://Scenes/Menu/menu.tscn",
+			"scene_name": "res://Scenes/Dialog/dialog.tscn",
 			"args": [],
 			"next_phase_id": "dialog_papa_1",
 			"is_replacement": true
@@ -21,23 +21,18 @@
 			"id": "table_1",
 			"scene_name": "res://Scenes/Table/table.tscn",
 			"args": [],
-			"next_phase_id": "dialog_cat_test",
+			"next_phase_id": "",
 			"is_replacement": true
-		},
+		}
+	],
+	"events": [
 		{
 			"id": "dialog_cat_test",
 			"scene_name": "res://Scenes/Dialog/dialog.tscn",
 			"args": [
 				"res://Configs/Dialog/testtest.json"
 			],
-			"next_phase_id": "table_2",
-			"is_replacement": false
-		},
-		{
-			"id": "table_2",
-			"scene_name": "res://Scenes/Table/table.tscn",
-			"args": [],
-			"next_phase_id": "menu",
+			"next_phase_id": "",
 			"is_replacement": false
 		}
 	],

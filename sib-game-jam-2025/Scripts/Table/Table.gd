@@ -85,8 +85,14 @@ func _process(delta):
 var sit : bool = true
 var card_choosing = false
 
+func _next_game_event(id: String):
+	var event = PhaseManager.start_event(id)
+	var scene = load(event.scene_name)
+	var scene_instance = scene.instantiate()
+	add_child(scene_instance)
+
 func _next_game_phase():
-	var next_phase: Phase = PhaseManager.next()
+	var next_phase: Phase = PhaseManager.try_next_phase()
 	if next_phase.is_replacement:
 		get_tree().change_scene_to_file(next_phase.scene_name)
 	else:

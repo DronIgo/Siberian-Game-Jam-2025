@@ -12,7 +12,7 @@ func _ready():
 	PhaseManager.init()
 
 func _on_play_button_pressed():
-	var phase: Phase = PhaseManager.next()
+	var phase: Phase = PhaseManager.try_next_phase()
 	get_tree().change_scene_to_file(phase.scene_name)
 
 func _on_authors_button_pressed():
