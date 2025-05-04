@@ -6,3 +6,8 @@
 [node name="CardsStack" type="Node3D"]
 script = ExtResource("1_cg22x")
 card_scene = ExtResource("2_wmjnh")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
