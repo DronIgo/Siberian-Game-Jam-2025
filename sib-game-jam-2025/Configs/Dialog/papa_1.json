@@ -9,8 +9,7 @@
 		{
 			"text": "Боже мой, Буратино! Где ты был? Что произошло?",
 			"speaker_location": "LEFT",
-			"speaker_name": "Папа Карло",
-			"speaker_texture_path": "res://Sprites/Dialog/papa.png"
+			"speaker_name": "Папа Карло"
 		},
 		{
 			"text": "Всё в порядке, Папа. Разве что у нас больше нет той замечательной смартлопаты…",

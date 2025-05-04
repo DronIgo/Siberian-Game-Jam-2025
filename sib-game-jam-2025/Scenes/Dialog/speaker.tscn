@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6dygmnny2usk"]
+[gd_scene load_steps=2 format=3 uid="uid://c6dygmnny2usk"]
 
-[ext_resource type="Texture2D" uid="uid://c7lqe77727cjo" path="res://Sprites/Dialog/papa.png" id="1_22kw0"]
 [ext_resource type="Script" uid="uid://dxsw5vi1p4ml8" path="res://Scripts/Dialog/Speaker.gd" id="1_q4sq7"]
 
 [node name="Speaker" type="Control"]
@@ -34,4 +33,3 @@ vertical_alignment = 1
 
 [node name="Avatar" type="Sprite2D" parent="."]
 position = Vector2(192, -192)
-texture = ExtResource("1_22kw0")
