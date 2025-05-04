@@ -4,14 +4,6 @@ extends Node3D
 
 enum Type { KEY, COIN, PUPPET, ALPHABET, SKULL }
 
-var type_representations = {
-	Type.KEY : "key",
-	Type.COIN : "coin",
-	Type.PUPPET : "pu",
-	Type.ALPHABET : "alpha",
-	Type.SKULL : ""
-}
-
 enum Value {
 	AVIAN = 1,
 	BUG = 2,
@@ -21,17 +13,6 @@ enum Value {
 	TURTLE = 6,
 	TBD = 7,
 	SCULL = 9
-}
-
-var value_representations = {
-	Value.AVIAN : "AVI",
-	Value.BUG : "B",
-	Value.DOG : "D",
-	Value.FROG : "F",
-	Value.LEECHE : "L",
-	Value.TURTLE : "T",
-	Value.TBD : "",
-	Value.SCULL : "scull"
 }
 
 @export var flip_anim_name = "card_flip"
@@ -64,15 +45,8 @@ func init(card : Card):
 		Card.CARD_COLOR.GREY:
 			_type = Type.SKULL
 	_value = card.value
-	var texture_path = _calc_card_name()
-	$Body/Front.texture = load(_calc_card_name())
-
-func _calc_card_name() -> String:
-	var prefix = "res://Sprites/Table/Cards/"
-	var postfix = "_mute_trans.png"
-	var type_str = type_representations[_type]
-	var value_str = value_representations[_value]
-	return str(prefix, value_str, "_", type_str, postfix)
+	var texture_path = CardTexturesHolder.get_texture(_type, _value)
+	$Body/Front.texture = texture_path
 
 func move_x(delta_x: float):
 	position += Vector3(delta_x, 0, 0)

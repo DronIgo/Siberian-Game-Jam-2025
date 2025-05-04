@@ -22,6 +22,7 @@ var _cards_hands: Array = []
 var _token_spawners: Array = []
 
 func _ready():
+	CardTexturesHolder.init()
 	_cards_hands.resize(2)
 	_cards_hands[MagicNumbers.PLAYER_ID] = _player_hand
 	_cards_hands[MagicNumbers.ENEMY_ID] = _enemy_hand
@@ -81,7 +82,9 @@ func _next_game_phase():
 func _new_card() -> Card:
 	var new_card = Card.new()
 	new_card.color = Card.CARD_COLOR.values().pick_random()
-	new_card.value = 1
+	new_card.value = Card3D.Value.values().pick_random()
+	if new_card.color == Card.CARD_COLOR.GREY:
+		new_card.value = 9
 	new_card.bonus_mod = 1
 	new_card.score_mod = 1
 	return new_card
