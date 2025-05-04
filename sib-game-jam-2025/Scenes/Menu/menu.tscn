@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://q4c2prspc74e"]
+[gd_scene load_steps=8 format=3 uid="uid://q4c2prspc74e"]
 
 [ext_resource type="Script" uid="uid://cu3ai40pl6edo" path="res://Scripts/Menu/Menu.gd" id="1_3ymnh"]
-[ext_resource type="Texture2D" uid="uid://bfd7bnlca2ixc" path="res://Sprites/Back/bg_casino.png" id="2_3qr6s"]
-[ext_resource type="Texture2D" uid="uid://uyjavjreteo5" path="res://Sprites/Table/Cat/cat_example.png" id="2_3ymnh"]
+[ext_resource type="Texture2D" uid="uid://djf23lpvsxf6" path="res://Sprites/Back/menu.png" id="2_3qr6s"]
+[ext_resource type="Theme" uid="uid://cp5jo1yfiwsd7" path="res://Resources/Themes/BUTTONS_FONT.tres" id="3_j7r1e"]
+[ext_resource type="Theme" path="res://Resources/Themes/DIALOG_FONT.tres" id="4_j7r1e"]
 
 [sub_resource type="Animation" id="Animation_3qr6s"]
 length = 0.001
@@ -64,44 +65,6 @@ _data = {
 &"authors_appear": SubResource("Animation_3ymnh")
 }
 
-[sub_resource type="Animation" id="Animation_8inha"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cat:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1800, 1300)]
-}
-
-[sub_resource type="Animation" id="Animation_j7r1e"]
-resource_name = "cat_float"
-length = 12.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cat:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 3, 5, 7, 7.5, 8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1800, 1800), Vector2(1800, 1300), Vector2(1800, 1350), Vector2(1800, 1300), Vector2(1800, 1350), Vector2(1800, 1300), Vector2(1800, 1800)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2mnh"]
-_data = {
-&"RESET": SubResource("Animation_8inha"),
-&"cat_float": SubResource("Animation_j7r1e")
-}
-
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_3ymnh")
 
@@ -130,19 +93,6 @@ position = Vector2(-916, -496)
 scale = Vector2(0.51, 0.51)
 texture = ExtResource("2_3qr6s")
 
-[node name="TitleLabel" type="Label" parent="Rect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 100.0
-offset_top = -268.5
-offset_right = 1026.0
-offset_bottom = -131.5
-grow_vertical = 2
-theme_override_font_sizes/font_size = 100
-text = "Buratino's Big Bluff"
-
 [node name="PlayButton" type="Button" parent="Rect"]
 layout_mode = 1
 anchors_preset = 4
@@ -153,6 +103,7 @@ offset_top = -48.0
 offset_right = 529.0
 offset_bottom = 48.0
 grow_vertical = 2
+theme = ExtResource("3_j7r1e")
 theme_override_font_sizes/font_size = 64
 text = "играть"
 
@@ -166,6 +117,7 @@ offset_top = 62.0
 offset_right = 529.0
 offset_bottom = 158.0
 grow_vertical = 2
+theme = ExtResource("3_j7r1e")
 theme_override_font_sizes/font_size = 64
 text = "авторы"
 
@@ -179,12 +131,9 @@ offset_top = 172.0
 offset_right = 529.0
 offset_bottom = 268.0
 grow_vertical = 2
+theme = ExtResource("3_j7r1e")
 theme_override_font_sizes/font_size = 64
 text = "выйти"
-
-[node name="Cat" type="Sprite2D" parent="Rect"]
-position = Vector2(1800, 1300)
-texture = ExtResource("2_3ymnh")
 
 [node name="AuthorsBase" type="Control" parent="Rect"]
 layout_mode = 1
@@ -201,7 +150,7 @@ offset_left = -900.0
 offset_top = -222.0
 offset_right = -60.0
 offset_bottom = -64.0
-color = Color(0.203922, 0.0588235, 0.458824, 1)
+color = Color(0.0666667, 0.0666667, 0.0588235, 0)
 
 [node name="JamLabel" type="Label" parent="Rect/AuthorsBase/JamRect"]
 layout_mode = 1
@@ -210,6 +159,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_j7r1e")
 theme_override_font_sizes/font_size = 42
 text = "игра сделана в рамках
 Siberian Game Jam (май 2025)"
@@ -222,7 +172,7 @@ offset_left = 540.0
 offset_top = 98.0
 offset_right = 940.0
 offset_bottom = 414.0
-color = Color(0.203922, 0.0588235, 0.458824, 1)
+color = Color(0.0666667, 0.0666667, 0.0588235, 0)
 
 [node name="AuthorsLabel" type="Label" parent="Rect/AuthorsBase/AuthorsRect"]
 layout_mode = 0
@@ -230,19 +180,14 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 50.0
 offset_bottom = 68.0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("4_j7r1e")
+theme_override_font_sizes/font_size = 50
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Rect/AuthorsBase"]
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_3qr6s")
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Rect"]
-libraries = {
-&"": SubResource("AnimationLibrary_n2mnh")
-}
-autoplay = "cat_float"
 
 [connection signal="pressed" from="Rect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="Rect/AuthorsButton" to="." method="_on_authors_button_pressed"]
