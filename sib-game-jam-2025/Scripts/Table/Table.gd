@@ -34,6 +34,7 @@ func _ready():
 	EventBus.hand_select_card.connect(_select_card_in_hand)
 	EventBus.hand_unselect_card.connect(_unselect_card_in_hand)
 	EventBus.token_add.connect(_add_token)
+	EventBus.token_add_several.connect(_add_several_tokens)
 	EventBus.token_remove.connect(_remove_token)
 	EventBus.stack_add_card.connect(_add_card_to_stack)
 	EventBus.stack_add_several_cards.connect(_add_several_cards_to_stack)
@@ -153,6 +154,9 @@ func _flip_card_in_checkable_line(index: int):
 
 func _add_token(player_id: int):
 	_token_spawners[player_id].add_token()
+
+func _add_several_tokens(player_id: int, num: int):
+	_token_spawners[player_id].add_tokens(num)
 
 func _remove_token(player_id: int):
 	_token_spawners[player_id].remove_token()

@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cv3ksaqbetw7n"]
+[gd_scene load_steps=14 format=3 uid="uid://cv3ksaqbetw7n"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_4w2lj"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_65vo3"]
 [ext_resource type="PackedScene" uid="uid://cikwpq7gmfthh" path="res://Scenes/Table/nose.tscn" id="3_cv3oe"]
 [ext_resource type="PackedScene" uid="uid://c42yp56m6umg" path="res://Scenes/Table/token_spawner.tscn" id="4_5al06"]
 [ext_resource type="Texture2D" uid="uid://bq6esk7ur5k51" path="res://Sprites/Table/cat_body.png" id="4_cv3oe"]
-[ext_resource type="Script" uid="uid://8i5ruje3lq3v" path="res://Scripts/Table/TokenSpawner.gd" id="5_n4dhq"]
 [ext_resource type="PackedScene" uid="uid://dxgtuiu2e58qa" path="res://Scenes/Table/token.tscn" id="6_6ax0b"]
 [ext_resource type="PackedScene" uid="uid://b3oyeftvghnow" path="res://Scenes/Table/cards_stack.tscn" id="7_q1js6"]
 [ext_resource type="PackedScene" uid="uid://c1qvodqhuvjxq" path="res://Scenes/Table/cards_line.tscn" id="8_vq1v8"]
@@ -141,12 +140,10 @@ texture = ExtResource("4_cv3oe")
 
 [node name="EnemyTokenSpawner" parent="." instance=ExtResource("4_5al06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -4.25)
-script = ExtResource("5_n4dhq")
 token_scene = ExtResource("6_6ax0b")
 
 [node name="PlayerTokenSpawner" parent="." instance=ExtResource("4_5al06")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -1.75)
-script = ExtResource("5_n4dhq")
 token_scene = ExtResource("6_6ax0b")
 
 [node name="NewCardsStack" parent="." instance=ExtResource("7_q1js6")]
