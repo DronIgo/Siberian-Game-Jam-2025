@@ -8,10 +8,10 @@ extends Node
 @onready var select_color: HBoxContainer = $"../CanvasLayer/SelectColor"
 @onready var cards_visulaiser_3d: CardVisualiser3D = $"../CardsVisulaiser3d"
 
-@onready var place_cards_button: Button = $"../CanvasLayer/PlaceCardsButton"
-@onready var declare_trust_button: Button = $"../CanvasLayer/DeclareTrustButton"
-@onready var call_bluff_button: Button = $"../CanvasLayer/CallBluffButton"
-@onready var extra_check_button: Button = $"../CanvasLayer/ExtraCheckButton"
+@onready var place_cards_button: TextureButton = $"../CanvasLayer/PlaceCardsButton"
+@onready var declare_trust_button: TextureButton = $"../CanvasLayer/DeclareTrustButton"
+@onready var call_bluff_button: TextureButton = $"../CanvasLayer/CallBluffButton"
+@onready var extra_check_button: TextureButton = $"../CanvasLayer/ExtraCheckButton"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

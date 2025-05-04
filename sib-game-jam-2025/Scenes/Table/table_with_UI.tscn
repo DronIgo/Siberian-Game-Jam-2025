@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://wkejd16i1b8q"]
+[gd_scene load_steps=33 format=3 uid="uid://wkejd16i1b8q"]
 
 [ext_resource type="Script" uid="uid://b0fm3tiij7782" path="res://Scripts/Table/Table.gd" id="1_172km"]
 [ext_resource type="PackedScene" uid="uid://2k40ei7w4s1c" path="res://Scenes/Table/cards_hand.tscn" id="2_1x3b8"]
@@ -10,13 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://cdcfnxst2dods" path="res://Scenes/Game Logic/CardManager.tscn" id="10_qdrav"]
 [ext_resource type="PackedScene" uid="uid://jn7o7q01waf0" path="res://Scenes/Game Logic/GameManager.tscn" id="11_y1rv6"]
 [ext_resource type="PackedScene" uid="uid://crjpjpkq5cefd" path="res://Scenes/Game Logic/GameStateManager.tscn" id="12_r7qkd"]
+[ext_resource type="Theme" uid="uid://cp5jo1yfiwsd7" path="res://Resources/Themes/BUTTONS_FONT.tres" id="13_i5h15"]
 [ext_resource type="PackedScene" uid="uid://4xxewo47h8ay" path="res://Scenes/Game Logic/PlayerActions.tscn" id="13_uxepg"]
 [ext_resource type="PackedScene" uid="uid://dgtvnvliwh4aw" path="res://Scenes/Game Logic/EnemyAI.tscn" id="14_4w4ur"]
 [ext_resource type="PackedScene" uid="uid://cqsnixrd8nhfe" path="res://Scenes/Demo/InfoVisualiser.tscn" id="15_lbt75"]
 [ext_resource type="Script" uid="uid://bakakojeb88us" path="res://Scripts/Demo/select_color.gd" id="16_s02ep"]
 [ext_resource type="Theme" uid="uid://yerfq4qvcb0i" path="res://Resources/Demo/red_button_theme.tres" id="17_i5h15"]
 [ext_resource type="Theme" uid="uid://bn0nt8tywlwfk" path="res://Resources/Demo/blue_button_theme.tres" id="18_1qvjy"]
+[ext_resource type="Texture2D" uid="uid://eiydrf5o73ef" path="res://Sprites/UI/buttons/white_300.png" id="18_s02ep"]
 [ext_resource type="Theme" uid="uid://dclbdlmn1jp4n" path="res://Resources/Demo/green_button_theme.tres" id="19_3tq7i"]
+[ext_resource type="Texture2D" uid="uid://b8b3tyiklpn86" path="res://Sprites/UI/buttons/white_glow_300.png" id="19_i5h15"]
 [ext_resource type="Theme" uid="uid://bjxsr2atb27ka" path="res://Resources/Demo/violet_button_theme.tres" id="20_kpvdj"]
 [ext_resource type="PackedScene" uid="uid://baqct71bfl7sn" path="res://Scenes/Table/Actions/CardsVisulaiser3D.tscn" id="21_r7qkd"]
 [ext_resource type="PackedScene" uid="uid://bgjob4hixs50t" path="res://Scenes/Raycasting/RayCastingManager.tscn" id="21_uxepg"]
@@ -184,17 +187,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, -4)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlaceCardsButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-offset_top = -180.0
-offset_right = 220.0
-offset_bottom = -118.0
-grow_vertical = 0
-text = "Положить карты"
-
 [node name="SelectColor" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -274,7 +266,21 @@ offset_bottom = -962.0
 grow_vertical = 0
 text = "Enemy: 0"
 
-[node name="DeclareTrustButton" type="Button" parent="CanvasLayer"]
+[node name="OLD_PlaceCardsButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -180.0
+offset_right = 242.0
+offset_bottom = -118.0
+grow_vertical = 0
+theme = ExtResource("13_i5h15")
+text = "Положить карты"
+
+[node name="OLD_DeclareTrustButton" type="Button" parent="CanvasLayer"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -285,7 +291,20 @@ offset_bottom = -118.0
 grow_vertical = 0
 text = "Верю!"
 
-[node name="CallBluffButton" type="Button" parent="CanvasLayer"]
+[node name="OLD_ExtraCheckButton" type="Button" parent="CanvasLayer"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1320.0
+offset_top = -180.0
+offset_right = 1510.0
+offset_bottom = -118.0
+grow_vertical = 0
+text = "Купить проверку"
+
+[node name="OLD_CallBluffButton" type="Button" parent="CanvasLayer"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -297,7 +316,6 @@ grow_vertical = 0
 text = "Не верю!"
 
 [node name="SelectedColor" type="Button" parent="CanvasLayer"]
-visible = false
 custom_minimum_size = Vector2(50, 50)
 offset_left = 216.0
 offset_top = 64.0
@@ -335,16 +353,119 @@ size_flags_horizontal = 4
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ExtraCheckButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
+[node name="DeclareTrustButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.533801, 1, 0.712365, 0.784314)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = 130.0
+offset_right = -20.0
+offset_bottom = 302.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
+
+[node name="Label" type="Label" parent="CanvasLayer/DeclareTrustButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1320.0
-offset_top = -180.0
-offset_right = 1510.0
-offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
+text = "ВЕРЮ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CallBluffButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.928361, 0.345342, 0, 0.784314)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -230.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 0
 grow_vertical = 0
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
+
+[node name="Label" type="Label" parent="CanvasLayer/CallBluffButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
+text = "НЕ ВЕРЮ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExtraCheckButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.909804, 0.831373, 0, 0.784314)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -230.0
+offset_right = -20.0
+offset_bottom = -58.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1, 0.991246)
+theme = ExtResource("13_i5h15")
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
+
+[node name="Label" type="Label" parent="CanvasLayer/ExtraCheckButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
 text = "Купить проверку"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlaceCardsButton" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(0.67451, 1, 0, 0.784314)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -40.0
+offset_right = 150.0
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("18_s02ep")
+texture_hover = ExtResource("19_i5h15")
+
+[node name="Label" type="Label" parent="CanvasLayer/PlaceCardsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("13_i5h15")
+text = "ВЫЛОЖИТЬ КАРТЫ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RayCastingManager" parent="." instance=ExtResource("21_uxepg")]
 

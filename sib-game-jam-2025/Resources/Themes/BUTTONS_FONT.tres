@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cp5jo1yfiwsd7"]
+
+[ext_resource type="FontFile" uid="uid://bt614bxm24b2" path="res://Sprites/UI/fonts/GULAG_Pavljenko.otf" id="1_iyjmk"]
+
+[resource]
+default_font = ExtResource("1_iyjmk")
+default_font_size = 24
