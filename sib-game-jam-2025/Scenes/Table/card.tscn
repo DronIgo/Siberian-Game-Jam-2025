@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://lxyxtu86gwqx"]
+[gd_scene load_steps=10 format=3 uid="uid://lxyxtu86gwqx"]
 
 [ext_resource type="Script" uid="uid://gl3re7i7a8dr" path="res://Scripts/Table/Card.gd" id="1_b0j6s"]
 [ext_resource type="Texture2D" uid="uid://v14mq4v8dyxf" path="res://Sprites/Table/card_back.png" id="2_b0j6s"]
+[ext_resource type="Texture2D" uid="uid://bwc1sg4revri8" path="res://Sprites/Table/card_red.png" id="2_ybx6g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0j6s"]
 
@@ -128,7 +129,13 @@ script = ExtResource("1_b0j6s")
 [node name="Body" type="RigidBody3D" parent="."]
 
 [node name="Front" type="Sprite3D" parent="Body"]
+transform = Transform3D(0.033, 0, 0, 0, 0.033, 0, 0, 0, 0.033, 0, 0, 0)
 alpha_cut = 2
+
+[node name="Middle" type="Sprite3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.005)
+alpha_cut = 2
+texture = ExtResource("2_ybx6g")
 
 [node name="Back" type="Sprite3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
