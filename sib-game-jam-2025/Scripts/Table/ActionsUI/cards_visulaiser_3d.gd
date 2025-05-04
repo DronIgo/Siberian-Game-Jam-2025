@@ -29,7 +29,6 @@ func _ready() -> void:
 	EventBusGL.update_visualisation.connect(display_stack)
 	EventBusGL.update_visualisation.connect(update_selected_color)
 	EventBusGL.start_round.connect(start_round)
-	EventBus.hide_cards.emit()
 
 func start_round() -> void:
 	for card3d in player_hand._cards:
@@ -151,7 +150,8 @@ func _physics_process(delta):
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if mouse_pressed_last_frame:
-			
+			return
+		if EventBus.cards_move_animation_in_progress:
 			return
 		mouse_pressed_last_frame = true
 		if player_cards_active:

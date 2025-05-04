@@ -17,6 +17,7 @@ extends Node3D
 @onready var _checkable_cards_line = $CheckableCardsLine
 @onready var _nose = $Camera3D/Nose
 @onready var _anim_player = $AnimationPlayer
+@onready var _animation_player_cards: AnimationPlayer = $AnimationPlayerCards
 
 var _cards_hands: Array = []
 var _token_spawners: Array = []
@@ -109,17 +110,26 @@ func _sit_back():
 
 func _show_cards():
 	print("_show_cards")
-	
+	if EventBus.card_select_animation_in_progress:
+		return
 	if !card_choosing:
 		print("play cards_up")
-		_anim_player.play_backwards("cards_down")
+		EventBus.cards_move_animation_in_progress = true
+		_animation_player_cards.play("cards_up")
+		await _animation_player_cards.animation_finished
+		EventBus.cards_move_animation_in_progress = false
 		card_choosing = true
 
 func _hide_cards():
 	print("_hide_cards")
+	if EventBus.card_select_animation_in_progress:
+		return
 	if card_choosing:
 		print("play cards_down")
-		_anim_player.play("cards_down")
+		EventBus.cards_move_animation_in_progress = true
+		_animation_player_cards.play_backwards("cards_up")
+		await _animation_player_cards.animation_finished
+		EventBus.cards_move_animation_in_progress = false
 		card_choosing = false
 
 #func _on_AnimationPlayer_animation_finished(anim_name):

@@ -3,6 +3,9 @@ extends Node
 # dialog
 signal dialog_start(config_path: String)
 
+var card_select_animation_in_progress : bool = false
+var cards_move_animation_in_progress : bool = false
+
 # table
 signal hand_add_card(player_id: int, base_card: Card)
 signal hand_remove_card(player_id: int, index: int)
