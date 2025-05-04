@@ -6,7 +6,7 @@ extends Node3D
 
 @onready var sprite: Sprite3D = $Sprite3D
 
-var desired_z = 0.0
+var desired_z = 0.3
 var _current_scale: Vector3
 
 func _ready():
@@ -15,10 +15,10 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if sprite.position.z > desired_z:
-		sprite.translate_object_local(Vector3(0, delta * 2.0, 0))
+		sprite.translate_object_local(Vector3(0, delta * 0.5, 0))
 
 func increase():
-	if desired_z > -0.5:
+	if desired_z > -0.6:
 		desired_z -= scale_step
 	
 

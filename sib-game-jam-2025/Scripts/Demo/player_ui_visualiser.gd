@@ -5,7 +5,7 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 
-@onready var select_color: HBoxContainer = $"../CanvasLayer/SelectColor"
+@onready var select_color = $"../CanvasLayer/SelectColor"
 @onready var card_visualiser: CardVisualiser = $"../CardVisualiser"
 @onready var place_cards_button: Button = $"../CanvasLayer/PlaceCardsButton"
 @onready var declare_trust_button: Button = $"../CanvasLayer/DeclareTrustButton"

@@ -45,7 +45,9 @@ func finish():
 		queue_free()
 		return
 	var next_phase = PhaseManager.try_next_phase()
-	if not next_phase == null and next_phase.is_replacement:
+	if next_phase == null:
+		get_tree().quit()
+	elif next_phase.is_replacement:
 		get_tree().change_scene_to_file(next_phase.scene_name)
 	else:
 		queue_free()

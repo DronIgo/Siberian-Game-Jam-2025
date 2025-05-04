@@ -239,7 +239,7 @@ func select_color() -> void:
 	selected_color = Card.CARD_COLOR.RED
 	var max = 0
 	for color in num_colors.keys():
-		if num_colors[color] > max:
+		if num_colors[color] > max && color != Card.CARD_COLOR.GREY:
 			max = num_colors[color]
 			selected_color = color
 
