@@ -47,7 +47,8 @@ func _check_tokens_to_add():
 
 func _fix_token_position(token):
 	var tokens_num = _current_tokens.size()
-	var current_stack = tokens_num / max_tokens_in_stack
-	var current_row = current_stack / max_stacks_in_row
+	var current_stack = int(tokens_num / max_tokens_in_stack)
+	var current_row = int(current_stack / max_stacks_in_row)
 	token.position.x += (current_stack - current_row * max_stacks_in_row) * stacks_offset
 	token.position.z += current_row * stacks_offset
+	print(current_stack)

@@ -56,6 +56,7 @@ func _ready():
 	EventBus.enemy_hand_down.connect(_enemy_hand_down)
 	var phase = PhaseManager.current_phase()
 	MusicProcessor.process(phase)
+	EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, 10)
 
 # tests
 func _process(delta):
@@ -82,7 +83,7 @@ func _process(delta):
 	elif Input.is_key_pressed(KEY_9):
 		EventBus.enemy_hand_down.emit()
 	elif Input.is_key_pressed(KEY_0):
-		EventBus.stack_add_card.emit(CardsStack.Type.NON_CHECKABLE)
+		EventBus.token_add_several.emit(MagicNumbers.ENEMY_ID, 10)
 
 var sit : bool = true
 var card_choosing = false
