@@ -3,7 +3,7 @@ extends Node
 
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
-@onready var player_actions: PlayerActions = $"../PlayerActions"
+@onready var ACTIONs: PlayerActions = $"../PlayerActions"
 
 @onready var select_color = $"../CanvasLayer/SelectColor"
 @onready var card_visualiser: CardVisualiser = $"../CardVisualiser"
@@ -55,31 +55,31 @@ func update_avialable_actions_UI() -> void:
 	var avialable_actions = game_state_manager.player_avialable_actions
 	for action in avialable_actions:
 		match action:
-			EventBusAction.PLAYER_ACTION.ADD_CARDS:
+			EventBusAction.ACTION.ADD_CARDS:
 				enable_select_cards(true)
-			EventBusAction.PLAYER_ACTION.SELECT_COLOR:
+			EventBusAction.ACTION.SELECT_MARK:
 				enable_color_select(true)
-			EventBusAction.PLAYER_ACTION.DECLARE_TRUST:
+			EventBusAction.ACTION.DECLARE_TRUST:
 				enable_declare_trust(true)
-			EventBusAction.PLAYER_ACTION.CALL_BLUFF:
+			EventBusAction.ACTION.CALL_BLUFF:
 				enable_call_bluff(true)
-			EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK:
+			EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK:
 				enable_add_extra_check(true)
-			EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK:
+			EventBusAction.ACTION.ADD_CARD_TO_CHECK:
 				enable_pick_card_check(true)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func call_bluff() -> void:
-	player_actions.call_bluff()
+	ACTIONs.call_bluff()
 	
 func declare_trust() -> void:
-	player_actions.declare_trust()
+	ACTIONs.declare_trust()
 	
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
 		return
-	player_actions.place_cards()
+	ACTIONs.place_cards()
 func add_extra_check() -> void:
-	player_actions.add_extra_check()
+	ACTIONs.add_extra_check()

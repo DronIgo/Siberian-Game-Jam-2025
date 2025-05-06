@@ -3,31 +3,31 @@ extends HBoxContainer
 @onready var game_manager: GameManager = $"../../GameManager"
 @onready var player_actions: PlayerActions = $"../../PlayerActions"
 
-@onready var button_select_red: TextureButton = $SelectRed
-@onready var button_select_blue: TextureButton = $SelectBlue
-@onready var button_select_green: TextureButton = $SelectGreen
-@onready var button_select_violet: TextureButton = $SelectViolet
+@onready var button_select_KEY: TextureButton = $SelectKey
+@onready var button_select_PUPPET: TextureButton = $SelectPuppet
+@onready var button_select_COIN: TextureButton = $SelectCoin
+@onready var button_select_ALPHABET: TextureButton = $SelectAlphabet
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	button_select_blue.pressed.connect(select_blue)
-	button_select_red.pressed.connect(select_red)
-	button_select_green.pressed.connect(select_green)
-	button_select_violet.pressed.connect(select_violet)
+	button_select_PUPPET.pressed.connect(select_PUPPET)
+	button_select_KEY.pressed.connect(select_KEY)
+	button_select_COIN.pressed.connect(select_COIN)
+	button_select_ALPHABET.pressed.connect(select_ALPHABET)
 	visible = false
 	
-func select_red() -> void:
-	player_actions.select_color(Card.CARD_COLOR.RED)
+func select_KEY() -> void:
+	player_actions.select_mark(Card.CARD_MARK.KEY)
 	selection_done()
-func select_blue() -> void:
-	player_actions.select_color(Card.CARD_COLOR.BLUE)
+func select_PUPPET() -> void:
+	player_actions.select_mark(Card.CARD_MARK.PUPPET)
 	selection_done()
-func select_green() -> void:
-	player_actions.select_color(Card.CARD_COLOR.GREEN)
+func select_COIN() -> void:
+	player_actions.select_mark(Card.CARD_MARK.COIN)
 	selection_done()
-func select_violet() -> void:
-	player_actions.select_color(Card.CARD_COLOR.VIOLET)
+func select_ALPHABET() -> void:
+	player_actions.select_mark(Card.CARD_MARK.ALPHABET)
 	selection_done()
 	
 func selection_done() -> void:

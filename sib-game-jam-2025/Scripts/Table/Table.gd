@@ -80,9 +80,9 @@ func _next_game_phase():
 # tests
 func _new_card() -> Card:
 	var new_card = Card.new()
-	new_card.color = Card.CARD_COLOR.values().pick_random()
-	new_card.value = Card3D.Value.values().pick_random()
-	if new_card.color == Card.CARD_COLOR.GREY:
+	new_card.mark = Card.CARD_MARK.values().pick_random()
+	new_card.value = Card.CARD_VALUE.values().pick_random()
+	if new_card.mark == Card.CARD_MARK.SKULL:
 		new_card.value = 9
 	new_card.bonus_mod = 1
 	new_card.score_mod = 1

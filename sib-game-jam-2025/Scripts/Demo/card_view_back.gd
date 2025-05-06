@@ -5,11 +5,11 @@ var active : bool = false
 var base_card : Card
 
 var card_manager: CardManager
-var player_actions: PlayerActions
+var actions: PlayerActions
 
 const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
 const GREEN_BUTTON_THEME = preload("res://Resources/Demo/green_button_theme.tres")
-const GREY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
+const GRAY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
 const RED_BUTTON_THEME = preload("res://Resources/Demo/red_button_theme.tres")
 const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tres")
 
@@ -17,8 +17,8 @@ func _ready() -> void:
 	pressed.connect(_button_pressed)
 	card_manager = get_node("../../../CardManager")
 
-func set_visualiser(actions : PlayerActions) -> void:
-	player_actions = actions
+func set_visualiser(p_actions : PlayerActions) -> void:
+	actions = p_actions
 
 func set_base_card(base : Card) -> void:
 	base_card = base
@@ -29,20 +29,20 @@ func set_active(new_active : bool) -> void:
 func _button_pressed():
 	if (active):
 		flip()
-		player_actions.check_card(base_card.color)
+		actions.check_card(base_card.color)
 
 func flip() -> void:
 	if base_card:
-		match base_card.color:
-			Card.CARD_COLOR.RED:
+		match base_card.mark:
+			Card.CARD_MARK.KEY:
 				theme = RED_BUTTON_THEME
-			Card.CARD_COLOR.BLUE:
+			Card.CARD_MARK.PUPPET:
 				theme = BLUE_BUTTON_THEME
-			Card.CARD_COLOR.GREEN:
+			Card.CARD_MARK.COIN:
 				theme = GREEN_BUTTON_THEME
-			Card.CARD_COLOR.VIOLET:
+			Card.CARD_MARK.ALPHABET:
 				theme = VIOLET_BUTTON_THEME
-			Card.CARD_COLOR.GREY:
-				theme = GREY_BUTTON_THEME
+			Card.CARD_MARK.SKULL:
+				theme = GRAY_BUTTON_THEME
 		text = str(base_card.value)
 	

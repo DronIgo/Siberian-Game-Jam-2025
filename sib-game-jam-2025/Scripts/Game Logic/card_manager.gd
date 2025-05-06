@@ -2,8 +2,8 @@ class_name CardManager
 extends Node
 
 @export_category("Deck settings")
-@export var cards_each_color_num : int = 7
-@export var cards_grey_num : int = 4
+@export var cards_each_mark_num : int = 7
+@export var cards_skull_num : int = 4
 
 @export_category("Hands settings")
 @export var num_of_cards_in_hand : int = 7
@@ -102,19 +102,19 @@ func fill_hands() -> void:
 
 func create_starting_deck() -> void:
 	deck = []
-	for c in Card.CARD_COLOR.values():
-		if c as Card.CARD_COLOR == Card.CARD_COLOR.GREY:
+	for c in Card.CARD_MARK.values():
+		if c as Card.CARD_MARK == Card.CARD_MARK.SKULL:
 			continue
-		for i in range(cards_each_color_num):
+		for i in range(cards_each_mark_num):
 			var new_card = Card.new()
-			new_card.color = c as Card.CARD_COLOR
+			new_card.mark = c as Card.CARD_MARK
 			new_card.value = i + 1
 			new_card.bonus_mod = 1
 			new_card.score_mod = 1
 			deck.append(new_card)
-	for i in range(cards_grey_num):
+	for i in range(cards_skull_num):
 		var new_card = Card.new()
-		new_card.color = Card.CARD_COLOR.GREY
+		new_card.mark = Card.CARD_MARK.SKULL
 		new_card.value = 9
 		new_card.bonus_mod = 3
 		new_card.score_mod = 3

@@ -5,8 +5,8 @@ extends Node
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 
-@onready var selected_color: TextureButton = $"../CanvasLayer/SelectedColor"
-@onready var select_color = $"../CanvasLayer/SelectColor"
+@onready var selected_mark: TextureButton = $"../CanvasLayer/SelectedMark"
+@onready var select_mark = $"../CanvasLayer/SelectColor"
 @onready var cards_visulaiser_3d: CardVisualiser3D = $"../CardsVisulaiser3d"
 
 @onready var place_cards_button: TextureButton = $"../CanvasLayer/PlaceCardsButton"
@@ -23,11 +23,11 @@ func _ready() -> void:
 	call_bluff_button.pressed.connect(call_bluff)
 	place_cards_button.pressed.connect(place_cards)
 	extra_check_button.pressed.connect(add_extra_check)
-	EventBusGL.update_visualisation.connect(update_selected_color)
+	EventBusGL.update_visualisation.connect(update_selected_mark)
 	disable_all_UI()
 	
 func disable_all_UI() -> void:
-	enable_color_select(false)
+	enable_mark_select(false)
 	enable_select_cards(false)
 	enable_place_cards(false)
 	enable_declare_trust(false)
@@ -35,8 +35,8 @@ func disable_all_UI() -> void:
 	enable_add_extra_check(false)
 	enable_pick_card_check()
 
-func enable_color_select(enable : bool) -> void:
-	select_color.visible = enable
+func enable_mark_select(enable : bool) -> void:
+	select_mark.visible = enable
 func enable_select_cards(enable : bool) -> void:
 	cards_visulaiser_3d.set_cards_active(enable)
 	place_cards_button.visible = enable
@@ -52,7 +52,7 @@ func enable_add_extra_check(enable : bool) -> void:
 	extra_check_button.visible = enable
 func enable_pick_card_check() -> void:
 	var enable = game_state_manager.player_avialable_actions.has(\
-	EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
+	EventBusAction.ACTION.ADD_CARD_TO_CHECK)
 	cards_visulaiser_3d.set_last_active(enable)
 	if enable:
 		EventBus.bend_over_table.emit()
@@ -65,18 +65,18 @@ func update_avialable_actions_UI() -> void:
 	var avialable_actions = game_state_manager.player_avialable_actions
 	for action in avialable_actions:
 		match action:
-			EventBusAction.PLAYER_ACTION.ADD_CARDS:
+			EventBusAction.ACTION.ADD_CARDS:
 				enable_select_cards(true)
 				enable_place_cards(true)
-			EventBusAction.PLAYER_ACTION.SELECT_COLOR:
-				enable_color_select(true)
-			EventBusAction.PLAYER_ACTION.DECLARE_TRUST:
+			EventBusAction.ACTION.SELECT_MARK:
+				enable_mark_select(true)
+			EventBusAction.ACTION.DECLARE_TRUST:
 				enable_declare_trust(true)
-			EventBusAction.PLAYER_ACTION.CALL_BLUFF:
+			EventBusAction.ACTION.CALL_BLUFF:
 				enable_call_bluff(true)
-			EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK:
+			EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK:
 				enable_add_extra_check(true)
-			EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK:
+			EventBusAction.ACTION.ADD_CARD_TO_CHECK:
 				enable_pick_card_check()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -91,8 +91,8 @@ func call_bluff() -> void:
 func declare_trust() -> void:
 	player_actions.declare_trust()
 	
-func check_card(color : Card.CARD_COLOR) -> void:
-	player_actions.check_card(color)
+func check_card(mark : Card.CARD_MARK) -> void:
+	player_actions.check_card(mark)
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
@@ -102,18 +102,18 @@ func add_extra_check() -> void:
 	player_actions.add_extra_check()
 
 
-func update_selected_color() -> void:
-	selected_color.visible = game_state_manager.color_selected
-	selected_color.scale = Vector2(0.4, 0.4)
-	if ! game_state_manager.color_selected:
+func update_selected_mark() -> void:
+	selected_mark.visible = game_state_manager.round_mark_set
+	selected_mark.scale = Vector2(0.4, 0.4)
+	if ! game_state_manager.round_mark_set:
 		return
 	else:
-		match game_state_manager.current_correct_color:
-			Card.CARD_COLOR.RED:
-				selected_color.texture_normal = load("res://Sprites/UI/buttons/key_button.png")
-			Card.CARD_COLOR.BLUE:
-				selected_color.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
-			Card.CARD_COLOR.GREEN:
-				selected_color.texture_normal = load("res://Sprites/UI/buttons/puppet_button.png")
-			Card.CARD_COLOR.VIOLET:
-				selected_color.texture_normal = load("res://Sprites/UI/buttons/alpha_button.png")
+		match game_state_manager.round_mark:
+			Card.CARD_MARK.KEY:
+				selected_mark.texture_normal = load("res://Sprites/UI/buttons/key_button.png")
+			Card.CARD_MARK.PUPPET:
+				selected_mark.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
+			Card.CARD_MARK.COIN:
+				selected_mark.texture_normal = load("res://Sprites/UI/buttons/puppet_button.png")
+			Card.CARD_MARK.ALPHABET:
+				selected_mark.texture_normal = load("res://Sprites/UI/buttons/alpha_button.png")

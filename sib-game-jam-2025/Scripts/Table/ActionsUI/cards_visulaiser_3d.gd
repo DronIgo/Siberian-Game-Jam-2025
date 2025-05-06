@@ -11,12 +11,6 @@ extends Node
 @onready var checkable_cards_line: CardsLine = $"../CheckableCardsLine"
 @onready var non_checkable_cards_stack: CardsStack = $"../NonCheckableCardsStack"
 
-const BLUE_BUTTON_THEME = preload("res://Resources/Demo/blue_button_theme.tres")
-const GREEN_BUTTON_THEME = preload("res://Resources/Demo/green_button_theme.tres")
-const RED_BUTTON_THEME = preload("res://Resources/Demo/red_button_theme.tres")
-const VIOLET_BUTTON_THEME = preload("res://Resources/Demo/violet_button_theme.tres")
-const GREY_BUTTON_THEME = preload("res://Resources/Demo/grey_button_theme.tres")
-
 @onready var card_manager: CardManager = $"../CardManager"
 
 var last_add_active : bool = false
@@ -122,7 +116,7 @@ func try_flip_card(card : Card3D):
 		return
 	var base_card = card.base_card as Card
 	card.flip()
-	player_actions.check_card(base_card.color)
+	player_actions.check_card(base_card.mark)
 
 var mouse_pressed_last_frame = false
 func _physics_process(delta):

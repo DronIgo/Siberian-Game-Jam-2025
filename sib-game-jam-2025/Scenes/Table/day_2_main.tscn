@@ -287,24 +287,24 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("8_yvm1u")
 
-[node name="SelectBlue" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectCoin" type="TextureButton" parent="CanvasLayer/SelectColor"]
 layout_mode = 2
 theme = ExtResource("9_b84mt")
 texture_normal = ExtResource("10_7065f")
 
-[node name="SelectGreen" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectPuppet" type="TextureButton" parent="CanvasLayer/SelectColor"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("11_r15tq")
 texture_normal = ExtResource("12_frtw4")
 
-[node name="SelectViolet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectAlphabet" type="TextureButton" parent="CanvasLayer/SelectColor"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("13_7uqey")
 texture_normal = ExtResource("14_io8gs")
 
-[node name="SelectRed" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectKey" type="TextureButton" parent="CanvasLayer/SelectColor"]
 layout_mode = 2
 theme = ExtResource("15_t4lix")
 texture_normal = ExtResource("16_eo3fs")
@@ -430,7 +430,7 @@ offset_bottom = -236.0
 grow_vertical = 0
 text = "Не верю!"
 
-[node name="SelectedColor" type="TextureButton" parent="CanvasLayer"]
+[node name="SelectedMark" type="TextureButton" parent="CanvasLayer"]
 custom_minimum_size = Vector2(50, 50)
 offset_left = 64.0
 offset_top = 64.0
@@ -439,7 +439,7 @@ offset_bottom = 114.0
 theme = ExtResource("15_t4lix")
 texture_normal = ExtResource("18_5oas5")
 
-[node name="StackCounter" type="Label" parent="CanvasLayer/SelectedColor"]
+[node name="StackCounter" type="Label" parent="CanvasLayer/SelectedMark"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

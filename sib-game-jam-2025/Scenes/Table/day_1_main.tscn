@@ -286,24 +286,24 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("16_s02ep")
 
-[node name="SelectBlue" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectCoin" type="TextureButton" parent="CanvasLayer/SelectColor"]
 layout_mode = 2
 theme = ExtResource("18_1qvjy")
 texture_normal = ExtResource("16_2pupv")
 
-[node name="SelectGreen" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectPuppet" type="TextureButton" parent="CanvasLayer/SelectColor"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("19_3tq7i")
 texture_normal = ExtResource("19_4k06g")
 
-[node name="SelectViolet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectAlphabet" type="TextureButton" parent="CanvasLayer/SelectColor"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("20_kpvdj")
 texture_normal = ExtResource("22_dpb1v")
 
-[node name="SelectRed" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectKey" type="TextureButton" parent="CanvasLayer/SelectColor"]
 layout_mode = 2
 theme = ExtResource("17_i5h15")
 texture_normal = ExtResource("25_xqlre")

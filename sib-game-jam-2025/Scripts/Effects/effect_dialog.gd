@@ -8,6 +8,7 @@ func _ready() -> void:
 
 func start(dialog_id : String) -> void:
 	var dialog_phase = PhaseManager.start_event(dialog_id)
+	print("Started diaog: ", dialog_id)
 	if !dialog_phase:
 		print(dialog_id)
 		timer.timeout.connect(finished)

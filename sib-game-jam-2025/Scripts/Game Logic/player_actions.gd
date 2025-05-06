@@ -16,48 +16,46 @@ func update_can_lie_this_turn():
 	can_lie_this_turn = false
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI:
 		if game_state_manager.player_avialable_actions.has(\
-		EventBusAction.PLAYER_ACTION.CALL_BLUFF):
+		EventBusAction.ACTION.CALL_BLUFF):
 			can_lie_this_turn = true
-func select_color(color : Card.CARD_COLOR) -> void:
-	var lied = !CardUtils.check_truth(card_manager.last_add, color)
+func select_mark(mark : Card.CARD_MARK) -> void:
+	var lied = !CardUtils.check_truth(card_manager.last_add, mark)
 	if lied && !can_control_lie:
 		EventBusAction.player_lied.emit()
 	else:
 		EventBusAction.player_told_truth.emit()
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR, color)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.SELECT_MARK, mark)
 	
 func call_bluff() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.CALL_BLUFF, null)
 	
 func declare_trust() -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
 	
-func check_card(color : Card.CARD_COLOR) -> void:
-	if color == Card.CARD_COLOR.GREY:
-		print("cool")
-	var correct_color = game_state_manager.current_correct_color
-	var truth = color == correct_color
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+func check_card(mark : Card.CARD_MARK) -> void:
+	var correct_mark = game_state_manager.round_mark
+	var truth = mark == correct_mark
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
 
 func add_extra_check() -> void:
 	game_manager.player_bonus -= game_manager.extra_check_cost
 	for i in game_manager.extra_check_cost:
 		EventBus.token_remove.emit(MagicNumbers.PLAYER_ID)
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
 		return
 	card_manager.place_cards(true)
 	
-	if game_state_manager.color_selected:
+	if game_state_manager.round_mark_set:
 		var lied = !CardUtils.check_truth(card_manager.last_add, \
-		game_state_manager.current_correct_color)
+		game_state_manager.round_mark)
 		if lied && !can_control_lie:
 			EventBusAction.player_lied.emit()
 		else:
 			EventBusAction.player_told_truth.emit()
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARDS, null)
 	
 func _process(delta: float) -> void:
 	if !can_control_lie:

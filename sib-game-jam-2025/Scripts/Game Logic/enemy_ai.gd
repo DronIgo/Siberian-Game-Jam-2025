@@ -48,9 +48,9 @@ func learned() -> void:
 	print("learn")
 	currentAI.learn()
 func detect_lie() -> void:
-	currentAI.player_lied_last_turn = true
+	currentAI._player_lied_last_turn = true
 func detect_truth() -> void:
-	currentAI.player_lied_last_turn = false
+	currentAI._player_lied_last_turn = false
 	
 func start_turn() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI &&\
@@ -61,15 +61,15 @@ func start_turn() -> void:
 		await EventBusAction.effect_end
 		currentAI.take_turn()
 
-func send_color(color : Card.CARD_COLOR) -> void:
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.SELECT_COLOR, color)
+func send_mark(mark : Card.CARD_MARK) -> void:
+	EventBusAction.send_action.emit(EventBusAction.ACTION.SELECT_MARK, mark)
 
 func place_cards() -> void:
 	card_manager.place_cards(false)
 	var voice = EFFECT_VOICE.instantiate()
 	add_child(voice)
 	voice.start("Add")
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARDS, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARDS, null)
 
 func check_cards(trust : bool) -> void:
 	EventBus.bend_over_table.emit()
@@ -77,12 +77,12 @@ func check_cards(trust : bool) -> void:
 		var voice = EFFECT_VOICE.instantiate()
 		add_child(voice)
 		voice.start("Trust")
-		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.DECLARE_TRUST, null)
+		EventBusAction.send_action.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
 	else:
 		var voice = EFFECT_VOICE.instantiate()
 		add_child(voice)
 		voice.start("Call_Bluff")
-		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.CALL_BLUFF, null)
+		EventBusAction.send_action.emit(EventBusAction.ACTION.CALL_BLUFF, null)
 
 func add_extra_check() -> void:
 	var voice = EFFECT_VOICE.instantiate()
@@ -91,15 +91,15 @@ func add_extra_check() -> void:
 	game_manager.enemy_bonus -= game_manager.extra_check_cost
 	for i in game_manager.extra_check_cost:
 		EventBus.token_remove.emit(MagicNumbers.ENEMY_ID)
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK, null)
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 var checked_cards_idx : Array
 
 func pick_random_check_card() -> void:
 	if !checkable_cards_line:
 		var truth = CardUtils.check_random(card_manager.get_last_addition(), \
-		game_state_manager.current_correct_color)
-		EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+		game_state_manager.round_mark)
+		EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
 		return 
 
 	var rand_card : Card3D
@@ -114,5 +114,5 @@ func pick_random_check_card() -> void:
 	add_child(timer)
 	timer.start(2.0)
 	await EventBusAction.effect_end
-	var truth = rand_card.base_card.color == game_state_manager.current_correct_color
-	EventBusAction.send_action.emit(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK, truth)
+	var truth = rand_card.base_card.mark == game_state_manager.round_mark
+	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)

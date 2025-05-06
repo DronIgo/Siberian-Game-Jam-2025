@@ -4,18 +4,24 @@ extends Object
 #to one of the player deck in this class
 class_name Card
 
-enum CARD_COLOR {
-	RED = 0,
-	GREEN = 1,
-	BLUE = 2,
-	VIOLET = 3,
-	GREY = 4
+enum CARD_MARK { KEY, COIN, PUPPET, ALPHABET, SKULL }
+
+enum CARD_VALUE {
+	AVIAN = 1,
+	LEECHE = 2,
+	SIX = 3,
+	SEVEN = 4,
+	EIGHT = 5,
+	NINE = 6,
+	TEN = 7,
+	TBD = 8,
+	SKULL = 9
 }
 
-var color: CARD_COLOR
-var value: int
+var mark: CARD_MARK
+var value: CARD_VALUE
 var bonus_mod : int
 var score_mod: int
 func debug_print() -> void:
 	#look like ass but displays the string representation
-	print("   ",CARD_COLOR.keys()[color], " ", value);
+	print("   ",CARD_MARK.keys()[mark], " ", value);

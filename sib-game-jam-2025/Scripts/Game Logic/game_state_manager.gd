@@ -3,20 +3,21 @@ class_name GameStateManager
 extends Node
 @onready var game_manager: GameManager = $"../GameManager"
 @onready var card_manager: CardManager = $"../CardManager"
-@onready var player_actions: PlayerActions = $"../PlayerActions"
+@onready var ACTIONs: PlayerActions = $"../PlayerActions"
 
 enum PLAYER {
 	MAN,
 	AI
 }
+
 const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
 const EFFECT_DIALOG = preload("res://Scenes/Effects/EffectDialog.tscn")
 
 var player_avialable_actions : Array
 var current_player : PLAYER = PLAYER.MAN
 var current_player_round : PLAYER = PLAYER.MAN
-var current_correct_color : Card.CARD_COLOR = Card.CARD_COLOR.GREY
-var color_selected : bool = false
+var round_mark : Card.CARD_MARK = Card.CARD_MARK.SKULL
+var round_mark_set : bool = false
 
 var card_checks_left : int = 1
 var card_checks_done : int = 0
@@ -28,7 +29,8 @@ func _ready() -> void:
 	EventBusGL.start_round.connect(card_manager.fill_hands)
 	EventBusGL.start_round.connect(start_round)
 	#TODO: delete
-	#PhaseManager.init()
+	PhaseManager.init()
+	PhaseNames.used_dialogs.clear()
 	pass # Replace with function body.
 
 func switch_player_round() -> void:
@@ -75,6 +77,7 @@ func call_basilio_signals():
 var learned = false
 var dialog_id : String
 func check_dialog() -> bool:
+	dialog_id = ""
 	if current_player == PLAYER.AI:
 		if check_succesed && check_trust:
 			dialog_id = PhaseNames.dialog_correct_trust_1
@@ -96,10 +99,9 @@ func check_dialog() -> bool:
 			learned = true
 	else:
 		return false
-	if PhaseNames.used_dialogs.has(dialog_id):
-		return false
-	PhaseNames.used_dialogs.append(dialog_id)
-	return true
+	if dialog_id != "":
+		return true
+	return false
 
 func end_round() -> void:
 	if current_player == PLAYER.AI:
@@ -123,9 +125,9 @@ func end_round() -> void:
 	
 func start_round() -> void:
 	EventBus.sit_back_at_table.emit()
-	current_correct_color = Card.CARD_COLOR.GREY
+	round_mark = Card.CARD_MARK.SKULL
 	card_checks_done = 0
-	color_selected = false
+	round_mark_set = false
 	check_succesed = false
 	if card_manager.hand_player.size() == 0 && \
 	card_manager.hand_enemy.size() == 0:
@@ -137,13 +139,13 @@ func start_round() -> void:
 	if card_manager.hand_enemy.size() == 0:
 		current_player = PLAYER.MAN
 	player_avialable_actions.clear()
-	player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
+	player_avialable_actions.append(EventBusAction.ACTION.ADD_CARDS)
 	EventBusAction.progress_game.emit()
 	EventBusGL.update_visualisation.emit()
 
 func end_game() -> void:
 	#самый быстрый способ это сделать
-	var first_game = !player_actions.can_control_lie
+	var first_game = !ACTIONs.can_control_lie
 	var player_won = game_manager.player_score < game_manager.enemy_score
 	if first_game || player_won:
 		var next_phase = PhaseManager.try_next_phase()
@@ -182,50 +184,50 @@ func update_check_success(check_truth : bool) -> void:
 	if (!check_truth) && (!check_trust):
 		check_succesed = true
 
-func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
+func recieve_action(action : EventBusAction.ACTION, data) -> void:
 	player_avialable_actions.clear()
 	var should_end_round = false
 	#lmao
 	print(PLAYER.keys()[current_player],\
 	" does ",\
-	EventBusAction.PLAYER_ACTION.keys()[action])
+	EventBusAction.ACTION.keys()[action])
 	EventBusAction.print_action.emit(PLAYER.keys()[current_player] + \
 	" does " + \
-	EventBusAction.PLAYER_ACTION.keys()[action])
+	EventBusAction.ACTION.keys()[action])
 	match action:
-		EventBusAction.PLAYER_ACTION.ADD_CARDS:
-			if color_selected:
+		EventBusAction.ACTION.ADD_CARDS:
+			if round_mark_set:
 				switch_player_turn()
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.DECLARE_TRUST)
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.CALL_BLUFF)
+				player_avialable_actions.append(EventBusAction.ACTION.DECLARE_TRUST)
+				player_avialable_actions.append(EventBusAction.ACTION.CALL_BLUFF)
 				if can_active_player_add_cards():
-					player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
+					player_avialable_actions.append(EventBusAction.ACTION.ADD_CARDS)
 			else:
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.SELECT_COLOR)
-		EventBusAction.PLAYER_ACTION.SELECT_COLOR:
-			current_correct_color = data as Card.CARD_COLOR
-			color_selected = true
+				player_avialable_actions.append(EventBusAction.ACTION.SELECT_MARK)
+		EventBusAction.ACTION.SELECT_MARK:
+			round_mark = data as Card.CARD_MARK
+			round_mark_set = true
 			switch_player_turn()
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.DECLARE_TRUST)
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.CALL_BLUFF)
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARDS)
-		EventBusAction.PLAYER_ACTION.CALL_BLUFF:
+			player_avialable_actions.append(EventBusAction.ACTION.DECLARE_TRUST)
+			player_avialable_actions.append(EventBusAction.ACTION.CALL_BLUFF)
+			player_avialable_actions.append(EventBusAction.ACTION.ADD_CARDS)
+		EventBusAction.ACTION.CALL_BLUFF:
 			card_checks_left = 1
 			check_trust = false
 			if can_increase_card_check():
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK)
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
+				player_avialable_actions.append(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK)
+			player_avialable_actions.append(EventBusAction.ACTION.ADD_CARD_TO_CHECK)
 		#can't increase num of checked cards, when we believe
-		EventBusAction.PLAYER_ACTION.DECLARE_TRUST:
+		EventBusAction.ACTION.DECLARE_TRUST:
 			card_checks_left = 1
 			check_trust = true
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
-		EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK:
+			player_avialable_actions.append(EventBusAction.ACTION.ADD_CARD_TO_CHECK)
+		EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK:
 			card_checks_left += 1
 			if can_increase_card_check():
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK)
-			player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
-		EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK:
+				player_avialable_actions.append(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK)
+			player_avialable_actions.append(EventBusAction.ACTION.ADD_CARD_TO_CHECK)
+		EventBusAction.ACTION.ADD_CARD_TO_CHECK:
 			card_checks_left -= 1
 			card_checks_done += 1
 			var truth = data as bool
@@ -235,7 +237,7 @@ func recieve_action(action : EventBusAction.PLAYER_ACTION, data) -> void:
 			if card_checks_left == 0:
 				should_end_round = true
 			if !should_end_round:
-				player_avialable_actions.append(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
+				player_avialable_actions.append(EventBusAction.ACTION.ADD_CARD_TO_CHECK)
 	if should_end_round:
 		end_round()
 	else:

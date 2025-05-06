@@ -12,7 +12,7 @@ extends Node
 @onready var player_bonuses: Label = $"../CanvasLayer/PlayerBonuses"
 @onready var enemy_bonuses: Label = $"../CanvasLayer/EnemyBonuses"
 @onready var turn_label: Label = $"../CanvasLayer/TurnLabel"
-@onready var stack_counter: Label = $"../CanvasLayer/SelectedColor/StackCounter"
+@onready var stack_counter: Label = $"../CanvasLayer/SelectedMark/StackCounter"
 
 
 

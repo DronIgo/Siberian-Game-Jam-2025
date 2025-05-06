@@ -1,11 +1,11 @@
 class_name BasilioBasic
 extends Node
 
-var card_manager : CardManager
-var game_manager : GameManager
-var game_state_manager : GameStateManager
-var enemy_ai : EnemyAI
-var player_lied_last_turn : bool = false
+var _card_manager : CardManager
+var _game_manager : GameManager
+var _game_state_manager : GameStateManager
+var _enemy_ai : EnemyAI
+var _player_lied_last_turn : bool = false
 
 @export var knows_buratino_cant_lie : bool = true
 @export var big_enough_stack : int = 6
@@ -22,82 +22,82 @@ func decr_trust():
 func learn():
 	knows_buratino_cant_lie = false
 
-var selected_color : Card.CARD_COLOR = Card.CARD_COLOR.RED
-var num_colors : Dictionary
+var selected_mark : Card.CARD_MARK = Card.CARD_MARK.KEY
+var num_cards_by_mark : Dictionary
 var generated_card_turns : bool = false
 
 func init(cm : CardManager, gm : GameManager, gsm : GameStateManager, eai : EnemyAI) -> void:
-	card_manager = cm
-	game_manager = gm
-	game_state_manager = gsm
-	enemy_ai = eai
+	_card_manager = cm
+	_game_manager = gm
+	_game_state_manager = gsm
+	_enemy_ai = eai
 
 func take_turn() -> void:
 	#здесь быть не должно, но без этого не работает :D
-	if game_state_manager.current_player != GameStateManager.PLAYER.AI:
+	if _game_state_manager.current_player != GameStateManager.PLAYER.AI:
 		return
-	var actions = game_state_manager.player_avialable_actions
-	var first_turn = !game_state_manager.color_selected
+	var actions = _game_state_manager.player_avialable_actions
+	var first_turn = !_game_state_manager.round_mark_set
 	
 	if !generated_card_turns:
 		if first_turn:	
-			select_color()
+			select_mark()
 		else:
-			selected_color = game_state_manager.current_correct_color
-		setup_turns(selected_color)
+			selected_mark = _game_state_manager.round_mark
+		setup_turns(selected_mark)
 		
-	var can_select_color = actions.has(EventBusAction.PLAYER_ACTION.SELECT_COLOR)
+	var can_select_mark = actions.has(EventBusAction.ACTION.SELECT_MARK)
 	var can_add_cards_to_check = \
-	actions.has(EventBusAction.PLAYER_ACTION.ADD_CARD_TO_CHECK)
+	actions.has(EventBusAction.ACTION.ADD_CARD_TO_CHECK)
 	#already picking card checks
 	if can_add_cards_to_check:
 		if try_add_extra_checks():
 			return
 		else:
-			enemy_ai.pick_random_check_card()
+			_enemy_ai.pick_random_check_card()
 			return
 	
-	#picked the hand in a privious turn and now declare the color
-	if can_select_color:
-		enemy_ai.send_color(selected_color)
+	#picked the hand in a privious turn and now declare the mark
+	if can_select_mark:
+		_enemy_ai.send_mark(selected_mark)
 		return
 
-	var can_add = actions.has(EventBusAction.PLAYER_ACTION.ADD_CARDS)
-	var can_check = actions.has(EventBusAction.PLAYER_ACTION.DECLARE_TRUST)
+	var can_add = actions.has(EventBusAction.ACTION.ADD_CARDS)
+	var can_check = actions.has(EventBusAction.ACTION.DECLARE_TRUST)
 	
 	#runned out of cards, need to check opponent
 	if can_check && !can_add:
 		if knows_buratino_cant_lie:
-			if !player_lied_last_turn:
-				enemy_ai.check_cards(true)
+			if !_player_lied_last_turn:
+				_enemy_ai.check_cards(true)
 				return
 			else:
-				enemy_ai.check_cards(false)
+				_enemy_ai.check_cards(false)
 				return
 		else:
 			if calc_trust():
-				enemy_ai.check_cards(true)
+				_enemy_ai.check_cards(true)
 				return
 			else:
-				enemy_ai.check_cards(false)
+				_enemy_ai.check_cards(false)
 				return
 			
 	if can_add:
 		#should check
 		if cards_for_turns.is_empty():
 			if knows_buratino_cant_lie:
-				if !player_lied_last_turn:
-					enemy_ai.check_cards(true)
+				if !_player_lied_last_turn:
+					_enemy_ai.check_cards(true)
 					return
 				else:
-					enemy_ai.check_cards(false)
+					_enemy_ai.check_cards(false)
 					return
 			else:
 				if calc_trust():
-					enemy_ai.check_cards(true)
+					_enemy_ai.check_cards(true)
 					return
 				else:
-					enemy_ai.check_cards(false)
+					_enemy_ai.check_cards(false)
 					return
 		else:
 			if can_lose_this_turn():
@@ -114,41 +114,41 @@ func take_turn() -> void:
 				else:
 					select_cards(cards_for_turns.pop_front())
 					cards_for_risky_turns.pop_front()
-			enemy_ai.place_cards()
+			_enemy_ai.place_cards()
 			return
 
 func get_cards_in_stack_num() -> int:
-	return card_manager.stack.size() + card_manager.last_add.size()
+	return _card_manager.stack.size() + _card_manager.last_add.size()
 	
 func can_lose_this_turn() -> bool:
-	var lose_threshold = card_manager.deck_total_score / 2
+	var lose_threshold = _card_manager.deck_total_score / 2
 	if (get_cards_in_stack_num() +\
-	game_manager.enemy_score) > lose_threshold:
+	_game_manager.enemy_score) > lose_threshold:
 		return true
 	return false
 	
 func try_add_extra_checks() -> bool:
-	var actions = game_state_manager.player_avialable_actions
+	var actions = _game_state_manager.player_avialable_actions
 	var can_add_extra_checks = \
-	actions.has(EventBusAction.PLAYER_ACTION.ADD_EXTRA_CARD_CHECK)
+	actions.has(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK)
 	if !can_add_extra_checks:
 		return false
 	if can_lose_this_turn():
-		enemy_ai.add_extra_check()
+		_enemy_ai.add_extra_check()
 		return true
-	if card_manager.stack.size() + card_manager.last_add.size() > big_enough_stack:
-		enemy_ai.add_extra_check()
+	if _card_manager.stack.size() + _card_manager.last_add.size() > big_enough_stack:
+		_enemy_ai.add_extra_check()
 		return true
 	return false
 
-func update_color_nums(hand : Array) -> void:
-	num_colors.clear()
+func update_mark_nums(hand : Array) -> void:
+	num_cards_by_mark.clear()
 	for c in hand:
 		var card = c as Card
-		if !num_colors.has(card.color):
-			num_colors.get_or_add(card.color, 1)
+		if !num_cards_by_mark.has(card.mark):
+			num_cards_by_mark.get_or_add(card.mark, 1)
 		else:
-			num_colors[card.color] += 1
+			num_cards_by_mark[card.mark] += 1
 
 func roll_risk(mod : float) -> bool:
 	var rand = randf_range(0.0, 6.0)
@@ -158,16 +158,16 @@ var cards_for_turns : Array = []
 var cards_for_risky_turns : Array = []
 var pure_risk_turns : Array = []
 
-#sets up 2-3 turns where mainly the selected color is used
-func setup_turns(color : Card.CARD_COLOR) -> void:
+#sets up 2-3 turns where mainly the selected mark is used
+func setup_turns(mark : Card.CARD_MARK) -> void:
 	generated_card_turns = true
 	cards_for_turns.clear()
 	cards_for_risky_turns.clear()
 	pure_risk_turns.clear()
 	var safe_cards = []
 	var risky_cards = []
-	for card in card_manager.get_enemy_hand():
-		if card.color == color:
+	for card in _card_manager.get_enemy_hand():
+		if card.mark == mark:
 			safe_cards.append(card)
 		else:
 			risky_cards.append(card)
@@ -191,7 +191,7 @@ func setup_turns(color : Card.CARD_COLOR) -> void:
 		for i in range(0, amount):
 			turn.append(risky_cards.pop_back())
 		pure_risk_turns.append(turn)
-	print(Card.CARD_COLOR.keys()[color])
+	print(Card.CARD_MARK.keys()[mark])
 	for c in cards_for_turns:
 		print("Safe turn")
 		for card in c:
@@ -228,25 +228,25 @@ func split_into_turns(all_used_cards : Array) -> void:
 
 func calc_trust() -> bool:
 	var trust_level : int = 10
-	if game_state_manager.current_player_round == GameStateManager.PLAYER.MAN:
+	if _game_state_manager.current_player_round == GameStateManager.PLAYER.MAN:
 		trust_level += 5
 	trust_level -= get_cards_in_stack_num()
 	trust_level -= randi_range(0, 3)
 	return trust_level > trust_treshold
 
-func select_color() -> void:
-	update_color_nums(card_manager.get_enemy_hand())
-	selected_color = Card.CARD_COLOR.RED
+func select_mark() -> void:
+	update_mark_nums(_card_manager.get_enemy_hand())
+	selected_mark = Card.CARD_MARK.KEY
 	var max = 0
-	for color in num_colors.keys():
-		if num_colors[color] > max && color != Card.CARD_COLOR.GREY:
-			max = num_colors[color]
-			selected_color = color
+	for mark in num_cards_by_mark.keys():
+		if num_cards_by_mark[mark] > max && mark != Card.CARD_MARK.SKULL:
+			max = num_cards_by_mark[mark]
+			selected_mark = mark
 
 func select_cards(cards : Array) -> void:
 	if cards.size() > 3:
 		for card in cards.slice(0, 3):
-			card_manager.select_card(card)
+			_card_manager.select_card(card)
 		return
 	for card in cards:
-		card_manager.select_card(card)
+		_card_manager.select_card(card)
