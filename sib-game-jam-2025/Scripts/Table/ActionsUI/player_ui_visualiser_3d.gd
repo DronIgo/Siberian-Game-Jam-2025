@@ -111,9 +111,9 @@ func update_selected_mark() -> void:
 		match game_state_manager.round_mark:
 			Card.CARD_MARK.KEY:
 				selected_mark.texture_normal = load("res://Sprites/UI/buttons/key_button.png")
-			Card.CARD_MARK.PUPPET:
-				selected_mark.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
 			Card.CARD_MARK.COIN:
+				selected_mark.texture_normal = load("res://Sprites/UI/buttons/coin_button.png")
+			Card.CARD_MARK.PUPPET:
 				selected_mark.texture_normal = load("res://Sprites/UI/buttons/puppet_button.png")
 			Card.CARD_MARK.ALPHABET:
 				selected_mark.texture_normal = load("res://Sprites/UI/buttons/alpha_button.png")
