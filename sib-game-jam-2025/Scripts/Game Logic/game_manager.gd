@@ -7,10 +7,6 @@ extends Node
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 
-#TO DO: move elsewhere
-@onready var player_score_disp: Label = $"../CanvasLayer/PlayerScore"
-@onready var enemy_score_disp: Label = $"../CanvasLayer/EnemyScore"
-
 const EFFECT_NOSE_GROW = preload("res://Scenes/Effects/EffectNoseGrow.tscn")
 
 var player_score : int = 0

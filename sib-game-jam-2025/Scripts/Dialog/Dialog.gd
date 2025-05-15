@@ -9,6 +9,7 @@ extends CanvasLayer
 
 var _current_replica_dictionaries: Array
 var _next_replica_index: int = 0
+var _should_pause_on_start : bool = true 
 
 func _ready():
 	EventBus.dialog_start.connect(start)
@@ -28,6 +29,8 @@ func start(phase: Phase):
 	var config: Dictionary = StorageManager.read_from(phase.args[0])
 	_current_replica_dictionaries = config["data"]
 	MusicProcessor.process(phase)
+	if _should_pause_on_start:
+		PauseManager.pause()
 	next()
 
 func next():
@@ -39,6 +42,8 @@ func next():
 	_next_replica_index += 1
 
 func finish():
+	if _should_pause_on_start:
+		PauseManager.unpause()
 	EventBus.dialog_finished.emit()
 	if PhaseManager.is_event:
 		PhaseManager.finish_event()

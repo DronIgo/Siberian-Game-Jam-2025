@@ -6,7 +6,7 @@ extends Node
 @onready var player_actions: PlayerActions = $"../PlayerActions"
 
 @onready var selected_mark: TextureButton = $"../CanvasLayer/SelectedMark"
-@onready var select_mark = $"../CanvasLayer/SelectColor"
+@onready var select_mark = $"../CanvasLayer/SelectMark"
 @onready var cards_visulaiser_3d: CardVisualiser3D = $"../CardsVisulaiser3d"
 
 @onready var place_cards_button: TextureButton = $"../CanvasLayer/PlaceCardsButton"

@@ -3,14 +3,12 @@ class_name GameStateManager
 extends Node
 @onready var game_manager: GameManager = $"../GameManager"
 @onready var card_manager: CardManager = $"../CardManager"
-@onready var ACTIONs: PlayerActions = $"../PlayerActions"
 
 enum PLAYER {
 	MAN,
 	AI
 }
 
-const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
 const EFFECT_DIALOG = preload("res://Scenes/Effects/EffectDialog.tscn")
 
 var player_avialable_actions : Array
@@ -30,8 +28,7 @@ func _ready() -> void:
 	EventBusGL.start_round.connect(start_round)
 	#TODO: delete
 	PhaseManager.init()
-	PhaseNames.used_dialogs.clear()
-	pass # Replace with function body.
+	#PhaseNames.used_dialogs.clear()
 
 func switch_player_round() -> void:
 	if current_player_round == PLAYER.MAN:
@@ -106,22 +103,18 @@ func check_dialog() -> bool:
 func end_round() -> void:
 	if current_player == PLAYER.AI:
 		call_basilio_signals()
-	var timer_effect = EFFECT_TIMER.instantiate()
-	add_child(timer_effect)
-	timer_effect.start(2.0)
-	await EventBusAction.effect_end
+	await Utils.wait(1.0)
 	if check_dialog():
 		var dialog_effect = EFFECT_DIALOG.instantiate()
 		add_child(dialog_effect)
 		dialog_effect.start(dialog_id)
-		await EventBusAction.effect_end
 		
 	var result = get_round_result()
 	print("ROUND ENDED")
-	EventBusGL.end_round.emit(result)
-	EventBusGL.update_visualisation.emit()
+	EventBusGL.end_round_delayed.emit(result)
+	EventBusGL.update_visualisation_delayed.emit()
 	switch_player_round()
-	EventBusGL.start_round.emit()
+	EventBusGL.start_round_delayed.emit()
 	
 func start_round() -> void:
 	EventBus.sit_back_at_table.emit()
@@ -145,7 +138,7 @@ func start_round() -> void:
 
 func end_game() -> void:
 	#самый быстрый способ это сделать
-	var first_game = !ACTIONs.can_control_lie
+	var first_game = PhaseManager.current_phase().id == "game_1"
 	var player_won = game_manager.player_score < game_manager.enemy_score
 	if first_game || player_won:
 		var next_phase = PhaseManager.try_next_phase()
@@ -158,7 +151,6 @@ func end_game() -> void:
 		add_child(scene_instance)
 		await EventBus.dialog_finished
 		get_tree().reload_current_scene()
-	#EventBusAction.print_action.emit("Game Over!")
 
 func can_increase_card_check() -> bool:
 	var num_bonus : int

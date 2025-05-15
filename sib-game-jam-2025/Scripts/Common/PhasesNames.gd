@@ -2,7 +2,7 @@ class_name PhasesNames
 
 extends Node
 
-var used_dialogs : Array
+#var used_dialogs : Array
 
 
 var dialog_id_correct_bluff_1 = "dialog_correct_bluff_1"

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://6gul4yn6koen" path="res://Scenes/Dialog/replicas_box.tscn" id="1_o85vb"]
 
 [node name="Dialog" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_agsmp")
 
 [node name="BackBase" type="Control" parent="."]

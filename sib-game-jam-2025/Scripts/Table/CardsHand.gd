@@ -50,9 +50,6 @@ func unselect_card(index: int):
 	_selected_cards.erase(index)
 	card.unselect()
 
-func confirm_selected_cards():
-	EventBus.hand_confirm_selected.emit(_selected_cards)
-
 func _replace_cards():
 	var max_left_index = (_cards.size() - 1) / 2
 	_replace_left_half(max_left_index)
