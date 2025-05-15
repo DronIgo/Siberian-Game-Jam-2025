@@ -12,5 +12,5 @@ func start(time : float) -> void:
 	timer.start()
 
 func finished() -> void:
-	EventBusAction.effect_end.emit()
+	EventBusAction.effect_end_delayed.emit()
 	queue_free()

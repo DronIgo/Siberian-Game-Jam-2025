@@ -111,6 +111,7 @@ func end_round() -> void:
 		
 	var result = get_round_result()
 	print("ROUND ENDED")
+	EventBusAction.progress_game_delayed.emit()
 	EventBusGL.end_round_delayed.emit(result)
 	EventBusGL.update_visualisation_delayed.emit()
 	switch_player_round()
@@ -133,8 +134,8 @@ func start_round() -> void:
 		current_player = PLAYER.MAN
 	player_avialable_actions.clear()
 	player_avialable_actions.append(EventBusAction.ACTION.ADD_CARDS)
-	EventBusAction.progress_game.emit()
-	EventBusGL.update_visualisation.emit()
+	EventBusAction.progress_game_delayed.emit()
+	EventBusGL.update_visualisation_delayed.emit()
 
 func end_game() -> void:
 	#самый быстрый способ это сделать
@@ -233,8 +234,8 @@ func recieve_action(action : EventBusAction.ACTION, data) -> void:
 	if should_end_round:
 		end_round()
 	else:
-		EventBusGL.update_visualisation.emit()
-	EventBusAction.progress_game.emit()
+		EventBusGL.update_visualisation_delayed.emit()
+		EventBusAction.progress_game_delayed.emit()
 
 func _process(delta: float) -> void:
 	pass
