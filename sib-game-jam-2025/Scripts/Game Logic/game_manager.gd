@@ -7,10 +7,6 @@ extends Node
 @onready var card_manager: CardManager = $"../CardManager"
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 
-#TO DO: move elsewhere
-@onready var player_score_disp: Label = $"../CanvasLayer/PlayerScore"
-@onready var enemy_score_disp: Label = $"../CanvasLayer/EnemyScore"
-
 const EFFECT_NOSE_GROW = preload("res://Scenes/Effects/EffectNoseGrow.tscn")
 
 var player_score : int = 0
@@ -78,7 +74,7 @@ func add_score(result : EventBusGL.END_ROUND_RESULT) -> void:
 		enemy_takes_cards()
 	if result == EventBusGL.END_ROUND_RESULT.CARDS_ARE_DISCARED:
 		cards_are_removed()
-	EventBusGL.update_visualisation.emit()
+	EventBusGL.update_visualisation_delayed.emit()
 
 func grow_nose() -> void:
 	var nose_effect = EFFECT_NOSE_GROW.instantiate()

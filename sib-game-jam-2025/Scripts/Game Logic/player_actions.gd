@@ -24,24 +24,24 @@ func select_mark(mark : Card.CARD_MARK) -> void:
 		EventBusAction.player_lied.emit()
 	else:
 		EventBusAction.player_told_truth.emit()
-	EventBusAction.send_action.emit(EventBusAction.ACTION.SELECT_MARK, mark)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.SELECT_MARK, mark)
 	
 func call_bluff() -> void:
-	EventBusAction.send_action.emit(EventBusAction.ACTION.CALL_BLUFF, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.CALL_BLUFF, null)
 	
 func declare_trust() -> void:
-	EventBusAction.send_action.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
 	
 func check_card(mark : Card.CARD_MARK) -> void:
 	var correct_mark = game_state_manager.round_mark
 	var truth = mark == correct_mark
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
 
 func add_extra_check() -> void:
 	game_manager.player_bonus -= game_manager.extra_check_cost
 	for i in game_manager.extra_check_cost:
 		EventBus.token_remove.emit(MagicNumbers.PLAYER_ID)
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():
@@ -55,7 +55,7 @@ func place_cards() -> void:
 			EventBusAction.player_lied.emit()
 		else:
 			EventBusAction.player_told_truth.emit()
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARDS, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, null)
 	
 func _process(delta: float) -> void:
 	if !can_control_lie:

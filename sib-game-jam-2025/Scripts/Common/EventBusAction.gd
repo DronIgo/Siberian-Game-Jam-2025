@@ -9,6 +9,10 @@ enum ACTION {
 	ADD_CARD_TO_CHECK
 }
 
+signal send_action_delayed(action : ACTION, data)
+signal progress_game_delayed
+signal effect_end_delayed
+
 signal send_action(action : ACTION, data)
 signal progress_game
 signal print_action(action : String)

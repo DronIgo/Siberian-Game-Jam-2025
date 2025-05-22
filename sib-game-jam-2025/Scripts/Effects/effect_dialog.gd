@@ -20,5 +20,5 @@ func start(dialog_id : String) -> void:
 	EventBus.dialog_finished.connect(finished, CONNECT_ONE_SHOT)
 	
 func finished() -> void:
-	EventBusAction.effect_end.emit()
+	EventBusAction.effect_end_delayed.emit()
 	queue_free()

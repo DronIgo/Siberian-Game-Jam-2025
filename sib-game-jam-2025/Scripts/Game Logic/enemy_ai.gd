@@ -9,7 +9,6 @@ const BASILIO_BASIC_AI = preload("res://Scenes/Game Logic/EnemyAI/BasilioBasicAI
 @onready var game_state_manager: GameStateManager = $"../GameStateManager"
 @onready var game_manager: GameManager = $"../GameManager"
 
-const EFFECT_TIMER = preload("res://Scenes/Effects/EffectTimer.tscn")
 const EFFECT_VOICE = preload("res://Scenes/Effects/EffectVoice.tscn")
 
 @export_category("Displayed params")
@@ -55,21 +54,18 @@ func detect_truth() -> void:
 func start_turn() -> void:
 	if game_state_manager.current_player == GameStateManager.PLAYER.AI &&\
 	game_state_manager.player_avialable_actions.size() > 0:
-		var timer = EFFECT_TIMER.instantiate()
-		add_child(timer)
-		timer.start(next_think_time)
-		await EventBusAction.effect_end
+		await Utils.wait(next_think_time)
 		currentAI.take_turn()
 
 func send_mark(mark : Card.CARD_MARK) -> void:
-	EventBusAction.send_action.emit(EventBusAction.ACTION.SELECT_MARK, mark)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.SELECT_MARK, mark)
 
 func place_cards() -> void:
 	card_manager.place_cards(false)
 	var voice = EFFECT_VOICE.instantiate()
 	add_child(voice)
 	voice.start("Add")
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARDS, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, null)
 
 func check_cards(trust : bool) -> void:
 	EventBus.bend_over_table.emit()
@@ -77,12 +73,12 @@ func check_cards(trust : bool) -> void:
 		var voice = EFFECT_VOICE.instantiate()
 		add_child(voice)
 		voice.start("Trust")
-		EventBusAction.send_action.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
+		EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
 	else:
 		var voice = EFFECT_VOICE.instantiate()
 		add_child(voice)
 		voice.start("Call_Bluff")
-		EventBusAction.send_action.emit(EventBusAction.ACTION.CALL_BLUFF, null)
+		EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.CALL_BLUFF, null)
 
 func add_extra_check() -> void:
 	var voice = EFFECT_VOICE.instantiate()
@@ -91,15 +87,16 @@ func add_extra_check() -> void:
 	game_manager.enemy_bonus -= game_manager.extra_check_cost
 	for i in game_manager.extra_check_cost:
 		EventBus.token_remove.emit(MagicNumbers.ENEMY_ID)
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK, null)
 
 var checked_cards_idx : Array
 
 func pick_random_check_card() -> void:
+	#only here to support the demo scene
 	if !checkable_cards_line:
 		var truth = CardUtils.check_random(card_manager.get_last_addition(), \
 		game_state_manager.round_mark)
-		EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
+		EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
 		return 
 
 	var rand_card : Card3D
@@ -110,9 +107,6 @@ func pick_random_check_card() -> void:
 	rand_card = checkable_cards_line._current_cards[rand_idx]
 	checked_cards_idx.append(rand_idx)
 	rand_card.flip()
-	var timer = EFFECT_TIMER.instantiate()
-	add_child(timer)
-	timer.start(2.0)
-	await EventBusAction.effect_end
+	await Utils.wait(2.0)
 	var truth = rand_card.base_card.mark == game_state_manager.round_mark
-	EventBusAction.send_action.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)

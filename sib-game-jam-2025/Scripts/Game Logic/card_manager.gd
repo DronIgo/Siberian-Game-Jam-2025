@@ -9,18 +9,16 @@ extends Node
 @export var num_of_cards_in_hand : int = 7
 @export var max_cards_placed_during_turn : int = 3
 
-#const Card = preload("res://Scripts/Game Logic/Card.gd")
-
 var deck_total_score = 40
 
-var deck : Array
-var hand_player : Array
-var hand_enemy : Array
+var deck : Array = []
+var hand_player : Array = []
+var hand_enemy : Array = []
 #cards on the table, except for the ones added during last turn
-var stack : Array
-var selected_cards : Array
+var stack : Array = []
+var selected_cards : Array = []
 #cards added on last turn
-var last_add : Array
+var last_add : Array = []
 
 func get_player_hand() -> Array:
 	return hand_player
@@ -131,7 +129,3 @@ func debug_output() -> void:
 	print("DECK")
 	for c in deck:
 		c.debug_print()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

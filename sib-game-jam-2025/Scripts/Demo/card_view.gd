@@ -39,7 +39,7 @@ func _button_pressed():
 		else:
 			card_manager.deselect_card(base_card)
 			selected = !selected
-		EventBusGL.update_visualisation.emit()
+		EventBusGL.update_visualisation_delayed.emit()
 
 func update_view() -> void:
 	if base_card:

@@ -20,6 +20,8 @@ extends Node
 func _ready() -> void:
 	EventBusAction.print_action.connect(display_last_action)
 	EventBusGL.update_visualisation.connect(update_display)
+	PauseManager.game_paused.connect(disable_UI_pause)
+	PauseManager.game_unpaused.connect(enable_UI_unpause)
 
 func update_display() -> void:
 	cards_in_deck.text = "В колоде ещё " + str(card_manager.deck.size()) + " карт"
@@ -32,6 +34,16 @@ func update_display() -> void:
 		turn_label.text = "Ваш ход!"
 	else:
 		turn_label.text = "Противник думает..."
+
+func disable_UI_pause() -> void:
+	#last_action.visible = false
+	#TO DO: здесь же можно выключать и другие элементы UI
+	turn_label.visible = false
+
+func enable_UI_unpause() -> void:
+	#last_action.visible = true
+	turn_label.visible = true
+
 func display_last_action(action: String) -> void:
 	last_action.text = action
 	

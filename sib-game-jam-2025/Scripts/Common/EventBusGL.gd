@@ -6,6 +6,10 @@ enum END_ROUND_RESULT {
 	CARDS_ARE_DISCARED
 }
 
+signal start_round_delayed
+signal end_round_delayed(round_result : END_ROUND_RESULT)
+signal update_visualisation_delayed
+
 signal start_round
-signal end_round(player_won : END_ROUND_RESULT)
+signal end_round(round_result : END_ROUND_RESULT)
 signal update_visualisation

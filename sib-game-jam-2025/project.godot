@@ -26,6 +26,8 @@ CardTexturesHolder="*res://Scripts/Table/CardTexturesHolder.gd"
 SoundConstants="*res://Scripts/Common/SoundConstants.gd"
 MusicProcessor="*res://Scenes/Common/music_processor.tscn"
 PhaseNames="*res://Scripts/Common/PhasesNames.gd"
+Utils="*res://Scenes/Common/utils.tscn"
+PauseManager="*res://Scenes/Common/pause_manager.tscn"
 
 [display]
 

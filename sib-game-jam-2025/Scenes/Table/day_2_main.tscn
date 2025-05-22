@@ -272,7 +272,7 @@ can_control_lie = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="SelectColor" type="HBoxContainer" parent="CanvasLayer"]
+[node name="SelectMark" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -287,24 +287,24 @@ grow_vertical = 2
 alignment = 1
 script = ExtResource("8_yvm1u")
 
-[node name="SelectCoin" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectCoin" type="TextureButton" parent="CanvasLayer/SelectMark"]
 layout_mode = 2
 theme = ExtResource("9_b84mt")
 texture_normal = ExtResource("10_7065f")
 
-[node name="SelectPuppet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectPuppet" type="TextureButton" parent="CanvasLayer/SelectMark"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("11_r15tq")
 texture_normal = ExtResource("12_frtw4")
 
-[node name="SelectAlphabet" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectAlphabet" type="TextureButton" parent="CanvasLayer/SelectMark"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("13_7uqey")
 texture_normal = ExtResource("14_io8gs")
 
-[node name="SelectKey" type="TextureButton" parent="CanvasLayer/SelectColor"]
+[node name="SelectKey" type="TextureButton" parent="CanvasLayer/SelectMark"]
 layout_mode = 2
 theme = ExtResource("15_t4lix")
 texture_normal = ExtResource("16_eo3fs")
@@ -578,6 +578,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlaceCardsButton" type="TextureButton" parent="CanvasLayer"]
+visible = false
 modulate = Color(0.67451, 1, 0, 0.784314)
 anchors_preset = 8
 anchor_left = 0.5
