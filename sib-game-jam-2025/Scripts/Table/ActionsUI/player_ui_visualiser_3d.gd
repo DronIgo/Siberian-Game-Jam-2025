@@ -91,8 +91,8 @@ func call_bluff() -> void:
 func declare_trust() -> void:
 	player_actions.declare_trust()
 	
-func check_card(mark : Card.CARD_MARK) -> void:
-	player_actions.check_card(mark)
+func check_card(card : Card) -> void:
+	player_actions.check_card(card)
 
 func place_cards() -> void:
 	if !card_manager.is_selected_correct():

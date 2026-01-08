@@ -29,7 +29,7 @@ func set_active(new_active : bool) -> void:
 func _button_pressed():
 	if (active):
 		flip()
-		actions.check_card(base_card.color)
+		actions.check_card(base_card)
 
 func flip() -> void:
 	if base_card:

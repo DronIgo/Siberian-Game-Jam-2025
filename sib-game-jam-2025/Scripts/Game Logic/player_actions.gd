@@ -18,6 +18,7 @@ func update_can_lie_this_turn():
 		if game_state_manager.player_avialable_actions.has(\
 		EventBusAction.ACTION.CALL_BLUFF):
 			can_lie_this_turn = true
+
 func select_mark(mark : Card.CARD_MARK) -> void:
 	var lied = !CardUtils.check_truth(card_manager.last_add, mark)
 	if lied && !can_control_lie:
@@ -32,10 +33,8 @@ func call_bluff() -> void:
 func declare_trust() -> void:
 	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.DECLARE_TRUST, null)
 	
-func check_card(mark : Card.CARD_MARK) -> void:
-	var correct_mark = game_state_manager.round_mark
-	var truth = mark == correct_mark
-	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
+func check_card(card: Card) -> void:
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, card)
 
 func add_extra_check() -> void:
 	game_manager.player_bonus -= game_manager.extra_check_cost
@@ -55,7 +54,7 @@ func place_cards() -> void:
 			EventBusAction.player_lied.emit()
 		else:
 			EventBusAction.player_told_truth.emit()
-	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, card_manager.last_add)
 	
 func _process(delta: float) -> void:
 	if !can_control_lie:

@@ -116,7 +116,7 @@ func try_flip_card(card : Card3D):
 		return
 	var base_card = card.base_card as Card
 	card.flip()
-	player_actions.check_card(base_card.mark)
+	player_actions.check_card(base_card)
 
 var mouse_pressed_last_frame = false
 func _physics_process(delta):

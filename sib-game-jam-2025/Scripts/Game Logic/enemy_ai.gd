@@ -29,11 +29,12 @@ func _ready() -> void:
 	EventBusAction.player_told_truth.connect(detect_truth)
 	
 	EventBusAction.basilio_miscalled.connect(miscalled)
-	EventBusAction.basilio_miscalled.connect(mistrusted)
-	EventBusAction.basilio_miscalled.connect(learned)
+	EventBusAction.basilio_mistrusted.connect(mistrusted)
+	EventBusAction.basilio_miscalled_and_learns.connect(learned)
 	
 func end_round(res : EventBusGL.END_ROUND_RESULT) -> void:
 	checked_cards_idx.clear()
+	#currentAI.evaluate_round(res)
 	currentAI.generated_card_turns = false
 
 func miscalled() -> void:
@@ -65,7 +66,7 @@ func place_cards() -> void:
 	var voice = EFFECT_VOICE.instantiate()
 	add_child(voice)
 	voice.start("Add")
-	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, null)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARDS, card_manager.last_add)
 
 func check_cards(trust : bool) -> void:
 	EventBus.bend_over_table.emit()
@@ -108,5 +109,4 @@ func pick_random_check_card() -> void:
 	checked_cards_idx.append(rand_idx)
 	rand_card.flip()
 	await Utils.wait(2.0)
-	var truth = rand_card.base_card.mark == game_state_manager.round_mark
-	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, truth)
+	EventBusAction.send_action_delayed.emit(EventBusAction.ACTION.ADD_CARD_TO_CHECK, rand_card.base_card)

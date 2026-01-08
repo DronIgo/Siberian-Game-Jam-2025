@@ -23,7 +23,7 @@ func learn():
 	knows_buratino_cant_lie = false
 
 var selected_mark : Card.CARD_MARK = Card.CARD_MARK.KEY
-var num_cards_by_mark : Dictionary
+var num_cards_by_mark : Dictionary = {}
 var generated_card_turns : bool = false
 
 func init(cm : CardManager, gm : GameManager, gsm : GameStateManager, eai : EnemyAI) -> void:
@@ -40,7 +40,7 @@ func take_turn() -> void:
 	var first_turn = !_game_state_manager.round_mark_set
 	
 	if !generated_card_turns:
-		if first_turn:	
+		if first_turn:
 			select_mark()
 		else:
 			selected_mark = _game_state_manager.round_mark
@@ -146,7 +146,7 @@ func update_mark_nums(hand : Array) -> void:
 	for c in hand:
 		var card = c as Card
 		if !num_cards_by_mark.has(card.mark):
-			num_cards_by_mark.get_or_add(card.mark, 1)
+			num_cards_by_mark[card.mark] = 1
 		else:
 			num_cards_by_mark[card.mark] += 1
 
@@ -166,6 +166,8 @@ func setup_turns(mark : Card.CARD_MARK) -> void:
 	pure_risk_turns.clear()
 	var safe_cards = []
 	var risky_cards = []
+	if mark == Card.CARD_MARK.SKULL:
+		print("SKULL as main mark!")
 	for card in _card_manager.get_enemy_hand():
 		if card.mark == mark:
 			safe_cards.append(card)
@@ -207,7 +209,7 @@ func setup_turns(mark : Card.CARD_MARK) -> void:
 
 func split_into_turns(all_used_cards : Array) -> void:
 	var all_size = all_used_cards.size()
-	print("All_size", all_size)
+	print("All_size ", all_size)
 	if all_size == 0:
 		return
 	if all_size == 1:
