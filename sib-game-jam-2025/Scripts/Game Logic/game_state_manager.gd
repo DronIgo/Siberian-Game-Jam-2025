@@ -27,7 +27,6 @@ func _ready() -> void:
 	#TODO: delete
 	PhaseManager.init()
 	#PhaseNames.used_dialogs.clear()
-
 	round_history = ROUND_HISTORY.instantiate()
 	add_child(round_history)
 	round_history.clear(current_player)
@@ -222,3 +221,7 @@ func recieve_action(action : EventBusAction.ACTION, data) -> void:
 	else:
 		EventBusGL.update_visualisation_delayed.emit()
 		EventBusAction.progress_game_delayed.emit()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_print"):
+		round_history.print()

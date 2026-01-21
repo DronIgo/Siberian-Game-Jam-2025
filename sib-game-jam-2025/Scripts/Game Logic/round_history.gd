@@ -92,7 +92,7 @@ func get_round_result() -> Dictionary:
 	
 	var result_action : EventBusGL.END_ROUND_RESULT
 	if current_player() == GameStateManager.PLAYER.MAN:
-		if check_succesed:
+		if correct_call:
 			if called_bluff:
 				result_action = EventBusGL.END_ROUND_RESULT.ENEMY_TAKES_CARDS
 			else:
@@ -100,7 +100,7 @@ func get_round_result() -> Dictionary:
 		else:
 			result_action =  EventBusGL.END_ROUND_RESULT.PLAYER_TAKES_CARDS
 	else:
-		if check_succesed:
+		if correct_call:
 			if called_bluff:
 				result_action =  EventBusGL.END_ROUND_RESULT.PLAYER_TAKES_CARDS
 			else:
@@ -112,3 +112,23 @@ func get_round_result() -> Dictionary:
 	"correct_call" : correct_call, \
 	"checked_all" : checked_all, \
 	"result_action" : result_action }
+
+func print() -> void:
+	for turn in history:
+		var t = turn as TurnHistory
+		match t.action:
+			EventBusAction.ACTION.ADD_CARDS:
+				print(t.player, " Added cards:")
+				for c in t.cards:
+					(c as Card).debug_print()
+			EventBusAction.ACTION.SELECT_MARK:
+				print(t.player, " Selected mark: ", Card.mark_to_str(t.mark))
+			EventBusAction.ACTION.DECLARE_TRUST:
+				print(t.player, " Declared trust")
+			EventBusAction.ACTION.CALL_BLUFF:
+				print(t.player, " Called bluff")
+			EventBusAction.ACTION.ADD_EXTRA_CARD_CHECK:
+				print(t.plauer, " Added extra card check:")
+			EventBusAction.ACTION.ADD_CARD_TO_CHECK:
+				print(t.plauer, " Added card to check:")
+				t.cards[0].debug_print()

@@ -24,4 +24,7 @@ var bonus_mod : int
 var score_mod: int
 func debug_print() -> void:
 	#look like ass but displays the string representation
-	print("   ",CARD_MARK.keys()[mark], " ", value);
+	print("   ",mark_to_str(mark), " ", value);
+
+static func mark_to_str(m : CARD_MARK) -> String:
+	return CARD_MARK.keys()[m]
